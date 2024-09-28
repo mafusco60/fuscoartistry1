@@ -28,7 +28,7 @@
   <!-- Mobile Menu -->
   <nav
       id="mobile-menu"
-      class=" md:hidden bg-blue-900 text-white mt-5 pb-4 space-y-2"
+      class=" hidden md:hidden bg-blue-900 text-white mt-5 pb-4 space-y-2"
   >
   
   
@@ -39,11 +39,7 @@
   <x-nav-link url="/register" :active="request()->is('register')" :mobile="true">Register</x-nav-link>
   <x-nav-link url="/dashboard" :active="request()->is('dashboard')" icon="gauge" :mobile="true">Dashboard</x-nav-link>
 
-      <a
-          href="{{url('/artworks/create')}}"
-          class="block px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white"
-      >
-          <i class="fa fa-edit"></i> Create Artwork
-      </a>
+  <x-button-link url="/artworks/create" icon="edit" textClass="text-white" :block="true">Create Artwork</x-button-link>
+
   </nav>
 </header>
