@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+use App\Models\Artwork;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+
 class ArtworkController extends Controller
 {
     /**
@@ -12,13 +16,8 @@ class ArtworkController extends Controller
      */
     public function index(): View
     {
-        $artworks = [
-            'Mona Lisa',
-            'The Starry Night',
-            'The Scream',
-            'The Persistence of Memory',
-        ];
-        return view('artworks.index', compact('artworks'));
+        $artworks = Artwork::all();
+        return view('artworks.index')->with('artworks', $artworks);
     }
 
     /**
@@ -32,17 +31,27 @@ class ArtworkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): string
+    public function store(Request $request): RedirectResponse
     {
-        return "store";
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+        ]);
+
+        Artwork::create ([
+            'title' =>  $validatedData ['title'],
+            'description' => $validatedData ['description'],
+        ]);
+
+        return redirect()->route('artworks.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id) : string
+    public function show(Artwork $artwork) : View
     {
-        return "show";
+        return view ('artworks.show')->with('artwork', $artwork);
     }
 
     /**
