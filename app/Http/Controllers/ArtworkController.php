@@ -31,7 +31,7 @@ class ArtworkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function storeBRAD(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
@@ -41,10 +41,41 @@ class ArtworkController extends Controller
         Artwork::create ([
             'title' =>  $validatedData ['title'],
             'description' => $validatedData ['description'],
+
         ]);
 
         return redirect()->route('artworks.index');
     }
+
+//Store Listings
+public function store(Request $request){
+    $formFields = $request->validate([
+      'id'=> 'nullable',
+      'title' => 'required',
+      'description' => 'required',
+      'medium' => 'required',
+      'original' => 'required',
+      'featured' => 'required',
+      'search_tags' => 'nullable',
+      'original_price' => 'nullable' ,
+      'original_substrate' => 'nullable',
+      'oiginal_dimensions' => 'nullable',
+        'image' => 'required',
+  
+    ]);
+  
+  
+    if($request->hasFile('image')){
+      $image = $request->file('image');
+      $filename = time() . '_' . $image->getClientOriginalName();
+      $formFields['image'] = $image->storeAs('images', $filename, 'public');
+    }
+  
+  
+    Artwork::create($formFields);
+  
+      return redirect('/')->with('artwork', 'Artwork created successfully');
+  }
 
     /**
      * Display the specified resource.
