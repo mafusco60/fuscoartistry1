@@ -31,27 +31,22 @@
           class="text-sm border border-gray-200 rounded p-2 w-full"
           name="medium"
           id="medium"
-          value="{{ old('type') }}"
+          value="{{ old('medium') }}"
         >
           <option value="Other">Other</option>
           <option value="Graphite">Graphite</option>
-          <option value="Color Pencil">Colored Pencil</option>
+          <option value="Color Pencil">Color Pencil</option>
           <option value="Charcoal">Charcoal</option>
-          <option value="Alcohol Marker">Alcohol Markers</option>
-          <option value="Oil Paint">Oil Paint</option>
-          <option value="Oil Pastels">Oil Pastels</option>
-          <option value="Pastels">Pastels</option>
-          <option value="Acrylic">Acrylic</option>
-          <option value="Gouache">Gouache</option>
+          <option value="Alcohol Marker">Alcohol Marker</option>
+          <option value="Ink">Ink</option>
+          <option value="Oil Painting">Oil Painting</option>
+          <option value="Oil Pastel">Oil Pastel</option>
+          <option value="Soft Pastel">Soft Pastel</option>
+          <option value="Acrylic Painting">Acrylic Painting</option>
           <option value="Watercolor">Watercolor</option>
           <option value="Mixed Media">Mixed Media</option>
           <option value="Digital Art">Digital Art</option>
-          <option value="N/A">N/A</option>
         </select>
-
-
-
-        
 
         @error('medium')
           <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -118,8 +113,8 @@
           id="featured"
           class="text-sm border rounded"
         >
-          <option value="1">Yes</option>
-          <option value="0">No</option>
+          <option value='1'>Yes</option>
+          <option value='0'>No</option>
         </select>
       </div>
 
@@ -138,15 +133,44 @@
       <div class="mb-2">
         <label for="original_price" class="inline-block text-sm mb-2">
         Original Price        </label>
-        <textarea
+        <input
           class="text-sm border border-gray-200 rounded p-2 w-full"
           name="original_price"
           id="original_price"
-          rows="2"
-          placeholder="Example: An acrylic portrait of a young dancer."
-        >{{ old('original_price') }}</textarea>
+  
+        {{ old('original_price') }}/>
 
         @error('original_price')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
+
+      <div class="mb-2">
+        <label for="original_substrate" class="inline-block text-sm mb-2">
+        Original Substrate        </label>
+        <input
+          class="text-sm border border-gray-200 rounded p-2 w-full"
+          name="original_substrate"
+          id="original_substrate"
+  
+        {{ old('original_substrate') }}/>
+
+        @error('original_substrate')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
+
+      <div class="mb-2">
+        <label for="original_dimensions" class="inline-block text-sm mb-2">
+        Original Dimensions        </label>
+        <input
+          class="text-sm border border-gray-200 rounded p-2 w-full"
+          name="original_dimensions"
+          id="original_dimensions"
+  
+        {{ old('original_dimensions') }}/>
+
+        @error('original_dimensions')
           <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
         @enderror
       </div>
