@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artwork;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-public function index()
+public function index(): View
 {
-    return view('/pages/index');}
+    $artworks = Artwork::latest()->limit(3)->get();
+    return view('/pages/index')->with('artworks', $artworks);
+}
 }

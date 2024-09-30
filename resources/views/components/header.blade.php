@@ -1,5 +1,5 @@
 
-<header class="bg-blue-900 text-white p-4">
+<header class="bg-indigo-900 text-white p-4">
   <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-3xl font-semibold">
         <a href="{{url('/')}}">
@@ -28,7 +28,7 @@
   <!-- Mobile Menu -->
   <nav
       id="mobile-menu"
-      class=" hidden md:hidden bg-blue-900 text-white mt-5 pb-4 space-y-2"
+      class=" hidden md:hidden bg-indigo-900 text-white mt-5 pb-4 space-y-2"
   >
   
   
