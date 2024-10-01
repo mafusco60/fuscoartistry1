@@ -54,7 +54,7 @@
                 name="featured"
                 label="Featured"
                 value="{{old('featured')}}"
-                :options="[ 'true' => 'Yes', 'false' => 'No']"
+                :options="[ '1' => 'Yes', '0' => 'No']"
             />
         </div>
 
@@ -64,7 +64,7 @@
                 name="original"
                 label="Original"
                 value="{{old('original')}}"
-                :options="[ 'true' => 'Yes', 'false' => 'No']"
+                :options="[ '1' => 'Yes', '0' => 'No']"
             />
         </div>
 

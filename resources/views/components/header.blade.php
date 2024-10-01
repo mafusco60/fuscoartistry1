@@ -1,4 +1,4 @@
-<header class="bg-indigo-900 text-white p-4">
+<header class="bg-indigo-900 text-white p-4" x-data="{ open: false }">
     <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-3xl font-semibold">
             <a href="{{ url('/') }}">
@@ -39,14 +39,20 @@
                 Create Artwork
             </x-button-link>
         </nav>
-        <button id="hamburger" class="text-white md:hidden flex items-center">
+        <button
+            @click="open = !open"
+            id="hamburger"
+            class="text-white md:hidden flex items-center"
+        >
             <i class="fa fa-bars text-2xl"></i>
         </button>
     </div>
     <!-- Mobile Menu -->
     <nav
+        x-show="open"
+        @click.away="open = false"
         id="mobile-menu"
-        class="hidden md:hidden bg-indigo-900 text-white mt-5 pb-4 space-y-2"
+        class="bg-indigo-900 text-white mt-5 pb-4 space-y-2"
     >
         <x-nav-link url="/" :active="request()->is('/')" :mobile="true">
             Home

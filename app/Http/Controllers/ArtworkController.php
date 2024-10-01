@@ -50,17 +50,16 @@ class ArtworkController extends Controller
 //Store Listings
 public function store(Request $request){
     $formFields = $request->validate([
-      'id'=> 'nullable',
-      'title' => 'required',
-      'description' => 'required',
-      'medium' => 'required',
-      'original' => 'required',
-      'featured' => 'required',
-      'search_tags' => 'nullable',
-      'original_price' => 'nullable' ,
-      'original_substrate' => 'nullable',
-      'original_dimensions' => 'nullable',
-        'image' => 'required',
+      'title' => 'required|string|max:255',
+      'description' => 'required|string',
+      'medium' => 'required|string|max:255',
+      'original' => 'required|boolean',
+      'featured' => 'required|boolean',
+      'search_tags' => 'nullable|string|max:255',
+      'original_price' => 'nullable|integer',
+      'original_substrate' => 'nullable|string|max:255',
+      'original_dimensions' => 'nullable|string|max:255',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
   
     ]);
   
@@ -74,7 +73,7 @@ public function store(Request $request){
   
     Artwork::create($formFields);
   
-      return redirect('/')->with('artwork', 'Artwork created successfully');
+      return redirect()-> route('artworks.index') ->with('success', 'Artwork created successfully');
   }
 
     /**
