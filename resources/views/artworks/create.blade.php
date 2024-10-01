@@ -12,7 +12,7 @@
             <label for="image" class="inline-block text-sm mb-2">Image</label>
             <input
                 type="file"
-                class="text-sm border border-gray-200 rounded p-2 w-full"
+                class="text-sm border focus:outline-none @error('image') border-rose-500 @enderror rounded p-2 w-full"
                 name="image"
                 id="image"
             />
@@ -22,28 +22,90 @@
         </div>
 
         <div class="mb-2">
-            <label for="medium" class="inline-block text-sm mb-2">
-                Type of Artwork
-            </label>
+            <label for="medium" class="inline-block text-sm mb-2">Medium</label>
             <select
-                class="text-sm border border-gray-200 rounded p-2 w-full"
+                class="text-sm border focus:outline-none rounded p-2 w-full"
                 name="medium"
                 id="medium"
-                value="{{ old('medium') }}"
             >
-                <option value="Other">Other</option>
-                <option value="Graphite">Graphite</option>
-                <option value="Color Pencil">Color Pencil</option>
-                <option value="Charcoal">Charcoal</option>
-                <option value="Alcohol Marker">Alcohol Marker</option>
-                <option value="Ink">Ink</option>
-                <option value="Oil Painting">Oil Painting</option>
-                <option value="Oil Pastel">Oil Pastel</option>
-                <option value="Soft Pastel">Soft Pastel</option>
-                <option value="Acrylic Painting">Acrylic Painting</option>
-                <option value="Watercolor">Watercolor</option>
-                <option value="Mixed Media">Mixed Media</option>
-                <option value="Digital Art">Digital Art</option>
+                <option
+                    value="Other"
+                    {{ old('medium') == 'Other' ? 'selected' : '' }}
+                >
+                    Other
+                </option>
+                <option
+                    value="Graphite"
+                    {{ old('medium') == 'Graphite' ? 'selected' : '' }}
+                >
+                    Graphite
+                </option>
+                <option
+                    value="Color Pencil"
+                    {{ old('medium') == 'Color Pencil' ? 'selected' : '' }}
+                >
+                    Color Pencil
+                </option>
+                <option
+                    value="Charcoal"
+                    {{ old('medium') == 'Charcoal' ? 'selected' : '' }}
+                >
+                    Charcoal
+                </option>
+                <option
+                    value="Alcohol Marker"
+                    {{ old('medium') == 'Alcohol Marker' ? 'selected' : '' }}
+                >
+                    Alcohol Marker
+                </option>
+                <option
+                    value="Ink"
+                    {{ old('medium') == 'Ink' ? 'selected' : '' }}
+                >
+                    Ink
+                </option>
+                <option
+                    value="Oil Painting"
+                    {{ old('medium') == 'Oil Painting' ? 'selected' : '' }}
+                >
+                    Oil Painting
+                </option>
+                <option
+                    value="Oil Pastel"
+                    {{ old('medium') == 'Oil Pastel' ? 'selected' : '' }}
+                >
+                    Oil Pastel
+                </option>
+                <option
+                    value="Soft Pastel"
+                    {{ old('medium') == 'Soft Pastel' ? 'selected' : '' }}
+                >
+                    Soft Pastel
+                </option>
+                <option
+                    value="Acrylic Painting"
+                    {{ old('medium') == 'Acrylic Painting' ? 'selected' : '' }}
+                >
+                    Acrylic Painting
+                </option>
+                <option
+                    value="Watercolor"
+                    {{ old('medium') == 'Watercolor' ? 'selected' : '' }}
+                >
+                    Watercolor
+                </option>
+                <option
+                    value="Mixed Media"
+                    {{ old('medium') == 'Mixed Media' ? 'selected' : '' }}
+                >
+                    Mixed Media
+                </option>
+                <option
+                    value="Digital Art"
+                    {{ old('medium') == 'Digital Art' ? 'selected' : '' }}
+                >
+                    Digital Art
+                </option>
             </select>
 
             @error('medium')
@@ -57,7 +119,7 @@
             </label>
             <input
                 type="text"
-                class="text-sm border border-gray-200 rounded p-2 w-full"
+                class="text-sm border rounded p-2 w-full focus:outline-none @error('title') border-rose-500 @enderror"
                 name="title"
                 placeholder="Example: The Dancer"
                 value="{{ old('title') }}"
@@ -75,7 +137,7 @@
             </label>
             <input
                 type="text"
-                class="text-sm border border-gray-200 rounded p-2 w-full"
+                class="text-sm border focus:outline-none rounded p-2 w-full"
                 name="search_tags"
                 id="search_tags"
                 placeholder="Example: Dancer, Ballet, Graceful"
@@ -92,14 +154,13 @@
                 Artwork Description
             </label>
             <textarea
-                class="text-sm border border-gray-200 rounded p-2 w-full"
+                class="text-sm border focus:outline-none @error('description') border-rose-500 @enderror rounded p-2 w-full"
                 name="description"
                 id="description"
-                rows="2"
-                placeholder="Example: An acrylic portrait of a young dancer."
+                rows="3"
             >
-{{ old('description') }}</textarea
-            >
+            {{ old('description') }}
+            </textarea>
 
             @error('description')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -107,7 +168,10 @@
         </div>
 
         <div class="mb-2">
-            <label for="featured" class="inline-block text-sm mb-2">
+            <label
+                for="featured"
+                class="inline-block focus:outline-none text-sm mb-2"
+            >
                 Featured
             </label>
             <select
@@ -115,8 +179,18 @@
                 id="featured"
                 class="text-sm border rounded"
             >
-                <option value="1">Yes</option>
-                <option value="0">No</option>
+                <option
+                    value="1"
+                    {{ old('featured') == '1' ? 'selected' : '' }}
+                >
+                    Yes
+                </option>
+                <option
+                    value="0"
+                    {{ old('featured') == '0' ? 'selected' : '' }}
+                >
+                    No
+                </option>
             </select>
         </div>
 
@@ -127,10 +201,21 @@
             <select
                 name="original"
                 id="original"
-                class="text-sm border rounded"
+                class="text-sm border rounded focus:outline-none"
+                default="0"
             >
-                <option value="1">Yes</option>
-                <option value="0">No</option>
+                <option
+                    value="1"
+                    {{ old('original') == '1' ? 'selected' : '' }}
+                >
+                    Yes
+                </option>
+                <option
+                    value="0"
+                    {{ old('original') == '0' ? 'selected' : '' }}
+                >
+                    No
+                </option>
             </select>
         </div>
 
@@ -139,7 +224,7 @@
                 Original Price
             </label>
             <input
-                class="text-sm border border-gray-200 rounded p-2 w-full"
+                class="text-sm border focus:outline-none rounded p-2 w-full"
                 name="original_price"
                 id="original_price"
                 {{ old('original_price') }}
@@ -155,7 +240,7 @@
                 Original Substrate
             </label>
             <input
-                class="text-sm border border-gray-200 rounded p-2 w-full"
+                class="text-sm border focus:outline-none rounded p-2 w-full"
                 name="original_substrate"
                 id="original_substrate"
                 {{ old('original_substrate') }}
@@ -171,7 +256,7 @@
                 Original Dimensions
             </label>
             <input
-                class="text-sm border border-gray-200 rounded p-2 w-full"
+                class="text-sm border focus:outline-none rounded p-2 w-full"
                 name="original_dimensions"
                 id="original_dimensions"
                 {{ old('original_dimensions') }}

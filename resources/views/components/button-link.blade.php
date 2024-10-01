@@ -3,13 +3,13 @@
     'icon' => null,
     'bgClass' => 'bg-yellow-600',
     'hoverClass' => 'hover:bg-yellow-500',
-    'textClass' => 'text-black',
+    'textClass' => 'text-indigo-900',
     'block' => 'false',
 ])
 
 <a
     href="{{ $url }}"
-    class="{{ $bgClass }} {{ $hoverClass }} {{ $textClass }} py-4 px-2 rounded-lg w-full"
+    class="{{ $bgClass }} {{ $hoverClass }} {{ $textClass }} py-4 px-6 rounded-lg text-center text-md"
 >
     @if ($icon)
         <i class="fa fa-{{ $icon }} mr-1 inline"></i>
