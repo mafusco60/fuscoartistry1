@@ -7,264 +7,93 @@
 
     <form method="POST" action="/artworks" enctype="multipart/form-data">
         @csrf
-
         <div class="mb-2">
-            <label for="image" class="inline-block text-sm mb-2">Image</label>
-            <input
-                type="file"
-                class="text-sm border focus:outline-none @error('image') border-rose-500 @enderror rounded p-2 w-full"
-                name="image"
-                id="image"
-            />
-            @error('image')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+            <x-inputs.file id="image" name="image" label="Image" />
         </div>
 
         <div class="mb-2">
-            <label for="medium" class="inline-block text-sm mb-2">Medium</label>
-            <select
-                class="text-sm border focus:outline-none rounded p-2 w-full"
-                name="medium"
+            <x-inputs.select
                 id="medium"
-            >
-                <option
-                    value="Other"
-                    {{ old('medium') == 'Other' ? 'selected' : '' }}
-                >
-                    Other
-                </option>
-                <option
-                    value="Graphite"
-                    {{ old('medium') == 'Graphite' ? 'selected' : '' }}
-                >
-                    Graphite
-                </option>
-                <option
-                    value="Color Pencil"
-                    {{ old('medium') == 'Color Pencil' ? 'selected' : '' }}
-                >
-                    Color Pencil
-                </option>
-                <option
-                    value="Charcoal"
-                    {{ old('medium') == 'Charcoal' ? 'selected' : '' }}
-                >
-                    Charcoal
-                </option>
-                <option
-                    value="Alcohol Marker"
-                    {{ old('medium') == 'Alcohol Marker' ? 'selected' : '' }}
-                >
-                    Alcohol Marker
-                </option>
-                <option
-                    value="Ink"
-                    {{ old('medium') == 'Ink' ? 'selected' : '' }}
-                >
-                    Ink
-                </option>
-                <option
-                    value="Oil Painting"
-                    {{ old('medium') == 'Oil Painting' ? 'selected' : '' }}
-                >
-                    Oil Painting
-                </option>
-                <option
-                    value="Oil Pastel"
-                    {{ old('medium') == 'Oil Pastel' ? 'selected' : '' }}
-                >
-                    Oil Pastel
-                </option>
-                <option
-                    value="Soft Pastel"
-                    {{ old('medium') == 'Soft Pastel' ? 'selected' : '' }}
-                >
-                    Soft Pastel
-                </option>
-                <option
-                    value="Acrylic Painting"
-                    {{ old('medium') == 'Acrylic Painting' ? 'selected' : '' }}
-                >
-                    Acrylic Painting
-                </option>
-                <option
-                    value="Watercolor"
-                    {{ old('medium') == 'Watercolor' ? 'selected' : '' }}
-                >
-                    Watercolor
-                </option>
-                <option
-                    value="Mixed Media"
-                    {{ old('medium') == 'Mixed Media' ? 'selected' : '' }}
-                >
-                    Mixed Media
-                </option>
-                <option
-                    value="Digital Art"
-                    {{ old('medium') == 'Digital Art' ? 'selected' : '' }}
-                >
-                    Digital Art
-                </option>
-            </select>
-
-            @error('medium')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+                name="medium"
+                label="Medium"
+                value="{{old('medium')}}"
+                :options="[ 'Graphite' => 'Graphite', 'Color Pencil' => 'Color Pencil', 'Charcoal' => 'Charcoal', 'Alcohol Marker' => 'Alcohol Marker', 'Ink' => 'Ink', 'Oil Painting' => 'Oil Painting', 'Oil Pastel' => 'Oil Pastel', 'Soft Pastel' => 'Soft Pastel', 'Acrylic Painting' => 'Acrylic Painting', 'Watercolor' => 'Watercolor', 'Mixed Media' => 'Mixed Media', 'Digital Art' => 'Digital Art', 'Other' => 'Other']"
+            />
         </div>
 
         <div class="mb-2">
-            <label for="title" class="inline-block text-sm mb-2">
-                Artwork Title
-            </label>
-            <input
-                type="text"
-                class="text-sm border rounded p-2 w-full focus:outline-none @error('title') border-rose-500 @enderror"
-                name="title"
-                placeholder="Example: The Dancer"
-                value="{{ old('title') }}"
+            <x-inputs.text
                 id="title"
+                name="title"
+                label="Artwork Title"
+                placeholder="Example: The Dancer"
             />
-
-            @error('title')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
         </div>
 
         <div class="mb-2">
-            <label for="search_tags" class="inline-block text-sm mb-2">
-                Tags
-            </label>
-            <input
-                type="text"
-                class="text-sm border focus:outline-none rounded p-2 w-full"
-                name="search_tags"
+            <x-inputs.text
                 id="search_tags"
-                placeholder="Example: Dancer, Ballet, Graceful"
-                value="{{ old('search_tags') }}"
+                name="search_tags"
+                label="Search Tags"
+                placeholder="Example: Colorful, Abstract, Surreal"
             />
-
-            @error('search_tags')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
         </div>
 
         <div class="mb-2">
-            <label for="description" class="inline-block text-sm mb-2">
-                Artwork Description
-            </label>
-            <textarea
-                class="text-sm border focus:outline-none @error('description') border-rose-500 @enderror rounded p-2 w-full"
-                name="description"
+            <x-inputs.text-area
                 id="description"
-                rows="3"
-            >
-            {{ old('description') }}
-            </textarea>
-
-            @error('description')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+                name="description"
+                label="Description"
+                placeholder="Example: This piece was inspired by..."
+            />
         </div>
 
         <div class="mb-2">
-            <label
-                for="featured"
-                class="inline-block focus:outline-none text-sm mb-2"
-            >
-                Featured
-            </label>
-            <select
-                name="featured"
+            <x-inputs.select
                 id="featured"
-                class="text-sm border rounded"
-            >
-                <option
-                    value="1"
-                    {{ old('featured') == '1' ? 'selected' : '' }}
-                >
-                    Yes
-                </option>
-                <option
-                    value="0"
-                    {{ old('featured') == '0' ? 'selected' : '' }}
-                >
-                    No
-                </option>
-            </select>
+                name="featured"
+                label="Featured"
+                value="{{old('featured')}}"
+                :options="[ 'true' => 'Yes', 'false' => 'No']"
+            />
         </div>
 
         <div class="mb-2">
-            <label for="original" class="inline-block text-sm mb-2">
-                Original
-            </label>
-            <select
-                name="original"
+            <x-inputs.select
                 id="original"
-                class="text-sm border rounded focus:outline-none"
-                default="0"
-            >
-                <option
-                    value="1"
-                    {{ old('original') == '1' ? 'selected' : '' }}
-                >
-                    Yes
-                </option>
-                <option
-                    value="0"
-                    {{ old('original') == '0' ? 'selected' : '' }}
-                >
-                    No
-                </option>
-            </select>
+                name="original"
+                label="Original"
+                value="{{old('original')}}"
+                :options="[ 'true' => 'Yes', 'false' => 'No']"
+            />
         </div>
 
         <div class="mb-2">
-            <label for="original_price" class="inline-block text-sm mb-2">
-                Original Price
-            </label>
-            <input
-                class="text-sm border focus:outline-none rounded p-2 w-full"
-                name="original_price"
+            <x-inputs.text
                 id="original_price"
-                {{ old('original_price') }}
+                name="original_price"
+                label="Original Price"
+                placeholder="Example: 200"
+                type="number"
             />
-
-            @error('original_price')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
         </div>
 
         <div class="mb-2">
-            <label for="original_substrate" class="inline-block text-sm mb-2">
-                Original Substrate
-            </label>
-            <input
-                class="text-sm border focus:outline-none rounded p-2 w-full"
-                name="original_substrate"
+            <x-inputs.text
                 id="original_substrate"
-                {{ old('original_substrate') }}
+                name="original_substrate"
+                label="Original Substrate"
+                placeholder="Example\: Artist Paper"
             />
-
-            @error('original_substrate')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
         </div>
 
         <div class="mb-2">
-            <label for="original_dimensions" class="inline-block text-sm mb-2">
-                Original Dimensions
-            </label>
-            <input
-                class="text-sm border focus:outline-none rounded p-2 w-full"
-                name="original_dimensions"
+            <x-inputs.text
                 id="original_dimensions"
-                {{ old('original_dimensions') }}
+                name="original_dimensions"
+                label="Original Dimensions"
+                placeholder='Example: 12"x14"'
             />
-
-            @error('original_dimensions')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
         </div>
 
         <div class="mb-2">

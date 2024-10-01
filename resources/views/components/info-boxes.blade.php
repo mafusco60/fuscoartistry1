@@ -15,10 +15,10 @@
                     Log in and bookmark your favorite art pieces.
                 </p>
 
-                <div class="mt-5 mx-auto">
+                <div class="mt-5">
                     <x-button-link
                         url="/artworks"
-                        icon="palette"
+                        icon="paint-brush"
                         textClass="text-yellow-50"
                         bgClass="bg-black"
                         hoverClass="hover:bg-indigo-900"
@@ -38,7 +38,7 @@
                 <p class="text-indigo-900 mt-2 mb-8 text-sm">
                     but not quite right? Request something similar.
                 </p>
-                <div class="mt-5 mx-auto">
+                <div class="mt-5">
                     <x-button-link
                         url="/messages"
                         icon="envelope"
@@ -61,7 +61,7 @@
                 <p class="text-indigo-900 mt-2 mb-8 text-sm">
                     Original not available? Get a high quality print.
                 </p>
-                <div class="mt-5 mx-auto">
+                <div class="my-5">
                     <x-button-link
                         url="/pricings"
                         icon="dollar"
