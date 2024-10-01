@@ -59,7 +59,7 @@ public function store(Request $request){
       'search_tags' => 'nullable',
       'original_price' => 'nullable' ,
       'original_substrate' => 'nullable',
-      'oiginal_dimensions' => 'nullable',
+      'original_dimensions' => 'nullable',
         'image' => 'required',
   
     ]);
