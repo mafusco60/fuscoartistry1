@@ -50,6 +50,7 @@
     <!-- Mobile Menu -->
     <nav
         x-show="open"
+        x-cloak
         @click.away="open = false"
         id="mobile-menu"
         class="bg-indigo-900 text-white mt-5 pb-4 space-y-2"

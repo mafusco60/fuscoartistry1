@@ -34,6 +34,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <script src="//unpkg.com/alpinejs" defer></script>
         <title>{{ $title ?? 'Fusco Artistry' }}</title>
+        <style>
+            [x-cloak] {
+                display: none;
+            }
+        </style>
     </head>
     <body class="bg-gray-100">
         <x-header />

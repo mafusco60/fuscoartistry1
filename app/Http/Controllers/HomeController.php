@@ -10,11 +10,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class HomeController extends Controller
 {
-/* public function index(): View
-{
-    $artworks = Artwork::latest()->limit(3)->get();
-    return view('/pages/index')->with('artworks', $artworks);
-} */
+    //@desc show the home index view
+    //@route GET /
 public function index(): View
 {
     // Fetch 4 featured artworks
