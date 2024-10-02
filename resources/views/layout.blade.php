@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <link
             rel="icon"
             href="{{ asset('favicon.ico') }}"
@@ -25,6 +26,11 @@
             sizes="32x32"
             href="{{ asset('favicon.png') }}"
         />
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"
+            rel="stylesheet"
+        />
+
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <script src="//unpkg.com/alpinejs" defer></script>
         <title>{{ $title ?? 'Fusco Artistry' }}</title>
@@ -48,6 +54,16 @@
 
             {{ $slot }}
         </main>
-        <script src="{{ asset('js/script.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('[data-fancybox="gallery"]').fancybox({
+                    // Options will go here
+                });
+            });
+        </script>
+
+        {{-- <script src="{{ asset('js/script.js') }}"></script> --}}
     </body>
 </html>

@@ -19,12 +19,13 @@
         rows="{{ $rows }}"
         cols="{{ $cols }}"
         type="textarea"
-        class="text-sm border rounded p-2 w-full focus:outline-none @error($name) border-rose-500 @enderror"
+        class="text-sm border rounded p-2 w-full focus:outline-none font-bold @error($name) border-rose-500 @enderror"
         name="{{ $name }}"
-        placeholder="{{ $placeholder }}"
-        value="{{ old($name, $value) }}"
         id="{{ $id }}"
-    ></textarea>
+        placeholder="{{ $placeholder }}"
+    >
+{{ old($name, $value) }}</textarea
+    >
 
     @error($name)
         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

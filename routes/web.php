@@ -8,4 +8,6 @@ Route::get('/', [HomeController::class, 'index'] );
 
 Route::resource('artworks', ArtworkController::class);
 
-
+Route::get('/lightbox-test', function () {
+    return view('lightbox-test');
+});

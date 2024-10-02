@@ -7,7 +7,7 @@
     <div class="container-xl lg:container m-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 rounded-lg">
             {{-- Box One: Gallery Link --}}
-            <div class="bg-yellow-100 p-6 rounded-lg shadow-lg">
+            <div class="bg-yellow-50 p-6 rounded-lg shadow-lg">
                 <h2 class="text-indigo-900 text-2xl font-bold">
                     For Browsers and Buyers
                 </h2>
@@ -54,7 +54,7 @@
 
             {{-- Box Three: Price Chart Link --}}
 
-            <div class="bg-yellow-100 p-6 rounded-lg shadow-lg">
+            <div class="bg-yellow-50 p-6 rounded-lg shadow-lg">
                 <h2 class="text-indigo-900 text-2xl font-bold">
                     Check Out Pricing Charts
                 </h2>

@@ -14,7 +14,7 @@
     <input
         id="{{ $id }}"
         type="file"
-        class="text-sm border rounded p-2 w-full focus:outline-none @error($name) border-rose-500 @enderror"
+        class="text-sm border rounded p-2 w-full focus:outline-none font-bold @error($name) border-rose-500 @enderror"
         name="{{ $name }}"
     />
 

@@ -50,7 +50,7 @@
 @endif
 
 <select
-    class="text-sm border focus:outline-none rounded p-2 w-full @error($name) border-rose-500 @enderror"
+    class="text-sm border focus:outline-none rounded p-2 w-full font-bold @error($name) border-rose-500 @enderror"
     name="{{ $name }}"
     id="{{ $id }}"
 >

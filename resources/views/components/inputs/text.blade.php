@@ -17,10 +17,10 @@
     <input
         id="{{ $id }}"
         type="{{ $type }}"
-        class="text-sm border rounded p-2 w-full focus:outline-none @error($name) border-rose-500 @enderror"
+        class="text-sm border rounded p-2 w-full focus:outline-none font-bold @error($name) border-rose-500 @enderror"
         name="{{ $name }}"
         placeholder="{{ $placeholder }}"
-        value="{{ old($id) }}"
+        value="{{ old($name, $value) }}"
     />
 
     @error($name)
