@@ -6,7 +6,6 @@
             <h2>No artworks found</h2>
         @endforelse
     </div>
-    <div class="mt-6 p-4">
-        {{ $artworks->links() }}
-    </div>
+    <div class="mt-6 p-4"></div>
+    {{ $artworks->links() }}
 </x-layout>

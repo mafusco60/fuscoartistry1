@@ -10,7 +10,7 @@
                 />
             </a>
         </h1>
-        <nav class="hidden md:flex items-center space-x-4">
+        <nav class="hidden text-sm md:flex items-center space-x-4">
             <x-nav-link url="/" :active="request()->is('/')">
                 <i class="fa fa-home inline"></i>
                 Home
@@ -38,9 +38,10 @@
                     Dashboard
                 </x-nav-link>
                 <x-logout-button />
-                <x-button-link url="/artworks/create" icon="edit">
+               {{--  <x-button-link url="/artworks/create" icon="edit">
                     Create Artwork
-                </x-button-link>
+                </x-button-link> --}}
+                <x-avatar :user="auth()->user()" />
             @else
                 <x-nav-link url="/login" :active="request()->is('login')">
                     Login
@@ -114,6 +115,7 @@
                 Create Artwork
                 </x-button-link>
             --}}
+
         @else
             <x-nav-link
                 url="/login"

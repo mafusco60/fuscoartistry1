@@ -13,11 +13,7 @@
                 @csrf
                 @method('PUT')
 
-                <img
-                    src="{{ asset($user->avatar) }}"
-                    alt="avatar"
-                    class="w-32 h-32 rounded-full mx-auto mb-4"
-                />
+                <x-avatar :user="$user" />
 
                 <x-inputs.text
                     id="name"

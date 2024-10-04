@@ -69,8 +69,10 @@
                         <a href="{{ url('pricings') }}">Price Chart</a>
                     </h2>
                 </div>
+                {{-- Row 2 cols 1-4 --}}
 
                 {{-- Row 2 - Cols 1-6 --}}
+                {{-- Description --}}
                 <div
                     class="md:col-span-6 p-5 border border-gray-300 bg-indigo-100"
                 >
@@ -84,20 +86,20 @@
                     </h3>
                 </div>
 
-                {{-- Row 2 - Cols 7-8 --}}
-                {{-- Edit (temp) --}}
+                {{-- Row 2 - Cols 7-8 blank for now --}}
                 <div
                     class="md:col-span-2 text-end border p-5 border-gray-300 bg-yellow-50 rounded-x"
-                >
-                    <a href="{{ route('artworks.edit', $artwork->id) }}">
-                        <button
-                            class="bg-blue-500 text-white rounded py-2 px-4 hover:bg-blue-700"
-                        >
-                            Edit
-                        </button>
-                    </a>
+                ></div>
 
-                    {{-- Delete Form (temp) --}}
+                {{-- Row 2 cols 5-8 --}}
+
+                {{-- Row 3 - Cols 1-8 --}}
+
+                <div
+                    class="grid grid-cols-1 md:grid-cols-8 md:col-span-8 gap-4 text-end border p-5 border-gray-300 bg-yellow-50 rounded-x"
+                ></div>
+                {{-- Delete --}}
+                <div class="w-full">
                     <form
                         method="POST"
                         action="{{ route('artworks.destroy', $artwork->id) }}"
@@ -114,15 +116,25 @@
                         </button>
                     </form>
                 </div>
-            </div>
-            {{-- Contact Artist Button --}}
-            <div class="mt-10 grid grid-cols-5">
-                <div class="col-start-3 col-span-2 w-full">
+
+                {{-- - Edit Button --}}
+                <div class="col-start-2 w-full">
+                    <a href="{{ route('artworks.edit', $artwork->id) }}">
+                        <button
+                            class="bg-blue-500 text-white rounded py-2 px-4 hover:bg-blue-700"
+                        >
+                            Edit
+                        </button>
+                    </a>
+                </div>
+
+                {{-- Contact Artist Button --}}
+                <div class="col-start- col-span-3 w-full">
                     <x-button-link
                         url="/messages"
                         icon="envelope"
                         textClass="text-white"
-                        bgClass="bg-indigo-900"
+                        bgClass="bg-indigo-500"
                         hoverClass="hover:bg-indigo-700"
                     >
                         Contact Artist
