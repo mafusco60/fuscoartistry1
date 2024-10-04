@@ -16,7 +16,7 @@
                 {{-- Row 1 -- Cols 1-3 --}}
 
                 <div
-                    class="md:col-span-3 px-5 pt-5 border border-gray-300 bg-indigo-100 rounded-xl"
+                    class="md:col-span-3 px-5 pt-5 border border-gray-200 bg-indigo-100 rounded-xl"
                 >
                     <h3 class="text-2xl text-center font-bold mt-10">
                         "{{ $artwork->title }}"
@@ -44,7 +44,7 @@
                 </div>
                 {{-- Row 1 - Cols 4-6 --}}
                 <div
-                    class="md:col-span-3 px-5 pt-5 border border-gray-300 bg-indigo-100 rounded-x"
+                    class="md:col-span-3 px-5 pt-5 border border-gray-200 bg-indigo-100 rounded-x"
                 >
                     <a
                         href="{{ asset($artwork->image) }}"
@@ -61,7 +61,7 @@
 
                 {{-- Row 1 - Cols 7-8 --}}
                 <div
-                    class="md:col-span-2 text-end p-5 border border-gray-300 bg-yellow-50 rounded-x"
+                    class="md:col-span-2 text-end p-5 border border-gray-200 bg-yellow-50 rounded-x"
                 >
                     Placeholder for Column 7-8
                     <h1 class="w-full font-bold mt-6 text-end">Print Lookup</h1>
@@ -69,12 +69,11 @@
                         <a href="{{ url('pricings') }}">Price Chart</a>
                     </h2>
                 </div>
-                {{-- Row 2 cols 1-4 --}}
 
                 {{-- Row 2 - Cols 1-6 --}}
                 {{-- Description --}}
                 <div
-                    class="md:col-span-6 p-5 border border-gray-300 bg-indigo-100"
+                    class="md:col-span-6 p-5 border border-gray-200 bg-indigo-100"
                 >
                     <h2 class="text-2xl font-bold mb-4 mr-5 text-rose-900">
                         Description
@@ -88,18 +87,60 @@
 
                 {{-- Row 2 - Cols 7-8 blank for now --}}
                 <div
-                    class="md:col-span-2 text-end border p-5 border-gray-300 bg-yellow-50 rounded-x"
+                    class="md:col-span-2 text-end border p-5 border-gray-200 bg-yellow-50 rounded-x"
                 ></div>
-
-                {{-- Row 2 cols 5-8 --}}
 
                 {{-- Row 3 - Cols 1-8 --}}
+                {{-- Contact Artist Button --}}
+                <div class="col-span-8 w-full">
+                    <a href="{{ route('messages.create', $artwork->id) }}">
+                        <button
+                            class="bg-indigo-100 text-rose-900 font-semibold hover:bg-indigo-700 hover:text-white w-full py-2 px-4 rounded-full flex items-center justify-center"
+                        >
+                            <i class="fas fa-envelope mr-3"></i>
+                            Contact Artist
+                        </button>
+                    </a>
+                </div>
+                <div class="md:col-span-8 gap-4 text-end">
+                    @guest
+                        <a href="{{ route('login') }}">
+                            <p
+                                class="bg-indigo-100 text-indigo-900 font-bold w-full py-2 px-4 rounded-full text-center"
+                            >
+                                <i class="fas fa-sign-in mr-3"></i>
+                                Log in to add to your favorites!
+                            </p>
+                        </a>
+                    @else
+                        <form
+                            method="POST"
+                            action="{{ auth()->user()->favorites()->where('artwork_id', $artwork->id)->exists() ? route('favorites.destroy', $artork->id) : route('favorites.store', $artwork->id) }}"
+                            class=""
+                        >
+                            @csrf
+                            @if (auth()->user()->favorites()->where('artwork_id', $artwork->id)->exists())
+                                @method('DELETE')
+                                <button
+                                    class="bg-rose-100 hover:bg-indigo-100 text-rose-900 font-bold w-full py-2 px-4 rounded-full flex items-center justify-center"
+                                >
+                                    <i class="fas fa-bookmark mr-3"></i>
+                                    Remove from Favorites
+                                </button>
+                            @else
+                                <button
+                                    class="bg-indigo-100 hover:bg-indigo-600 hover:text-white text-rose-900 font-bold w-full py-2 px-4 rounded-full flex items-center justify-center"
+                                >
+                                    <i class="fas fa-heart mr-3"></i>
+                                    Add to Favorites
+                                </button>
+                            @endif
+                        </form>
+                    @endguest
+                </div>
 
-                <div
-                    class="grid grid-cols-1 md:grid-cols-8 md:col-span-8 gap-4 text-end border p-5 border-gray-300 bg-yellow-50 rounded-x"
-                ></div>
                 {{-- Delete --}}
-                <div class="w-full">
+                <div class="w-full col-span-8">
                     <form
                         method="POST"
                         action="{{ route('artworks.destroy', $artwork->id) }}"
@@ -110,35 +151,25 @@
 
                         <button
                             type="submit"
-                            class="px-4 py-2 bg-rose-500 text-white rounded hover:bg-rose-700"
+                            class="px-4 py-2 bg-indigo-100 text-rose-900 rounded-full font-semibold hover:bg-rose-700 hover:text-white w-full"
                         >
+                            <i class="fas fa-trash mr-3"></i>
                             Delete
                         </button>
                     </form>
                 </div>
 
                 {{-- - Edit Button --}}
-                <div class="col-start-2 w-full">
+                <div class="col-span-8 w-full">
                     <a href="{{ route('artworks.edit', $artwork->id) }}">
                         <button
-                            class="bg-blue-500 text-white rounded py-2 px-4 hover:bg-blue-700"
+                            type="submit"
+                            class="bg-indigo-100 text-rose-900 rounded-full font-semibold hover:bg-indigo-700 hover:text-white w-full py-2 px-4 flex items-center justify-center"
                         >
+                            <i class="fas fa-edit mr-3"></i>
                             Edit
                         </button>
                     </a>
-                </div>
-
-                {{-- Contact Artist Button --}}
-                <div class="col-start- col-span-3 w-full">
-                    <x-button-link
-                        url="/messages"
-                        icon="envelope"
-                        textClass="text-white"
-                        bgClass="bg-indigo-500"
-                        hoverClass="hover:bg-indigo-700"
-                    >
-                        Contact Artist
-                    </x-button-link>
                 </div>
             </div>
         </div>

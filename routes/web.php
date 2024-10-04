@@ -7,6 +7,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/', [HomeController::class, 'index'] )->name('home'); 
 
@@ -21,3 +23,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 Route::get('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+
+Route::resource('/favorites', FavoriteController::class);
+
+Route::resource('/messages', MessageController::class);

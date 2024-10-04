@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Artwork extends Model
 {
@@ -22,6 +24,16 @@ class Artwork extends Model
         'medium',
   
     ];
-
+// Relationship with User
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+// Relationship with Favorites
+    public function favorites(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'favorites')
+        ->withTimestamps();
+    }
    
 }

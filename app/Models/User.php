@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -44,5 +46,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Relationship with Artwork
+    public function artworks(): HasMany
+    {
+        return $this->hasMany(Artwork::class);
+    }
+    // Relationship with Favorites
+    public function favorites(): BelongsToMany
+    {
+        return $this->belongsToMany(Artwork::class, 'favorites')
+        ->withTimestamps();
     }
 }
