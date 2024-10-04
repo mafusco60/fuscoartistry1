@@ -11,34 +11,49 @@
             </a>
         </h1>
         <nav class="hidden md:flex items-center space-x-4">
-            <x-nav-link url="/" :active="request()->is('/')">Home</x-nav-link>
+            <x-nav-link url="/" :active="request()->is('/')">
+                <i class="fa fa-home inline"></i>
+                Home
+            </x-nav-link>
             <x-nav-link url="/artworks" :active="request()->is('artworks')">
+                <i class="fa fa-palette inline"></i>
+
                 Gallery
             </x-nav-link>
-            <x-nav-link
-                url="/artworks/saved"
-                :active="request()->is('artworks/saved')"
-            >
-                Fav's'
-            </x-nav-link>
-            <x-nav-link url="/login" :active="request()->is('login')">
-                Login
-            </x-nav-link>
-            <x-nav-link url="/register" :active="request()->is('register')">
-                Register
-            </x-nav-link>
-            <x-nav-link
-                url="/dashboard"
-                :active="request()->is('dashboard')"
-                icon="gauge"
-            >
-                Dashboard
-            </x-nav-link>
+            @auth
+                <x-nav-link
+                    url="/artworks/saved"
+                    :active="request()->is('artworks/saved')"
+                >
+                    <i class="fa fa-heart inline"></i>
 
-            <x-button-link url="/artworks/create" icon="edit">
-                Create Artwork
-            </x-button-link>
+                    Fav's'
+                </x-nav-link>
+
+                <x-nav-link
+                    url="/dashboard"
+                    :active="request()->is('dashboard')"
+                    icon="gauge"
+                >
+                    Dashboard
+                </x-nav-link>
+                <x-logout-button />
+                <x-button-link url="/artworks/create" icon="edit">
+                    Create Artwork
+                </x-button-link>
+            @else
+                <x-nav-link url="/login" :active="request()->is('login')">
+                    Login
+                </x-nav-link>
+                <x-nav-link
+                    url="/register"
+                    :active="request()->is('register')"
+                >
+                    Register
+                </x-nav-link>
+            @endauth
         </nav>
+
         <button
             @click="open = !open"
             id="hamburger"
@@ -56,6 +71,7 @@
         class="bg-indigo-900 text-white mt-5 pb-4 space-y-2"
     >
         <x-nav-link url="/" :active="request()->is('/')" :mobile="true">
+            <i class="fa fa-home inline"></i>
             Home
         </x-nav-link>
         <x-nav-link
@@ -63,45 +79,56 @@
             :active="request()->is('artworks')"
             :mobile="true"
         >
+            <i class="fa fa-palette inline"></i>
+
             Gallery
         </x-nav-link>
-        <x-nav-link
-            url="/artworks/saved"
-            :active="request()->is('artworks/saved')"
-            :mobile="true"
-        >
-            Fav's'
-        </x-nav-link>
-        <x-nav-link
-            url="/login"
-            :active="request()->is('login')"
-            :mobile="true"
-        >
-            Login
-        </x-nav-link>
-        <x-nav-link
-            url="/register"
-            :active="request()->is('register')"
-            :mobile="true"
-        >
-            Register
-        </x-nav-link>
-        <x-nav-link
-            url="/dashboard"
-            :active="request()->is('dashboard')"
-            icon="gauge"
-            :mobile="true"
-        >
-            Dashboard
-        </x-nav-link>
+        @auth
+            <x-nav-link
+                url="/artworks/saved"
+                :active="request()->is('artworks/saved')"
+                :mobile="true"
+            >
+                <i class="fa fa-heart inline"></i>
 
-        <x-button-link
-            url="/artworks/create"
-            icon="edit"
-            textClass="text-indigo-900"
-            :block="true"
-        >
-            Create Artwork
-        </x-button-link>
+                Fav's
+            </x-nav-link>
+
+            <x-nav-link
+                url="/dashboard"
+                :active="request()->is('dashboard')"
+                icon="gauge"
+                :mobile="true"
+            >
+                Dashboard
+            </x-nav-link>
+                <x-logout-button />
+            </div>
+            {{--
+                <x-button-link
+                url="/artworks/create"
+                icon="edit"
+                textClass="text-indigo-900"
+                :block="true"
+                >
+                Create Artwork
+                </x-button-link>
+            --}}
+        @else
+            <x-nav-link
+                url="/login"
+                :active="request()->is('login')"
+                :mobile="true"
+            >
+                Login
+            </x-nav-link>
+            <x-nav-link
+                url="/register"
+                :active="request()->is('register')"
+                :mobile="true"
+            >
+                Register
+            </x-nav-link>
+        @endauth
     </nav>
 </header>

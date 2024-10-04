@@ -16,8 +16,10 @@ class ArtworkController extends Controller
     //@route GET /artworks
     public function index(): View
     {
-        $artworks = Artwork::all();
+        $artworks = Artwork::latest()->paginate(9);
         return view('artworks.index')->with('artworks', $artworks);
+
+    
     }
 
    //@desc show the create artwork form
