@@ -57,8 +57,6 @@ class ArtworkController extends Controller
   
     $artwork = Artwork::create($formFields);
   
-    //   return redirect()-> route('artworks.index') ->with('success', 'Artwork created successfully');
-
       return redirect()->route('artworks.show', ['artwork' => $artwork->id])->with('success', 'Artwork created successfully');
 
   }

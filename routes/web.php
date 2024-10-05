@@ -24,6 +24,16 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 Route::get('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
-Route::resource('/favorites', FavoriteController::class);
+Route::middleware('auth')->group(function(){
+  Route::get('/favorites/index', [FavoriteController::class, 'index'])->name('favorites.index');
+  Route::post('/favorites/{artwork}', [FavoriteController::class, 'store'])->name('favorites.store');
+  Route::delete('/favorites/{artwork}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+});
 
-Route::resource('/messages', MessageController::class);
+Route::get('/messages/index', [MessageController::class, 'index'])->name('messages.index');
+Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
+Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
+Route::get('/messages/edit/{message}', [MessageController::class, 'edit'])->name('messages.edit');
+Route::put('/messages/{message}', [MessageController::class, 'update'])->name('messages.reply');

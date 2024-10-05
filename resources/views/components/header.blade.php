@@ -11,23 +11,23 @@
             </a>
         </h1>
         <nav class="hidden text-sm md:flex items-center space-x-4">
-            <x-nav-link url="/" :active="request()->is('/')">
-                <i class="fa fa-home inline"></i>
+            <x-nav-link url="/" :active="request()->is('/')" icon="home">
                 Home
             </x-nav-link>
-            <x-nav-link url="/artworks" :active="request()->is('artworks')">
-                <i class="fa fa-palette inline"></i>
-
+            <x-nav-link
+                url="/artworks"
+                :active="request()->is('artworks')"
+                icon="palette"
+            >
                 Gallery
             </x-nav-link>
             @auth
                 <x-nav-link
-                    url="/artworks/saved"
-                    :active="request()->is('artworks/saved')"
+                    url="/favorites/index"
+                    :active="request()->is('favorites')"
+                    icon="heart"
                 >
-                    <i class="fa fa-heart inline"></i>
-
-                    Fav's'
+                    Fav's
                 </x-nav-link>
 
                 <x-nav-link
@@ -38,9 +38,11 @@
                     Dashboard
                 </x-nav-link>
                 <x-logout-button />
-               {{--  <x-button-link url="/artworks/create" icon="edit">
+                {{--
+                    <x-button-link url="/artworks/create" icon="edit">
                     Create Artwork
-                </x-button-link> --}}
+                    </x-button-link>
+                --}}
                 <x-avatar :user="auth()->user()" />
             @else
                 <x-nav-link url="/login" :active="request()->is('login')">
@@ -79,19 +81,17 @@
             url="/artworks"
             :active="request()->is('artworks')"
             :mobile="true"
+            icon="palette"
         >
-            <i class="fa fa-palette inline"></i>
-
             Gallery
         </x-nav-link>
         @auth
             <x-nav-link
-                url="/artworks/saved"
-                :active="request()->is('artworks/saved')"
+                url="/favorites/index"
+                :active="request()->is('favorites')"
                 :mobile="true"
+                icon="heart"
             >
-                <i class="fa fa-heart inline"></i>
-
                 Fav's
             </x-nav-link>
 
@@ -103,8 +103,8 @@
             >
                 Dashboard
             </x-nav-link>
-                <x-logout-button />
-            </div>
+            <x-logout-button />
+            {{-- </div> --}}
             {{--
                 <x-button-link
                 url="/artworks/create"
@@ -115,7 +115,6 @@
                 Create Artwork
                 </x-button-link>
             --}}
-
         @else
             <x-nav-link
                 url="/login"

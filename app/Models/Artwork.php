@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Artwork extends Model
 {
@@ -30,10 +31,19 @@ class Artwork extends Model
         return $this->belongsTo(User::class);
     }
 // Relationship with Favorites
+    
     public function favorites(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'favorites')
-        ->withTimestamps();
+        return $this->belongsToMany(User::class, 'favorites', 'artwork_id', 'user_id')
+                    ->withTimestamps();
     }
+// Relationship with Messages
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class, 'message', 'artwork_id', 'message_id')
+                    ->withTimestamps();
+    }
+   
+
    
 }

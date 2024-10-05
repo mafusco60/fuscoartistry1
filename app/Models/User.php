@@ -54,9 +54,17 @@ class User extends Authenticatable
         return $this->hasMany(Artwork::class);
     }
     // Relationship with Favorites
+
     public function favorites(): BelongsToMany
     {
-        return $this->belongsToMany(Artwork::class, 'favorites')
-        ->withTimestamps();
+        return $this->belongsToMany(Artwork::class, 'favorites', 'user_id', 'artwork_id')
+                    ->withTimestamps();
+    }
+
+    // Relationship with Messages
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class, 'message', 'artwork_id', 'message_id')
+                    ->withTimestamps();
     }
 }

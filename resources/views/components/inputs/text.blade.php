@@ -5,6 +5,7 @@
     'type' => 'text',
     'placeholder' => '',
     'value' => '',
+    'required' => false,
 ])
 
 <div class="mb-2">
@@ -20,6 +21,7 @@
         class="text-sm border rounded p-2 w-full focus:outline-none font-bold @error($name) border-rose-500 @enderror"
         name="{{ $name }}"
         placeholder="{{ $placeholder }}"
+        {{ $required ? 'required' : '' }}
         value="{{ old($name, $value) }}"
     />
 

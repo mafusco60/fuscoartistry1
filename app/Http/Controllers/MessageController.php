@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
+
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
     public function index()
-    {
-    return view('messages.index');
+    {   
+        $messages = Message::latest()->paginate(9);
+        
+        return view('messages.index')->with('messages', $messages);
+
     }
     public function create()
     {
-    return view('messages.create');
+        return view('messages.create');
     }
     public function store(Request $request)
     {

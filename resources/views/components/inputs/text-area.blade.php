@@ -6,6 +6,7 @@
     'value' => '',
     'rows' => 3,
     'cols' => 30,
+    'required' => false,
 ])
 
 <div class="mb-2">
@@ -23,6 +24,7 @@
         name="{{ $name }}"
         id="{{ $id }}"
         placeholder="{{ $placeholder }}"
+        {{ $required ? 'required' : '' }}
     >
 {{ old($name, $value) }}</textarea
     >
