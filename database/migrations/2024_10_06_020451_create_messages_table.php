@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('message', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sender_id')->constrained('users')->nullable();
             $table->foreignId('artwork_id')->constrained('artworks')->nullable();
@@ -19,9 +19,8 @@ return new class extends Migration
             $table->string('email');
             $table->text('body');
             $table->string('phone')->nullable();
-            $table->enum('subject', [
-                'Interest in Artwork', 'Interest in a Similar Artwork', 'Interest in a Commission', 'Interest in a quote', 'Give Feedback', 'Upload a Photo', 'Other',
-              ])->default('Other');
+            $table->string('subject')->nullable();
+          
             
             $table->string('image')->nullable();
             $table->boolean('read')->default(false);

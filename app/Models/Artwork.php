@@ -34,15 +34,15 @@ class Artwork extends Model
     
     public function favorites(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'favorites', 'artwork_id', 'user_id')
-                    ->withTimestamps();
+        return $this->belongsToMany(User::class, 'favorites', 'artwork_id', 'user_id');
     }
+    
 // Relationship with Messages
-    public function messages(): HasMany
+    public function message(): HasMany
     {
-        return $this->hasMany(Message::class, 'message', 'artwork_id', 'message_id')
-                    ->withTimestamps();
+        return $this->hasMany(Message::class);
     }
+
    
 
    

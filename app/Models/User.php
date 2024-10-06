@@ -62,9 +62,9 @@ class User extends Authenticatable
     }
 
     // Relationship with Messages
-    public function messages(): HasMany
+    public function message(): HasMany
     {
-        return $this->hasMany(Message::class, 'message', 'artwork_id', 'message_id')
-                    ->withTimestamps();
+        return $this->hasMany(Message::class, 'sender_id')->with ('artwork');
     }
-}
+}   
+

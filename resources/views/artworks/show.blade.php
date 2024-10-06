@@ -103,6 +103,7 @@
                             Contact Artist
                         </button>
                         <div
+                            x-cloak
                             x-show="open"
                             class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
                         >
@@ -111,10 +112,13 @@
                                 class="bg-white p-6 rounded-lg shadow-md w-full max-w-md"
                             >
                                 <h3 class="text-lg font-semibold mb-4">
-                                    Message Artist about
+                                    Contact Artist about
                                     "{{ $artwork->title }}"
                                 </h3>
-                                <form enctype="multipart/form-data">
+                                <form
+                                    enctype="multipart/form-data"
+                                    action="{{ route('message.store', $artwork->id) }}"
+                                >
                                     @csrf
                                     <x-inputs.text
                                         id="name"
@@ -140,12 +144,17 @@
                                         label="Reason for Contact"
                                         :options="[
 
-                                            'Interest in Artwork', 'Interest in a Similar Artwork', 'Interest in a Commission', 'Interest in a quote', 'Give Feedback', 'Upload a Photo', 'Other',
+                                            'Interest in Artwork'=> 'Interest in Artwork', 
+                                            'Interest in a Similar Artwork'=>'Interest in a Similar Artwork', 
+                                            'Interest in a Commission'=>'Interest in a Commission', 
+                                            'Interest in a quote'=>'Interest in a quote', 
+                                            'Give Feedback'=>'Give Feedback', 
+                                            'Upload a Photo'=>'Upload a Photo', 
+                                            'Other'=>'Other',
 
                                         ]"
-                                        value="{{ old('subject') }}"
-                                        :required="true"
                                     />
+
                                     <x-inputs.text-area
                                         id="body"
                                         name="body"
@@ -153,8 +162,8 @@
                                         :required="true"
                                     />
                                     <x-inputs.file
-                                        id="file"
-                                        name="file"
+                                        id="image"
+                                        name="image"
                                         label="Upload a Photo"
                                     />
 

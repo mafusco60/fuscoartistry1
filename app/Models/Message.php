@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Message extends Model
 {
@@ -25,13 +26,13 @@ class Message extends Model
         
     ];
 //Relation to User
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'sender_id');
+        return $this->belongsTo(User::class);
     }
 //Relation to Artwork
-    public function artwork()
+    public function artwork(): BelongsTo
     {
-        return $this->belongsTo(Artwork::class, 'artwork_id');
+        return $this->belongsTo(Artwork::class);
     }
 }
