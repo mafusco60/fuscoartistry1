@@ -16,11 +16,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         //Truncate tables
-        DB::table('users')->truncate();
+       /*  DB::table('users')->truncate();
         DB::table('favorites')->truncate();
 
         $this->call(TestUserSeeder::class);
-        $this->call(FavoriteSeeder::class);
+        $this->call(FavoriteSeeder::class); */
+
+        DB::table('messages')->truncate();
+
+        $this->call(MessageSeeder::class);
+
+
 
 
 

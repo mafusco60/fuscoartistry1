@@ -30,22 +30,7 @@ Route::middleware('auth')->group(function(){
   Route::delete('/favorites/{artwork}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
 });
 
-/* Route::get('/messages/index', [MessageController::class, 'index'])->name('messages.index');
- Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');*/
-/* Route::post('/messages/{artwork}', [MessageController::class, 'store'])->name('messages.store')->middleware('auth');
-Route::get('/artworks/{artwork}/messages', [MessageController::class, 'store'])->name('messages.store'); */
-
-// Route::get('/artworks/{artwork}/messages', [MessageController::class, 'index'])->name('messages.index');
-/* Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
-Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
-Route::get('/messages/edit/{message}', [MessageController::class, 'edit'])->name('messages.edit');
-Route::put('/messages/{message}', [MessageController::class, 'update'])->name('messages.reply'); */
 
 
-/* Route::post('/artworks/{artwork}/message', [MessageController::class, 'store'])->name('message.store')->middleware('auth');
-Route::get('/artworks/{artwork}/message', [MessageController::class, 'store'])->name('message.store')->middleware('auth');
-
-Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('message.destroy')->middleware('auth'); */
-
-Route::post('/artworks/{artwork}/message', [MessageController::class, 'store'])->name('message.store')->middleware('auth');
-Route::get('/artworks/{artwork}/message', [MessageController::class, 'store'])->name('message.store')->middleware('auth');
+Route::post('/', [MessageController::class, 'store'])->name('message.store');
+// Route::post('/', [MessageController::class, 'store'])->name('message.store');
