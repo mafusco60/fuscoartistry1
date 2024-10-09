@@ -1,7 +1,18 @@
 <x-layout>
     <h3 class="text-lg font-semibold mb-4">
         @if ($artwork->title ?? false)
-            Contact Artist about "{{ $artwork->title }}"
+            <div class="grid grid-cols-2 gap-4">
+                <div class="col-span-1 pt-16">
+                    Contact Artist about "{{ $artwork->title }}"
+                </div>
+                <div class="col-span-1">
+                    <img
+                        src="{{ asset($artwork->image) }}"
+                        alt="{{ $artwork->title }}"
+                        class="w-20 h-20 object-cover rounded-md"
+                    />
+                </div>
+            </div>
         @else
                 Contact Artist
         @endif
@@ -9,7 +20,7 @@
     <form
         method="POST"
         enctype="multipart/form-data"
-        action="{{ route('message.store', $artwork->id) }}"
+        action="{{ route('messages.store', $artwork->id) }}"
     >
         @csrf
         <x-inputs.text type="hidden" id="artwork_id" name="artwork_id" />
