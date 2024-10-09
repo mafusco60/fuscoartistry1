@@ -32,8 +32,16 @@ Route::middleware('auth')->group(function(){
 
 
 
-Route::post('/', [MessageController::class, 'store'])->name('messages.store');
-Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+/* Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
+Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create'); */
 
-Route::post('/artworks/{artwork}', [MessageController::class, 'store'])->name('messages.store');
-Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'create'])->name('messages.create');
+/* Route::post('/artworks/{artwork}', [MessageController::class, 'artwork_store'])->name('artworks-messages.store');
+Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'create'])->name('artworks-messages.create'); */
+
+
+Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
+
+Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'createFromArtwork'])->name('artworks-messages.create');
+Route::post('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
+
