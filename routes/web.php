@@ -33,4 +33,7 @@ Route::middleware('auth')->group(function(){
 
 
 Route::post('/', [MessageController::class, 'store'])->name('message.store');
+Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+
 // Route::post('/', [MessageController::class, 'store'])->name('message.store');
+Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'create'])->name('messages.create');

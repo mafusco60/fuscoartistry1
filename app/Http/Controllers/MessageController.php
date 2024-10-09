@@ -8,6 +8,7 @@ use App\Models\Artwork;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 
 class MessageController extends Controller
@@ -18,11 +19,19 @@ class MessageController extends Controller
         
         return view('messages.index')->with('messages', $messages);
 
-    }
-    public function create()
+    }*/
+     
+    
+    public function create(Artwork $artwork): View
     {
-        return view('messages.create');
-    } */
+        
+
+        
+        return view('messages.create', compact('artwork'));
+    } 
+
+    // @desc save the message to database
+    // @route POST /artworks/{artwork}/message
     public function store(Request $request, Artwork $artwork): RedirectResponse
     {
         $formFields = $request->validate([
@@ -49,12 +58,29 @@ class MessageController extends Controller
       
         // Create a new message instance
 
-        $message = new Message($formFields);
+   
+
+        /* if (Auth::check()) {
+            $message->sender_id = Auth::id();
+        }
+        else {
+            $message->sender_id = null;
+        }
+        if ($artwork->id != null) {
+            $message->artwork_id = $artwork->id;
+        }
+        else {
+            $message->artwork_id = null;
+        } */
         
+
         $formFields['sender_id'] = Auth::id();
         $formFields['artwork_id'] = $artwork->id;
 
+
+
         // Save the message to the database
+        
         Message::create($formFields);
 
         

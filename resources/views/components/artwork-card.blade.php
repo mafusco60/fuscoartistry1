@@ -1,7 +1,7 @@
 @props(['artwork'])
 
 {{-- Display artwork with link to details page --}}
-<div class="relative group">
+<div class="relative group ">
     <a href="{{url('artworks/' . $artwork->id )}}">
       <img
         src="{{ asset($artwork->image) }}"

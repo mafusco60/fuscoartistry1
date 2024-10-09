@@ -98,8 +98,8 @@
             <x-nav-link
                 url="/dashboard"
                 :active="request()->is('dashboard')"
-                icon="gauge"
                 :mobile="true"
+                icon="gauge"
             >
                 Dashboard
             </x-nav-link>

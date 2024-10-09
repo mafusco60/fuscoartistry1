@@ -40,7 +40,7 @@
                 </p>
                 <div class="mt-5">
                     <x-button-link
-                        url="/messages"
+                        url="/messages/create"
                         icon="envelope"
                         textClass="text-indigo-50"
                         bgClass="bg-black"

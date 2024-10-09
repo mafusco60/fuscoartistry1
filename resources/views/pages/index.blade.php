@@ -18,8 +18,11 @@
 
 <x-layout>
     <x-featured :artworks="$featuredArtworks" />
-    <x-info-boxes />
-    <x-recent :artworks="$recentArtworks" />
-
+    <div class="z-40">
+        <x-info-boxes />
+    </div>
+    <div class="z-10">
+        <x-recent :artworks="$recentArtworks" />
+    </div>
     <x-bottom-banner />
 </x-layout>

@@ -44,6 +44,7 @@
         <x-header />
         @if (request()->is('/'))
             <x-hero />
+
             <x-top-banner />
         @endif
 
