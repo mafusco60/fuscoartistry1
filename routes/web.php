@@ -9,6 +9,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminDashboardController;
 
 Route::get('/', [HomeController::class, 'index'] )->name('home'); 
 
@@ -31,17 +33,15 @@ Route::middleware('auth')->group(function(){
 });
 
 
-
-/* Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
-Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create'); */
-
-/* Route::post('/artworks/{artwork}', [MessageController::class, 'artwork_store'])->name('artworks-messages.store');
-Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'create'])->name('artworks-messages.create'); */
-
-
 Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
 Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
 
 Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'createFromArtwork'])->name('artworks-messages.create');
 Route::post('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
 
+Route::get('/auth/admin-login/show', [AdminAuthController::class, 'show'])->name('admin.login');
+Route::post('auth/admin-login/authenticate', [AdminAuthController::class, 'authenticate'])->name('admin.authenticate');
+
+Route::post('/admin-logout', [AdminAuthController::class, 'logout'])->name('admin-logout')->middleware('auth:admin');
+
+Route::get('/admin-dashboards/index', [AdminDashboardController::class, 'index'])->name('admin-dashboard')->middleware('auth:admin');

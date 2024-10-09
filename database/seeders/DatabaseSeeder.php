@@ -26,6 +26,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(MessageSeeder::class);
 
+        DB::table('admins')->truncate();
+
+        $this->call(AdminSeeder::class);
+
+
 
 
 
