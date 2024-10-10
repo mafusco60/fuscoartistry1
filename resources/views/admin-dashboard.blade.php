@@ -90,7 +90,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('home') }}"
+                                    href="{{ route('messages') }}"
                                     class="flex text-white text-sm py-2 px-8 rounded-md hover:opacity-80"
                                 >
                                     <i class="fa-solid fa-envelope pr-4"></i>

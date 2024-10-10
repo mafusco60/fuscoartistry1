@@ -29,11 +29,21 @@
             :required="true"
         />
         <x-inputs.text id="phone" name="phone" label="Phone" />
-        <x-inputs.text
+        <x-inputs.select
             id="subject"
             name="subject"
-            label="Subject"
-            :required="true"
+            label="Reason for Contact"
+            :options="[
+
+                'Interest in Artwork'=> 'Interest in Artwork',
+                'Interest in a Similar Artwork'=>'Interest in a Similar Artwork',
+                'Interest in a Commission'=>'Interest in a Commission',
+                'Interest in a quote'=>'Interest in a quote',
+                'Give Feedback'=>'Give Feedback',
+                'Upload a Photo'=>'Upload a Photo',
+                'Other'=>'Other',
+
+            ]"
         />
         <div class="pt-3">
             <x-inputs.text-area

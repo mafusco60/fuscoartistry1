@@ -11,6 +11,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\ArchiveMessageController;
 
 Route::get('/', [HomeController::class, 'index'] )->name('home'); 
 
@@ -38,6 +39,11 @@ Route::post('/messages/store', [MessageController::class, 'store'])->name('messa
 
 Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'createFromArtwork'])->name('artworks-messages.create');
 Route::post('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
+
+Route::get('/messages/index', [MessageController::class, 'index'])->name('messages')->middleware(('auth:admin'));
+
+Route::get('/archive-messages/index', [ArchiveMessageController::class, 'index'])->name('archive-messages')->middleware(('auth:admin'));
+
 
 Route::get('/admin-login', [AdminAuthController::class, 'show'])->name('admin.login');
 Route::post('/admin-login', [AdminAuthController::class, 'authenticate'])->name('admin.authenticate');

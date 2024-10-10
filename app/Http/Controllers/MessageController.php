@@ -80,6 +80,14 @@ class MessageController extends Controller
 
         return redirect()->back()->with('success', 'Message sent successfully!');
     }
+
+    //Show all messages
+  public function index(){
+
+    $messages = Message::orderBy('created_at', 'desc')->get();
+    
+    return view('/messages/index', compact('messages'));
+    }
 }
     // @desc save the message to database
     // @route POST /artworks/{artwork}/message
