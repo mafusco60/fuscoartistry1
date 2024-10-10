@@ -34,6 +34,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <script src="//unpkg.com/alpinejs" defer></script>
         <title>{{ $title ?? 'Fusco Artistry' }}</title>
+
+        {{-- Stop the flicker of mobile menu --}}
         <style>
             [x-cloak] {
                 display: none;
@@ -48,7 +50,7 @@
             <x-top-banner />
         @endif
 
-        <main class="container mx-auto p-8">
+        <main {{-- class="container mx-auto p-8" --}}>
             {{-- Display alert message --}}
             @if (session('success'))
                 <x-alert type="success" message="{{ session('success') }}" />
@@ -61,14 +63,15 @@
             {{ $slot }}
         </main>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        {{-- fancybox ------ --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
         <script>
             $(document).ready(function () {
-                $('[data-fancybox="gallery"]').fancybox({
-                    // Options will go here
-                });
+                $('[data-fancybox="gallery"]').fancybox({});
             });
         </script>
+        {{-- end fancybox ----- --}}
 
         {{-- <script src="{{ asset('js/script.js') }}"></script> --}}
     </body>

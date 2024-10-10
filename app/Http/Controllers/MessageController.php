@@ -6,17 +6,18 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class MessageController extends Controller
 {
     // Show the form to create a new message from the home page
-    public function create()
+    public function create(): View
     {
         return view('messages.create');
     }
 
     // Show the form to create a new message from the artwork view
-    public function createFromArtwork(Artwork $artwork)
+    public function createFromArtwork(Artwork $artwork): View
     {
         return view('messages.create', ['artwork' => $artwork]);
     }
@@ -82,11 +83,12 @@ class MessageController extends Controller
     }
 
     //Show all messages
-  public function index(){
+  
 
-    $messages = Message::orderBy('created_at', 'desc')->get();
-    
-    return view('/messages/index', compact('messages'));
+    public function index()
+    {
+        $messages = Message::latest()->with('user','artwork')->get();
+        return view('messages.index', compact('messages'));
     }
 }
     // @desc save the message to database

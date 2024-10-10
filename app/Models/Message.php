@@ -26,13 +26,17 @@ class Message extends Model
         
     ];
 //Relation to User
-    public function user(): BelongsTo
+    /* public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
+    } */
 //Relation to Artwork
     public function artwork(): BelongsTo
     {
         return $this->belongsTo(Artwork::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'sender_id');
     }
 }

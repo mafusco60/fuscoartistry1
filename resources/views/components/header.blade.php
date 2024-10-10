@@ -71,7 +71,9 @@
             @click="open = !open"
             id="hamburger"
             class="text-white md:hidden flex items-center"
-        ></button>
+        >
+            <i class="fa fa-bars text-2xl"></i>
+        </button>
     </div>
     <!-- Mobile Menu -->
     <nav
