@@ -39,9 +39,9 @@ Route::post('/messages/store', [MessageController::class, 'store'])->name('messa
 Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'createFromArtwork'])->name('artworks-messages.create');
 Route::post('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
 
-Route::get('/auth/admin-login/show', [AdminAuthController::class, 'show'])->name('admin.login');
-Route::post('auth/admin-login/authenticate', [AdminAuthController::class, 'authenticate'])->name('admin.authenticate');
+Route::get('/admin-login', [AdminAuthController::class, 'show'])->name('admin.login');
+Route::post('/admin-login', [AdminAuthController::class, 'authenticate'])->name('admin.authenticate');
 
 Route::post('/admin-logout', [AdminAuthController::class, 'logout'])->name('admin-logout')->middleware('auth:admin');
 
-Route::get('/admin-dashboards/index', [AdminDashboardController::class, 'index'])->name('admin-dashboard')->middleware('auth:admin');
+Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin-dashboard')->middleware('auth:admin');

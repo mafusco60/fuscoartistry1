@@ -15,7 +15,7 @@ class AdminAuthController extends Controller
     // Admin Login Form
     public function show():View
     {
-        return view('/auth/admin-login/show');
+        return view('/admin-login');
     }
 
     // Admin Authenticate
@@ -36,13 +36,13 @@ class AdminAuthController extends Controller
             }
 
             if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
-                return redirect()->intended('/admin-dashboard/index');
+                return redirect()->intended('/admin-dashboard');
             } else {
                 return redirect()->back()->with('error', 'Invalid Email or Password');
             }
         }
 
-        return view('auth/admin-login/show');
+        return view('/admin-login');
     }
 
   //@desc  Logout Admin
@@ -52,6 +52,6 @@ public function logout(Request $request): RedirectResponse
     Auth::guard('admin')->logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
-    return redirect('/auth/admin-login/show')->with('message', 'You are logged out!');
+    return redirect('/admin-login')->with('message', 'You are logged out!');
 }
 }

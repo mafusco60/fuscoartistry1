@@ -34,11 +34,11 @@ class MessageController extends Controller
             'image' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Store the image in the public/images folder
+        // Store the image in the public/uploads folder
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = time() . '_' . $image->getClientOriginalName();
-            $formFields['image'] = $image->storeAs('images', $filename, 'public');
+            $formFields['image'] = $image->storeAs('uploads', $filename, 'public');
         }
 
         // Add additional fields
@@ -64,11 +64,11 @@ class MessageController extends Controller
             'image' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Store the image in the public/images folder
+        // Store the image in the public/uploads folder
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = time() . '_' . $image->getClientOriginalName();
-            $formFields['image'] = $image->storeAs('images', $filename, 'public');
+            $formFields['image'] = $image->storeAs('uploads', $filename, 'public');
         }
 
         // Add additional fields

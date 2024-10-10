@@ -7,7 +7,7 @@
 
 <x-layout>
     <body>
-        <div class="grid grid-cols-12">
+        <div class="grid grid-cols-12 gap-4">
             <div class="col-span-3 bg-indigo-900 h-max">
                 <div
                     class="text-white flex flex-col relative items-start px-5 h-[200vh]"
@@ -28,7 +28,8 @@
 
                         @if (Auth::guard('admin')->user() && Auth::guard('admin')->user()->status == 1)
                             <p class="text-rose-500 text-md">
-                                Hello {{ Auth::guard('admin')->user()->name }}!
+                                Hello
+                                {{ Auth::guard('admin')->user()->firstname }}!
                             </p>
                         @else
                             <a href="{{ route('admin.authenticate') }}">

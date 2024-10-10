@@ -21,7 +21,7 @@ class DashboardController extends Controller
 /*                $jobs = Artwork::where('user_id', $user->id)->with('applicants')->get(); */
                 $artworks = Artwork::get();
        
-               return view('dashboard.index', compact('user', 'artworks'));
+               return view('dashboard', compact('user', 'artworks'));
     }
    
 }

@@ -10,6 +10,6 @@ class AdminDashboardController extends Controller
     //@route GET /admin-dashboards
     public function index(): View
     {
-        return view('admin-dashboards.index');
+        return view('admin-dashboard');
     }
 }

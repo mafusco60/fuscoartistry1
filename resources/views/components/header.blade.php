@@ -11,6 +11,16 @@
             </a>
         </h1>
         <nav class="hidden text-sm md:flex items-center space-x-4">
+            @if (Auth::guard('admin')->user())
+                <x-nav-link
+                    url="/admin-dashboard"
+                    :active="request()->is('admin-dashboard')"
+                    :mobile="false"
+                >
+                    Admin Dashboard
+                </x-nav-link>
+            @endif
+
             <x-nav-link url="/" :active="request()->is('/')" icon="home">
                 Home
             </x-nav-link>
@@ -61,9 +71,7 @@
             @click="open = !open"
             id="hamburger"
             class="text-white md:hidden flex items-center"
-        >
-            <i class="fa fa-bars text-2xl"></i>
-        </button>
+        ></button>
     </div>
     <!-- Mobile Menu -->
     <nav
@@ -131,5 +139,19 @@
                 Register
             </x-nav-link>
         @endauth
+        <x-nav-link
+            url="/admin-login"
+            :active="request()->is('admin-login')"
+            :mobile="true"
+        >
+            Admin Login
+        </x-nav-link>
+        <x-nav-link
+            url="/admin-dashboard"
+            :active="request()->is('admin-dashboard')"
+            :mobile="true"
+        >
+            Admin Dashboard
+        </x-nav-link>
     </nav>
 </header>

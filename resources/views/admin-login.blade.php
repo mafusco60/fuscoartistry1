@@ -1,5 +1,5 @@
 <x-layout>
-  {{-- <x-card class="bg-gray-50 border border-gray-200 p-10 max-w-lg mx-auto mt-24"> --}}
+  <x-card class="bg-gray-50 border border-gray-200 p-10 max-w-lg mx-auto mt-24">
     {{-- <header class="text-center"> --}}
       <i class="fa-solid fa-lock text-rose-500 inline text-2xl"></i>
       <h2 class="text-2xl font-bold inline px-2 uppercase mb-1">Admin Sign In</h2>
@@ -33,7 +33,7 @@
       </div>
     @endif
 
-  <form method="POST" action="/auth/admin-login" type="email">
+  <form method="POST" action="{{route('admin.authenticate')}}" type="email">
       @csrf
       <div class="input-group mb-6">
         <input
@@ -92,5 +92,5 @@
         {{ __('Forgot your password?') }}
       </a>
     @endif
-  {{-- </x-card> --}}
+  </x-card>
 </x-layout>
