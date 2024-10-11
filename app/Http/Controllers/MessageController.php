@@ -83,97 +83,93 @@ class MessageController extends Controller
     }
 
     //Show all messages
-  
-
-    public function index()
+    public function index(): View
     {
         $messages = Message::latest()->with('user','artwork')->get();
         return view('messages.index', compact('messages'));
     }
+
+    //View Reply form
+    public function edit(Message $message): View
+    {
+        return view('messages.edit')->with('message', $message);
+    }
+
+    public function update(Request $request, $id)
+ {
+     // Validate the request
+     $request->validate([
+         'reply' => 'required|string',
+     ]);
+ 
+     // Find the  message by ID
+     $message = Message::findOrFail($id);
+ 
+     // Update the reply
+     $message->reply = $request->input('reply');
+     $message->save();
+ 
+     // Return a response with the email data
+     return response()->json([
+         'success' => true,
+         'email' => $message->email,
+         'subject' => 'in re: ' . $message->subject,
+         'body' => 'Hello, ' . $message->name . ',' . '<br><br>' . 'Thank you for reaching out to us. <br><br>' .
+         $message->reply . '<br><br>' . 
+
+         'Best regards,<br>Mary Anne @ Fusco Artistry' . '<br><br>' .
+          'This is a response to your message received on ' . $message->created_at->setTimezone('America/New_York')->format('m-d-y')  . ': ' . '<br>' . $message->body 
+          
+     ]);
+     //Redirect to the messages index page
+     return back()->with('success', 'Replied to message successfully');
+ }
+
+  
+    //Delete Message Data
+/* public function destroy(Request $request, Message $message)
+{
+    $message->delete();
+
+    if ($request->query('stay') === 'messages') {
+        return redirect('/admins/messages')->with('message', 'Message deleted successfully');
+    }
+    if($message->image && Storage::disk('public')->exists($message->image)) {
+      Storage::disk('public')->delete($message->image);
+  }
+
+    return redirect('admins/messages/')->with('message', 'Message deleted successfully');
+} */
+//--------------------------------
+// Archive begin --------------------------------
+// public function archive (Message $message) {
+  // Create a new archive message instance
+  /* $archive_message = new ArchiveMessage();
+
+  // Set all required fields
+  $archive_message->archive_name = $message->name;
+  $archive_message->archive_email = $message->email;
+  $archive_message->archive_category = $message->category;
+  $archive_message->archive_message = $message->message;
+  $archive_message->archive_image = $message->image;
+  $archive_message->archive_reply = $message->reply;
+  $archive_message->original_creation_date = $message->created_at; 
+  $archive_message->reply_creation_date = $message->updated_at; 
+  $archive_message->created_at = now();
+  $archive_message->updated_at = now();
+  // if the update_at is the exact same as the created_at date, set the reply date to null - there was no reply
+  if( $archive_message->reply_creation_date == $message->created_at){
+    $archive_message->reply_creation_date = null;
+  } 
+
+  // Save the archive message
+  $archive_message->save();
+
+  // Delete the original  message
+  $message->delete();
+
+  return redirect('/admins/-messages/index')->with('message', 'Message archived successfully');
+} */
+//archive end --------------------------------
 }
-    // @desc save the message to database
-    // @route POST /artworks/{artwork}/message
-  /*   public function store(Request $request, Artwork $artwork): RedirectResponse
-    {
-        $formFields = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'nullable',
-            'subject' => 'required',
-            'body' => 'required',
-            'archived' => 'nullable',
-            'reply' => 'nullable',
-            'read' => 'nullable',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        
-        ]);
-
-        
-            //Save the new image
-            if ($request->hasFile('image')) {
-                // Get the new image
-                $image = $request->file('image');
-                $filename = time() . '_' . $image->getClientOriginalName();
-                $formFields['image'] = $image->storeAs('uploads', $filename, 'public');
-            }
-      
-        
-
-        $formFields['sender_id'] = Auth::id();
-        $formFields['artwork_id'] = $artwork->id;
-
-
-
-        // Save the message to the database
-        
-        Message::create($formFields);
-
-        
-
-    return redirect()->back()->with('success', 'Message sent successfully');
-} */
-
-
-
- // @desc save the message to database
-    // @route POST /artworks/{artwork}/message
-    /* public function artwork_store(Request $request, Artwork $artwork): RedirectResponse
-    {
-        $formFields = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'nullable',
-            'subject' => 'required',
-            'body' => 'required',
-            'archived' => 'nullable',
-            'reply' => 'nullable',
-            'read' => 'nullable',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        
-        ]);
-
-        
-            //Save the new image
-            if ($request->hasFile('image')) {
-                // Get the new image
-                $image = $request->file('image');
-                $filename = time() . '_' . $image->getClientOriginalName();
-                $formFields['image'] = $image->storeAs('uploads', $filename, 'public');
-            }
-      
-        
-
-        $formFields['sender_id'] = Auth::id();
-        $formFields['artwork_id'] = $artwork->id;
-
-
-
-        // Save the message to the database
-        
-        Message::create($formFields);
-
-        
-
-    return redirect()->back()->with('success', 'Message sent successfully');
-} */
-
+    

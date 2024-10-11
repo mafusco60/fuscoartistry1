@@ -40,9 +40,13 @@ Route::post('/messages/store', [MessageController::class, 'store'])->name('messa
 Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'createFromArtwork'])->name('artworks-messages.create');
 Route::post('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
 
-Route::get('/messages/index', [MessageController::class, 'index'])->name('messages')->middleware(('auth:admin'));
+Route::get('/messages', [MessageController::class, 'index'])->name('messages')->middleware('auth:admin');
 
-Route::get('/archive-messages/index', [ArchiveMessageController::class, 'index'])->name('archive-messages')->middleware(('auth:admin'));
+Route::get('/messages/{message}/edit', [MessageController::class, 'edit'])->name('messages.edit')->middleware('auth:admin');
+
+Route::put('/messages/{message}/update', [MessageController::class, 'update'])->name('messages.update')->middleware('auth:admin');
+
+Route::get('/archive-messages/index', [ArchiveMessageController::class, 'index'])->name('archive-messages')->middleware('auth:admin');
 
 
 Route::get('/admin-login', [AdminAuthController::class, 'show'])->name('admin.login');

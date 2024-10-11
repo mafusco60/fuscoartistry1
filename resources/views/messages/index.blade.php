@@ -128,7 +128,7 @@
                                 class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                             >
                                 <a
-                                    href="{{ url('messages/reply' . $message->id) }} "
+                                    href="{{route('messages.edit', $message->id)}}"
                                     class="text-indigo-500 px-6 py-2 rounded-xl"
                                 >
                                     <i class="fa-solid fa-reply"></i>
