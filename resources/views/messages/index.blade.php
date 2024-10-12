@@ -100,12 +100,11 @@
                                 <p class="text-indigo-900 font-semibold pb-5 text-sm">No Image</p>
                             @endif
 
-                            {{-- </x-card> --}}
                         </td>
                         {{-- Display the reply message if it exists --}}
                         @if ($message->reply)
                             <td
-                                class="px-4 py-8 border-t border-b border-gray-300 text-md"
+                                class="px-4  border-t border-b border-gray-300 text-md"
                             >
                                 <p class="font-bold mb-4 text-indigo-500">
                                     Reply Message:
@@ -144,7 +143,7 @@
                         >
                             <form
                                 id="archive-form-{{ $message->id }}"
-                                action="/messages/archive/ {{ $message->id }}"
+                                action='/messages/{{$message->id}}/archive'
                                 method="POST"
                             >
                                 @csrf

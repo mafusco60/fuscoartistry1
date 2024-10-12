@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Artwork;
 use App\Models\Message;
+use App\Models\ArchiveMessage;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +56,7 @@ class MessageController extends Controller
     // Save the message to the database from the artwork view
     public function storeFromArtwork(Request $request, Artwork $artwork): RedirectResponse
     {
+        $messages = new Message();
         // Validate the form fields
         $formFields = $request->validate([
             'name' => 'required|string|max:255',
@@ -79,7 +81,7 @@ class MessageController extends Controller
         // Save the message to the database
         Message::create($formFields);
 
-        return redirect()->back()->with('success', 'Message sent successfully!');
+        return redirect()->back()->with('messages', $messages, 'success', 'Message sent successfully!');
     }
 
     //Show all messages
@@ -142,16 +144,16 @@ class MessageController extends Controller
 } */
 //--------------------------------
 // Archive begin --------------------------------
-// public function archive (Message $message) {
+public function archive (Message $message) {
   // Create a new archive message instance
-  /* $archive_message = new ArchiveMessage();
+  $archive_message = new ArchiveMessage();
 
   // Set all required fields
   $archive_message->archive_name = $message->name;
   $archive_message->archive_email = $message->email;
-  $archive_message->archive_category = $message->category;
-  $archive_message->archive_message = $message->message;
-  $archive_message->archive_image = $message->image;
+  $archive_message->archive_subject = $message->subject;
+  $archive_message->archive_body = $message->body;
+  $archive_message->archive_upload = $message->image;
   $archive_message->archive_reply = $message->reply;
   $archive_message->original_creation_date = $message->created_at; 
   $archive_message->reply_creation_date = $message->updated_at; 
@@ -168,8 +170,8 @@ class MessageController extends Controller
   // Delete the original  message
   $message->delete();
 
-  return redirect('/admins/-messages/index')->with('message', 'Message archived successfully');
-} */
+  return redirect('/archive-messages/index')->with('archive_messages $archive_messages', 'success', 'Message archived successfully');
+}
 //archive end --------------------------------
 }
     

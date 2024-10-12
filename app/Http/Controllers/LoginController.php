@@ -33,8 +33,8 @@ public function login(): View
         //Regenerate the session to prevent session fixation attacks
         $request->session()->regenerate();
 
-    //Redirect to home page
-         return redirect()->intended(route('home'))->with('success', 'You are logged in!'); 
+    //Redirect to the intended page
+         return redirect()->intended()->with('success', 'You are logged in!'); 
     }
     //If auth fails return back to login page
     return back()->withErrors([

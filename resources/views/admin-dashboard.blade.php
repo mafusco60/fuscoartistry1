@@ -100,7 +100,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('home') }}"
+                                    href="{{ route('archive-messages') }}"
                                     class="flex text-white text-sm py-2 px-8 rounded-md hover:opacity-80"
                                 >
                                     <i class="fa-solid fa-archive pr-4"></i>
