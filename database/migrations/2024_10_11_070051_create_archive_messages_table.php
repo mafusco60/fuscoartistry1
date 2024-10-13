@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('archive_messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('archive_sender_id')->constrained('users')->nullable();
-            $table->foreignId('archive_artwork_id')->constrained('artworks')->nullable();
+            $table->foreignId('archive_sender_id')->constrained('users');
+            $table->foreignId('archive_artwork_id')->constrained('artworks');
             $table->string('archive_name');
             $table->string('archive_email');
             $table->string('archive_subject');

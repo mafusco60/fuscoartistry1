@@ -142,8 +142,8 @@
                             class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                         >
                             <form
-                                id="archive-form-{{ $message->id }}"
-                                action='/messages/{{$message->id}}/archive'
+                                id="archive-form{{ $message->id }}"
+                                action='{{route('messages.archive', $message->id)}}'
                                 method="POST"
                             >
                                 @csrf

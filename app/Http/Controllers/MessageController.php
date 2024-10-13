@@ -88,7 +88,7 @@ class MessageController extends Controller
     public function index(): View
     {
         $messages = Message::latest()->with('user','artwork')->get();
-        return view('messages.index', compact('messages'));
+        return view ('messages.index', compact('messages'));
     }
 
     //View Reply form

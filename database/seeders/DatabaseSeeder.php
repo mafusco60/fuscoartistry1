@@ -22,14 +22,17 @@ class DatabaseSeeder extends Seeder
         $this->call(TestUserSeeder::class);
         $this->call(FavoriteSeeder::class); */
 
-        DB::table('messages')->truncate();
+       /*  DB::table('messages')->truncate();
 
-        $this->call(MessageSeeder::class);
+        $this->call(MessageSeeder::class); */
 
         DB::table('admins')->truncate();
 
         $this->call(AdminSeeder::class);
 
+        DB::table('archive_messages')->truncate();
+
+        $this->call(ArchiveMessageSeeder::class);
 
 
 

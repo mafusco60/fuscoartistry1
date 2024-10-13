@@ -117,7 +117,7 @@
                {{-- Restore Button --}}
                  {{-- Restore Archive Data from Controller--}}
                  <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                  <form id="restore {{ $archive_message->id }}" action='/admins/archive-messages/index/{{$archive_message->id}}' method="POST">
+                  <form id="restore {{ $archive_message->id }}" action='/archive-messages/{{$archive_message->id}}/restore' method="POST">
                       @csrf
                       <button type="submit" class="text-red-400  py-2 rounded-xl">
                         <i class="text-indigo-600 fa-solid fa-trash-restore-alt"></i>
@@ -129,7 +129,7 @@
               <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                 <form
                   id="delete-form"
-                  action="/admins/archive-messages/{{ $archive_message->id }}"
+                  action="{{route('archive-messages.destroy', $archive_message->id)}}"
                   method="POST"
                 >
                   @csrf

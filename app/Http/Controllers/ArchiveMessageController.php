@@ -121,7 +121,7 @@ public function restore(ArchiveMessage $archive_message) {
     // Delete the archived message
     $archive_message->delete();
   
-    return redirect('/admins/-messages/index')->with('message', 'Message restored successfully');
+    return redirect('/messages')->with('message', 'Message restored successfully');
   }
    
 }
