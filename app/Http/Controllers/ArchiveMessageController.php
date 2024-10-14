@@ -26,7 +26,7 @@ class ArchiveMessageController extends Controller
     {
       $archive_messages = ArchiveMessage::orderBy('created_at', 'desc')->get();
    
-    return view('archive-messages/index', compact('archive_messages'));
+    return view('/archive-messages/index', compact('archive_messages'));
     }
 
 
@@ -55,7 +55,7 @@ class ArchiveMessageController extends Controller
    
       ArchiveMessage::create($formFields);
     
-        return redirect('/admins/archive-messages/index')->with('success', 'Message sent successfully');
+        return redirect('/archive-messages')->with('success', 'Message sent successfully');
     }
     /**
      * Display the specified resource.

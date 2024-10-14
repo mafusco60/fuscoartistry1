@@ -223,38 +223,39 @@
                     @endguest
                 </div>
 
-                {{-- Delete --}}
-                <div class="w-full grid grid-cols-1 md:col-span-8">
-                    <form
-                        method="POST"
-                        action="{{ route('artworks.destroy', $artwork->id) }}"
-                        onsubmit="return confirm('Are you sure you want to delete {{ $artwork->title }} ?')"
-                    >
-                        @csrf
-                        @method('DELETE')
-
-                        <button
-                            type="submit"
-                            class="px-4 py-2 bg-indigo-100 text-rose-900 rounded-full font-semibold hover:bg-rose-700 hover:text-white w-full"
+                @auth('admin')
+                    <div class="w-full grid grid-cols-1 md:col-span-8">
+                        <form
+                            method="POST"
+                            action="{{ route('artworks.destroy', $artwork->id) }}"
+                            onsubmit="return confirm('Are you sure you want to delete {{ $artwork->title }} ?')"
                         >
-                            <i class="fas fa-trash mr-3"></i>
-                            Delete
-                        </button>
-                    </form>
-                </div>
+                            @csrf
+                            @method('DELETE')
 
-                {{-- - Edit Button --}}
-                <div class="grid grid-cols-1 md:col-span-8 w-full">
-                    <a href="{{ route('artworks.edit', $artwork->id) }}">
-                        <button
-                            type="submit"
-                            class="bg-indigo-100 text-rose-900 rounded-full font-semibold hover:bg-indigo-700 hover:text-white w-full py-2 px-4 flex items-center justify-center"
-                        >
-                            <i class="fas fa-edit mr-3"></i>
-                            Edit
-                        </button>
-                    </a>
-                </div>
+                            <button
+                                type="submit"
+                                class="px-4 py-2 bg-indigo-100 text-rose-900 rounded-full font-semibold hover:bg-rose-700 hover:text-white w-full"
+                            >
+                                <i class="fas fa-trash mr-3"></i>
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+
+                    {{-- -  Admins- Only - Edit Button --}}
+                    <div class="grid grid-cols-1 md:col-span-8 w-full">
+                        <a href="{{ route('artworks.edit', $artwork->id) }}">
+                            <button
+                                type="submit"
+                                class="bg-indigo-100 text-rose-900 rounded-full font-semibold hover:bg-indigo-700 hover:text-white w-full py-2 px-4 flex items-center justify-center"
+                            >
+                                <i class="fas fa-edit mr-3"></i>
+                                Edit
+                            </button>
+                        </a>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>

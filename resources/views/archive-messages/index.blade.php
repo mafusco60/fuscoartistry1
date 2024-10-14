@@ -5,6 +5,13 @@
         Archived Messages
       </h1>
     </header>
+    {{-- Button to view archive page --}}
+    <button class="text-indigo-400 px-6 py-2 rounded-xl">
+      <a href="{{ route('messages.index') }}">
+          <i class="fa-solid fa-archive"></i>
+          View Messages
+      </a>
+  </button>
 
     <table class="w-full table-auto rounded-sm">
       <tbody>

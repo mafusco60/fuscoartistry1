@@ -103,7 +103,7 @@
                     id="original_substrate"
                     name="original_substrate"
                     label="Original Substrate"
-                    placeholder="Example\: Artist Paper"
+                    placeholder="Example: Artist Paper"
                     :value="old('original_substrate', $artwork->original_substrate)"
                 />
             </div>

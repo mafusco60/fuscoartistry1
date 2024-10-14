@@ -5,6 +5,13 @@
             Messages
         </h1>
     </header>
+    {{-- Button to view archive page --}}
+    <button class="text-indigo-400 px-6 py-2 rounded-xl">
+        <a href="{{ route('archive-messages') }}">
+            <i class="fa-solid fa-archive"></i>
+            View Archived Messages
+        </a>
+    </button>
     <main class="container  mx-auto p-8">
 
     {{-- Display Messages in a Table --}}
@@ -36,6 +43,10 @@
                                         height="0"
                                         class="object-cover rounded-t-xl w-[20px] h-[30px]"
                                     />
+                                </a>
+                                <a href="{{asset('storage/' . $message->image)}}" download>
+                                    <i class="fa-solid fa-download"></i>
+                                    Download Image
                                 </a>
                             @endif
 
@@ -171,13 +182,7 @@
                     >
                         No messages.
                     </td>
-                    {{-- Button to view archive page --}}
-                    <button class="text-indigo-400 px-6 py-2 rounded-xl">
-                        <a href="{{ route('archive-messages') }}">
-                            <i class="fa-solid fa-archive"></i>
-                            View Archived Messages
-                        </a>
-                    </button>
+                    
                 </tr>
             @endif
         </tbody>

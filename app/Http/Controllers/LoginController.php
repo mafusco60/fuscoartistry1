@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Symfony\Component\Mime\Header\PathHeader;
 
 class LoginController extends Controller
 {
    
         //@desc show the login form
         //@route GET /login
-public function login(): View
-    {
-        return view('auth.login');
+    public function login(): View
+    {  
+       
+        $path = request()->path();
+        return view('auth.login', ['path' => $path]);
     }
 
     //@desc authenticate user
@@ -22,35 +26,35 @@ public function login(): View
     public function authenticate(Request $request): RedirectResponse
   
     {
+        
+
+    //Validate the user
         $credentials = $request->validate([
         'email' => 'required|email|max:100',
         'password' => 'required|string',
     ]);
     //Attempt to authenticate the user
     if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-
         //Regenerate the session to prevent session fixation attacks
         $request->session()->regenerate();
-
     //Redirect to the intended page
-         return redirect()->intended()->with('success', 'You are logged in!'); 
-    }
+    return redirect()->intended()->with('success', 'You are logged in!');     
+}
     //If auth fails return back to login page
     return back()->withErrors([
         'email' => 'The provided credentials do not match our records.',
     ])->onlyInput('email');
-            
+    
+    // return redirect()->intended()->with('success', 'You are logged in!');     
     }
     //@desc logout user
         //@route POST /logout
-    public function logout(Request $request): RedirectResponse
+    public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-    
-        return redirect('/')->with('success', 'You are logged out!');
+    return redirect('/')->with('success', 'You are logged out!');
     }
 
 }

@@ -170,7 +170,7 @@ public function archive (Message $message) {
   // Delete the original  message
   $message->delete();
 
-  return redirect('/archive-messages/index')->with('archive_messages $archive_messages', 'success', 'Message archived successfully');
+  return redirect('/messages')->with('archive_messages $archive_messages', 'success', 'Message archived successfully');
 }
 //archive end --------------------------------
 }
