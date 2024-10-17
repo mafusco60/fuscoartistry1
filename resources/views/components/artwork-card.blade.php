@@ -1,4 +1,4 @@
-@props(['artwork'])
+@props(['artwork', 'artworkWidth'=>'w-[300px]'])
 
 {{-- Display artwork with link to details page --}}
 <div class="relative group ">
@@ -9,7 +9,7 @@
         width="0"
         height="0"
         sizes="100vw"
-        class="w-[300px]  md:block rounded-xl mx-auto"
+        class="{{$artworkWidth}} md:block rounded-xl mx-auto"
       />
     </a>
 

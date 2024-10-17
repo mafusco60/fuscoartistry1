@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Artwork;
 use App\Models\User;
 
+
 class DashboardController extends Controller
 {
     // @desc show the dashboard view
@@ -16,12 +17,13 @@ class DashboardController extends Controller
     {
                // Get logged in user
                $user = Auth::user();
+               $favorites = $user->favorites;
 
                // Get the user listings
-/*                $jobs = Artwork::where('user_id', $user->id)->with('applicants')->get(); */
+/*                $artworks = Artwork::where('user_id', $user->id)->with('')->get(); */
                 $artworks = Artwork::get();
        
-               return view('dashboard', compact('user', 'artworks'));
+               return view('dashboard', compact('user', 'artworks', 'favorites'));
     }
    
 }

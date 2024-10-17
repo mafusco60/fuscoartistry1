@@ -9,7 +9,7 @@
     <div class="container lg:container m-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             @foreach ($artworks as $artwork)
-                <x-artwork-card :artwork="$artwork" />
+                <x-artwork-card :artwork="$artwork" artworkWidth="w-[300px]" />
             @endforeach
         </div>
     </div>
