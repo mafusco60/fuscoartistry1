@@ -17,10 +17,11 @@ class FavoriteController extends Controller
     public function index(): View
     {
         $user = Auth::user();
+        $artworks = Artwork::all();
 
         $favorites = $user->favorites()->orderBy('favorites.created_at', 'desc')->paginate(9);
 
-         return view('favorites/index')->with('favorites', $favorites);
+         return view('favorites/index', compact('favorites', 'artworks', 'user'));
     }
     
    public function store( Artwork $artwork):RedirectResponse
@@ -32,7 +33,7 @@ class FavoriteController extends Controller
             return back()->with('error', 'Job is already bookmarked');
         }
 
-        // Create new bookmark
+        // Create new favorite
         $user->favorites()->attach($artwork->id);
 
         return back()->with('success', 'Artwork added to favorites successfully!');
