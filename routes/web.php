@@ -20,7 +20,7 @@ Route::get('/', [HomeController::class, 'index'] )->name('home');
 Route::resource('artworks', ArtworkController::class);
 Route::get('/artworks/{artworks}', [ArtworkController::class, 'show'])->name('artworks.show'); ;
 
-Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -30,7 +30,7 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 Route::get('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth' )->group(function(){
   Route::get('/favorites/index', [FavoriteController::class, 'index'])->name('favorites.index');
   Route::post('/favorites/{artwork}', [FavoriteController::class, 'store'])->name('favorites.store');
   Route::delete('/favorites/{artwork}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
@@ -58,9 +58,9 @@ Route::post('/archive-messages/{archive_message}/restore', [ArchiveMessageContro
 
 Route::delete('/archive-messages/{archive_message}/delete', [ArchiveMessageController::class, 'destroy'])->name('archive-messages.destroy')->middleware('auth:admin');
 
-Route::get('/admin-login', [AdminAuthController::class, 'show'])->name('admin.login');
+/* Route::get('/admin-login', [AdminAuthController::class, 'show'])->name('admin.login');
 Route::post('/admin-login', [AdminAuthController::class, 'authenticate'])->name('admin.authenticate');
 
-Route::post('/admin-logout', [AdminAuthController::class, 'logout'])->name('admin-logout')->middleware('auth:admin');
+Route::post('/admin-logout', [AdminAuthController::class, 'logout'])->name('admin-logout')->middleware('auth:admin'); */
 
 Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin-dashboard')->middleware('auth:admin');

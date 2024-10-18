@@ -43,7 +43,8 @@ class LoginController extends Controller
     
     
     //Login the admin
-}if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
+}
+if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
     return redirect()->intended('/admin-dashboard');
 } else {
     return redirect()->back()->with('error', 'Invalid Email or Password');
@@ -58,7 +59,7 @@ class LoginController extends Controller
         'email' => 'The provided credentials do not match our records.',
     ])->onlyInput('email');
         } 
-    // return redirect()->intended()->with('success', 'You are logged in!'); 
+     return redirect()->intended()->with('success', 'You are logged in!'); 
         }
 
     

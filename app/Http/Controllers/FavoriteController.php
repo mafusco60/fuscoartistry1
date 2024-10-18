@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Artwork;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -18,17 +19,23 @@ class FavoriteController extends Controller
     {
         $user = Auth::user();
         $artworks = Artwork::all();
-
-        $favorites = $user->favorites()->orderBy('favorites.created_at', 'desc')->paginate(9);
-
-         return view('favorites/index', compact('favorites', 'artworks', 'user'));
+        if ($user) {
+            $favorites = $user->favorites()->orderBy('favorites.created_at', 'desc')->paginate(3);
+        } 
+        else {
+            return redirect()->route('login')->with('error', 'You need to login to view your favorites');
+    }
+  
+        return view('favorites/index', compact('favorites', 'artworks', 'user'));
     }
     
+    // @desc    Create an Artwork favorite
+    // @route   POST /favorites/{artwork}
    public function store( Artwork $artwork):RedirectResponse
     {
         $user = Auth::user();
 
-        // Check if the job is already bookmarked
+        // Check if the artwork is already a favorite
         if ($user->favorites()->where('artwork_id', $artwork->id)->exists()) {
             return back()->with('error', 'Job is already bookmarked');
         }
@@ -39,18 +46,18 @@ class FavoriteController extends Controller
         return back()->with('success', 'Artwork added to favorites successfully!');
     }
     
-        // @desc    Remove bookmarked job
-    // @route   DELETE /bookmarks/{job}
+        // @desc    Remove a favorite Artwork
+    // @route   DELETE /favorites/{artwork}
     public function destroy(Artwork $artwork): RedirectResponse
     {
         $user = Auth::user();
 
-        // Check if the job is not bookmarked
+        // Check if the artwork is not a favorite
         if (!$user->favorites()->where('artwork_id', $artwork->id)->exists()) {
             return back()->with('error', 'Artwork is not a favorite');
         }
 
-        // Remove bookmark
+        // Remove favorite
         $user->favorites()->detach($artwork->id);
 
         return back()->with('success', 'Favorite removed successfully!');

@@ -1,7 +1,7 @@
 <header class="bg-indigo-900 text-white p-4" x-data="{ open: false }">
     <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-3xl font-semibold">
-            <a href="{{ url('/') }}">
+            <a href="{{ route('home') }}">
                 <img
                     src="{{ url('/images/logo.png') }}"
                     class="w-[200px]"
@@ -48,12 +48,10 @@
                     Dashboard
                 </x-nav-link>
                 <x-logout-button />
-                {{--
-                    <x-button-link url="/artworks/create" icon="edit">
-                    Create Artwork
-                    </x-button-link>
-                --}}
-                <x-avatar :user="auth()->user()" />
+                <x-avatar 
+                user="auth()->user()"         
+                admin = "Auth::guard('admin')->user()"
+
             @else
                 <x-nav-link url="/login" :active="request()->is('login')">
                     Login

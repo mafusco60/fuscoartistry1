@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -23,6 +24,10 @@ class Admin extends Authenticatable
     protected $hidden = [
     'password', 'remember_token',
 ];
+
+
+
+    
 }
 
 

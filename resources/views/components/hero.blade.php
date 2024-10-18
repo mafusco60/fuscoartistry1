@@ -15,14 +15,7 @@
                 placeholder="Keywords"
                 class="w-full md:w-72 px-4 py-3 focus:outline-none"
             />
-            {{--
-                <input
-                type="text"
-                name="location"
-                placeholder="Location"
-                class="w-full md:w-72 px-4 py-3 focus:outline-none"
-                />
-            --}}
+
             <button
                 class="w-full md:w-auto bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-3 focus:outline-none"
             >

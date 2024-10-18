@@ -151,7 +151,7 @@
                         </ul>
 
                         <form
-                            action="{{ route('admin-logout') }}"
+                            action="{{ route('logout') }}"
                             method="POST"
                             class="inline"
                         >

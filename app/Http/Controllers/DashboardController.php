@@ -17,10 +17,10 @@ class DashboardController extends Controller
     {
                // Get logged in user
                $user = Auth::user();
+                // Get the user favorites
                $favorites = $user->favorites;
 
-               // Get the user listings
-/*                $artworks = Artwork::where('user_id', $user->id)->with('')->get(); */
+                // Get all the artworks
                 $artworks = Artwork::get();
        
                return view('dashboard', compact('user', 'artworks', 'favorites'));
