@@ -94,6 +94,7 @@ class MessageController extends Controller
     //View Reply form
     public function edit(Message $message): View
     {
+        
         return view('messages.edit')->with('message', $message);
     }
 
@@ -109,7 +110,9 @@ class MessageController extends Controller
  
      // Update the reply
      $message->reply = $request->input('reply');
+     $message->updated_at = now();
      $message->save();
+
  
      // Return a response with the email data
      return response()->json([
@@ -157,8 +160,6 @@ public function archive (Message $message) {
   $archive_message->archive_reply = $message->reply;
   $archive_message->original_creation_date = $message->created_at; 
   $archive_message->reply_creation_date = $message->updated_at; 
-  $archive_message->created_at = now();
-  $archive_message->updated_at = now();
   // if the update_at is the exact same as the created_at date, set the reply date to null - there was no reply
   if( $archive_message->reply_creation_date == $message->created_at){
     $archive_message->reply_creation_date = null;

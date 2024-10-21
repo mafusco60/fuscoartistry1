@@ -48,10 +48,16 @@
                     Dashboard
                 </x-nav-link>
                 <x-logout-button />
-                <x-avatar 
-                user="auth()->user()"         
-                admin = "Auth::guard('admin')->user()"
+                @php
+                    $userOrAdmin = null;
+                    if (auth()->check()) {
+                        $userOrAdmin = auth()->user();
+                    } elseif (Auth::guard('admin')->check()) {
+                        $userOrAdmin = Auth::guard('admin')->user();
+                    }
+                @endphp
 
+                <x-avatar :userOrAdmin="$userOrAdmin" />
             @else
                 <x-nav-link url="/login" :active="request()->is('login')">
                     Login

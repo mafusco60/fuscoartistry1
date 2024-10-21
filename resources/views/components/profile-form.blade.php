@@ -15,7 +15,7 @@
             @csrf
             @method('PUT')
 
-            <x-avatar :user="$user" />
+            <x-avatar :userOrAdmin="$user" />
 
             <x-inputs.text
                 id="name"

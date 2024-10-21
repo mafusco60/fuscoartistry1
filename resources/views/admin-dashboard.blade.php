@@ -27,7 +27,7 @@
                         </h2>
 
                         @if (Auth::guard('admin')->user() && Auth::guard('admin')->user()->status == 1)
-                            <p class="text-rose-500 text-md">
+                            <p class="text-rose-500 text-md text-center">
                                 Hello
                                 {{ Auth::guard('admin')->user()->firstname }}!
                             </p>
@@ -39,7 +39,7 @@
                             </a>
                         @endif
 
-                        @if (Auth::guard('admin')->user()->image != null)
+                        @if (Auth::guard('admin')->user()->avatar != null)
                             <img
                                 src=" {{ asset(Auth::guard('admin')->user()->avatar) }} "
                                 alt=" "

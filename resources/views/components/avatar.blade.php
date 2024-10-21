@@ -1,24 +1,11 @@
 @props([
-    'user',
-    'admin',
+    'userOrAdmin',
 ])
 <div>
-    @if ($user->avatar)
+    @if ($userOrAdmin->avatar)
         <img
-            src="{{ asset($user->avatar) }}"
-            alt="{{ $user->name }}"
-            style="
-                width: 3rem;
-                height: 3rem;
-                border-radius: 9999px;
-                object-fit: cover;
-                margin: 0 auto;
-            "
-        />
-    @elseif (admin->avatar)
-        <img
-            src="{{ asset($admin->avatar) }}"
-            alt="{{ $admin->name }}"
+            src="{{ asset($userOrAdmin->avatar) }}"
+            alt="{{ $userOrAdmin->name }}"
             style="
                 width: 3rem;
                 height: 3rem;

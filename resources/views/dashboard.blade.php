@@ -1,19 +1,4 @@
 <x-layout>
-    {{--
-        <main class="container mx-auto p-8">
-        <section class="flex flex-col md:flex-row gap-4">
-        <x-profile-form :user="$user" />
-        <div class="">
-        <x-favorites
-        :favorites="$favorites"
-        :artworks="$artworks"
-        favoritesClass="flex flex-cols md:flex-rows gap-4 mb-3 mx-auto"
-        />
-        </div>
-        </section>
-        </main>
-    --}}
-
     <main class="container mx-auto p-8">
         <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <x-profile-form :user="$user" />
