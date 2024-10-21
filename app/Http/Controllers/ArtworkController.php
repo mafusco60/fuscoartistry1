@@ -18,9 +18,8 @@ class ArtworkController extends Controller
     {
         $artworks = Artwork::latest()->paginate(9);
         return view('artworks.index')->with('artworks', $artworks);
-
-    
     }
+
 
    //@desc show the create artwork form
     //@route GET /artworks/create
@@ -46,18 +45,15 @@ class ArtworkController extends Controller
         'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
   
-  
     if($request->hasFile('image')){
       $image = $request->file('image');
       $filename = time() . '_' . $image->getClientOriginalName();
       $formFields['image'] = $image->storeAs('images', $filename, 'public');
     }
 
+        $artwork = Artwork::create($formFields);
   
-  
-    $artwork = Artwork::create($formFields);
-  
-      return redirect()->route('artworks.show', ['artwork' => $artwork->id])->with('success', 'Artwork created successfully');
+        return redirect()->route('artworks.show', ['artwork' => $artwork->id])->with('success', 'Artwork created successfully');
 
   }
 
@@ -93,11 +89,8 @@ class ArtworkController extends Controller
               'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         
           ]);
-        
-        
-        
-
-            //Save the new image
+      
+          //Save the new image
             if ($request->hasFile('image')) {
                 // Get the new image
                 $image = $request->file('image');
@@ -112,24 +105,51 @@ class ArtworkController extends Controller
             
             // Update the artwork
             $artwork->update($formFields);
-        
      
             return redirect()->route('artworks.show', ['artwork' => $artwork->id])->with('success', 'Artwork updated successfully');
 
         
     }
 
+
    //@desc delete the artwork listing from database
     //@route DELETE /artworks/{$id}
     public function destroy(Artwork $artwork): RedirectResponse
-    {
-       //If image exists, delete it
-       if($artwork->image){
-        Storage::disk('public')->delete($artwork->image);
-       }
-       $artwork->delete();
+        {
+        //If image exists, delete it
+            if($artwork->image){
+                Storage::disk('public')->delete($artwork->image);
+            }
+        $artwork->delete();
 
          return redirect()->route('artworks.index')->with('success', 'Artwork listing deleted successfully');
 
     }
+
+   
+
+    //@desc search for artwork listings
+    //@route GET /artworks/search
+    public function search(Request $request): View
+    {
+        $keywords = strtolower(trim($request->input('keywords')));
+        $query = Artwork::query();
+
+        if ($keywords) {
+            $query->where(function($q) use ($keywords) {
+                $q->where('title', 'LIKE', '%' . $keywords . '%')
+                  ->orWhere('description', 'LIKE', '%' . $keywords . '%')
+                  ->orWhere('medium', 'LIKE', '%' . $keywords . '%')
+                  ->orWhere('search_tags', 'LIKE', '%' . $keywords . '%')
+                  ->orWhere('original_substrate', 'LIKE', '%' . $keywords . '%')
+                  ->orWhere('original_dimensions', 'LIKE', '%' . $keywords . '%');
+            });
+        }
+
+        $artworks = $query->paginate(9);
+
+        return view('artworks.index', compact('artworks'));
+    }
+
 }
+

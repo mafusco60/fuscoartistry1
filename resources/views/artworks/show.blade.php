@@ -1,16 +1,14 @@
 <x-layout>
     <a
         href="{{ route('artworks.index') }}"
-        class="text-indigo-900 text-md my-4 py-2 px-8 rounded-xl hover:opacity-80 border border-rounded-lg"
+        class="text-indigo-900 text-md my-4 py-2 px-8"
     >
         <i class="fa-solid fa-arrow-alt-circle-left"></i>
         Back to Artworks
     </a>
 
     <div class="mx-4">
-        <div
-            class="text-lg inline text-rose-900 mb-4 border rounded-xl py-2 px-6"
-        >
+        <div class="text-lg inline text-rose-900 mb-4 rounded-xl py-2 px-6">
             {{-- Display Artwork Image and Details --}}
             <div class="grid grid-cols-1 md:grid-cols-8 gap-6">
                 {{-- Row 1 -- Cols 1-3 --}}

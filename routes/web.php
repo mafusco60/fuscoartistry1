@@ -16,9 +16,10 @@ use App\Http\Controllers\ArchiveMessageController;
 
 Route::get('/', [HomeController::class, 'index'] )->name('home'); 
 
+Route::get('/artworks/search', [ArtworkController::class, 'search'])->name('artworks.search'); 
 
 Route::resource('artworks', ArtworkController::class);
-Route::get('/artworks/{artworks}', [ArtworkController::class, 'show'])->name('artworks.show'); ;
+Route::get('/artworks/{artworks}', [ArtworkController::class, 'show'])->name('artworks.show'); 
 
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
