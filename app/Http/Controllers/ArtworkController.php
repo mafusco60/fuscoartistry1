@@ -130,15 +130,15 @@ class ArtworkController extends Controller
 
     //@desc search for artwork listings
     //@route GET /artworks/search
-    public function search(Request $request): View
+   /*  public function search(Request $request): View
     {
         $keywords = strtolower(trim($request->input('keywords')));
         $query = Artwork::query();
 
         if ($keywords) {
             $query->where(function($q) use ($keywords) {
-                $q->where('title', 'LIKE', '%' . $keywords . '%')
-                  ->orWhere('description', 'LIKE', '%' . $keywords . '%')
+                $q->where('description', 'LIKE', '%' . $keywords . '%')
+                  ->orWhere('title', 'LIKE', '%' . $keywords . '%')
                   ->orWhere('medium', 'LIKE', '%' . $keywords . '%')
                   ->orWhere('search_tags', 'LIKE', '%' . $keywords . '%')
                   ->orWhere('original_substrate', 'LIKE', '%' . $keywords . '%')
@@ -149,7 +149,28 @@ class ArtworkController extends Controller
         $artworks = $query->paginate(9);
 
         return view('artworks.index', compact('artworks'));
-    }
+    } */
+    public function search(Request $request): View
+    {
+        $keywords = strtolower($request->input('keywords'));
 
+        $query = Artwork::query();
+
+        if ($keywords) {
+            $query->where(function ($q) use ($keywords) {
+                $q->whereRaw('LOWER(title) like ?', ['%' . $keywords . '%'])
+                ->orWhereRaw('LOWER(description) like ?', ['%' . $keywords . '%'])
+                ->orWhereRaw('LOWER(search_tags) like ?', ['%' . $keywords . '%'])
+                ->orWhereRaw('LOWER(original_substrate) like ?', ['%' . $keywords . '%'])
+                ->orWhereRaw('LOWER(original_dimensions) like ?', ['%' . $keywords . '%'])
+                ->orWhereRaw('LOWER(medium) like ?', ['%' . $keywords . '%']);
+
+            });
+        }
+
+        $artworks = $query->paginate(12);
+
+        return view('artworks.index')->with('artworks', $artworks);
+    }
 }
 
