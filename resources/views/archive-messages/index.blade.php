@@ -5,7 +5,7 @@
         Archived Messages
       </h1>
     </header>
-    {{-- Button to view archive page --}}
+    {{-- Button to view messages page --}}
     <button class="text-indigo-400 px-6 py-2 rounded-xl">
       <a href="{{ route('messages.index') }}">
           <i class="fa-solid fa-archive"></i>
@@ -47,6 +47,22 @@
               {{-- Display Message Details --}}
               <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                 <x-card>
+                  {{-- Sender (id) --}}
+            <div class="text-sm">
+              <label for="user-name" class="inline-block text-sm font-semibold">
+                  Sender:
+              </label>
+              <p class="text-rose-700 inline text-sm">
+                 
+                  {{ $archive_message->archive_sender_id ? $archive_message->archive_sender_id : 'Guest' }}
+              </p>
+              <div>
+                  <label for="user-name" class="text-sm font-semibold">Artwork:</label>
+                  <p class="text-rose-700 inline text-sm">
+                      {{ $archive_message->archive_artwork_id ? $archive_message->archive_artwork_id : 'No Artwork' }}
+                  </p>
+              </div>
+          </div>
                   {{-- Name --}}
                   <h1>{{ $archive_message->archive_name }}</h1>
                   <div class="text-indigo-500 font-bold text-sm">

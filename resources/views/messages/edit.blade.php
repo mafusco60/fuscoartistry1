@@ -12,6 +12,22 @@
             </header>
 
             @csrf
+            {{-- User Name --}}
+            <div class="text-md">
+                <label for="user-name" class="inline-block text-md mb-2">
+                    Sender:
+                </label>
+                <p class="text-rose-700 inline">
+                    {{ $message->sender_id ? $message->user->name : 'Guest' }}
+                </p>
+                <div>
+                    <label for="user-name" class="text-md mb-2">Artwork:</label>
+                    <p class="text-rose-700 inline">
+                        {{ $message->artwork_id ? $message->artwork->title : 'No Artwork' }}
+                    </p>
+                </div>
+            </div>
+
             {{-- Name --}}
             <div class="text-md">
                 <label for="name" class="inline-block text-md mb-2">

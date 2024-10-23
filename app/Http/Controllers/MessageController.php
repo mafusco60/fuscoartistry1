@@ -94,8 +94,9 @@ class MessageController extends Controller
     //View Reply form
     public function edit(Message $message): View
     {
-        
-        return view('messages.edit')->with('message', $message);
+        $message = Message::findOrFail($message->id);
+        $sender_id = $message->sender_id;
+        return view('messages.edit', compact('message', 'sender_id'));
     }
 
     public function update(Request $request, $id)
@@ -157,7 +158,12 @@ public function archive (Message $message) {
   $archive_message->archive_subject = $message->subject;
   $archive_message->archive_body = $message->body;
   $archive_message->archive_upload = $message->image;
-  $archive_message->archive_reply = $message->reply;
+  if ($message->reply)
+    $archive_message->archive_reply = $message->reply;
+  if ($message->sender_id)
+    $archive_message->archive_sender_id = $message->sender_id;
+  if ($message->artwork_id)
+    $archive_message->archive_artwork_id = $message->artwork_id;
   $archive_message->original_creation_date = $message->created_at; 
   $archive_message->reply_creation_date = $message->updated_at; 
   // if the update_at is the exact same as the created_at date, set the reply date to null - there was no reply

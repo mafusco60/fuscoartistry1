@@ -43,6 +43,7 @@ Route::post('/messages/store', [MessageController::class, 'store'])->name('messa
 
 Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'createFromArtwork'])->name('artworks-messages.create');
 Route::post('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
+Route::get('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
 
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth:admin');
 

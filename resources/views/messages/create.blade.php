@@ -21,6 +21,15 @@
                 />
             @endisset
 
+            @isset($user)
+                <input
+                    id="user_id"
+                    type="hidden"
+                    name="user_id"
+                    value="{{ Auth::user()->id }}"
+                />
+            @endisset
+
             <x-inputs.text
                 id="name"
                 name="name"
@@ -28,13 +37,14 @@
                 :required="true"
             />
             <x-inputs.text
-                type="email"
                 id="email"
+                type="email"
                 name="email"
                 label="Email"
                 :required="true"
             />
             <x-inputs.text id="phone" name="phone" label="Phone" />
+
             <x-inputs.select
                 id="subject"
                 name="subject"

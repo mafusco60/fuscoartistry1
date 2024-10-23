@@ -16,7 +16,7 @@
     {{-- Create hidden / translucent overlay with artwork details --}}
     <a href= "/artworks/{{ $artwork->id}}">
     <div
-      class=" md:absolute bottom-0 md:left-0 md:right-0 p-2 px-4 text-white duration-500 bg-indigo-900 opacity-0 group-hover:opacity-100 bg-opacity-40"
+      class="md:absolute bottom-0 md:left-0 md:right-0 p-2 px-4 text-white duration-500 bg-indigo-900 opacity-0 group-hover:opacity-100 bg-opacity-40"
     >
       <div class="flex justify-between">
         <div class="font-normal">

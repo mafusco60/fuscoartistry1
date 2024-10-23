@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ArchiveMessage;
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -24,9 +25,10 @@ class ArchiveMessageController extends Controller
     //Show all archived messages
     public function index(): View
     {
-      $archive_messages = ArchiveMessage::orderBy('created_at', 'desc')->get();
+      $archive_messages = ArchiveMessage::orderBy('updated_at', 'desc')->get(); 
+      $user = new User();
    
-    return view('/archive-messages/index', compact('archive_messages'));
+    return view('/archive-messages/index', compact('archive_messages', 'user'));
     }
 
 
@@ -43,6 +45,8 @@ class ArchiveMessageController extends Controller
         'archive_body' => 'required',
         'archive_upload' => 'nullable',
         'archive_reply' => 'nullable',
+        'archive_sender_id' => 'nullable',
+        'archive_artwork_id' => 'nullable',
         'original_creation_date' => 'required',
         'reply_creation_date' => 'nullable'
       ]);
@@ -109,6 +113,10 @@ public function restore(ArchiveMessage $archive_message) {
     $message->body = $archive_message->archive_body;
     $message->reply = $archive_message->archive_reply;
     $message->image = $archive_message->archive_upload;
+    if ($archive_message->archive_sender_id)
+    $message->sender_id = $archive_message->archive_sender_id;
+    if ($archive_message->archive_artwork_id)
+    $message->artwork_id = $archive_message->archive_artwork_id;
     $message->created_at = $archive_message->original_creation_date;
     $message->updated_at = $archive_message->reply_creation_date;
     $message->created_at = now();
