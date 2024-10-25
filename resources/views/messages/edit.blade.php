@@ -87,7 +87,7 @@
                         <x-textarea
                             id="reply"
                             name="reply"
-                            value="{{ 'reply' }}"
+                            {{-- value="{{ 'reply' }}" --}}
                         ></x-textarea>
                     </div>
                 </div>

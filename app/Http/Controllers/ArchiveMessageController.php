@@ -28,8 +28,6 @@ class ArchiveMessageController extends Controller
     {
       $archive_messages = ArchiveMessage::latest()->with('user','artwork')->get();
         return view ('archive-messages.index', compact('archive_messages'));
-   
-    
     }
 
 
@@ -105,7 +103,7 @@ public function destroy(Request $request, ArchiveMessage $archive_message)
 
 public function restore(ArchiveMessage $archive_message) {
     // Create a new restored message instance
-    $message = new message();
+    $message = new Message();
   
     // Set all required fields
     $message->name = $archive_message->archive_name;

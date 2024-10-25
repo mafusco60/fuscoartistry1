@@ -26,11 +26,11 @@ class ArchiveMessage extends Model
 
     public function artwork(): BelongsTo
     {
-        return $this->belongsTo(Artwork::class);
+        return $this->belongsTo(Artwork::class, 'archive_artwork_id');
     }
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'sender_id');
+        return $this->belongsTo(User::class, 'archive_sender_id');
     }
 
 }

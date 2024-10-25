@@ -1,12 +1,13 @@
 @props([
-    'id',
-    'name',
-    'label' => null,
-    'placeholder' => '',
-    'value' => '',
-    'rows' => 3,
-    'cols' => 30,
-    'required' => false,
+    "id",
+    "name",
+    "label" => null,
+    "placeholder" => "",
+    "value" => "",
+    "rows" => 3,
+    "cols" => 30,
+    "required" => false,
+    "readonly" => false,
 ])
 
 <div class="mb-2">
@@ -20,11 +21,21 @@
         rows="{{ $rows }}"
         cols="{{ $cols }}"
         type="textarea"
-        class="text-sm border rounded p-2 w-full focus:outline-none font-bold @error($name) border-rose-500 @enderror"
+        @if ($readonly)
+            readonly
+            class="block mt-1 w-full border border-gray-200 rounded p-2 focus:outline-none text-stone-800 focus:border-none form control bg-stone-200"
+        @else
+            class="text-sm border rounded p-2 w-full focus:outline-none font-bold @error($name)
+         border-rose-500 @enderror
+
+
+
+                                "
+        @endif
         name="{{ $name }}"
         id="{{ $id }}"
         placeholder="{{ $placeholder }}"
-        {{ $required ? 'required' : '' }}
+        {{ $required ? "required" : "" }}
     >
 {{ old($name, $value) }}</textarea
     >

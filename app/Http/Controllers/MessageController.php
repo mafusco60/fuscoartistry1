@@ -180,9 +180,9 @@ public function archive (Message $message) {
   $archive_message->original_creation_date = $message->created_at; 
   $archive_message->reply_creation_date = $message->updated_at; 
   // if the update_at is the exact same as the created_at date, set the reply date to null - there was no reply
-  if( $archive_message->reply_creation_date == $message->created_at){
-    $archive_message->reply_creation_date = null;
-  } 
+//   if( $archive_message->reply_creation_date == $message->updated_at){
+//     $archive_message->reply_creation_date = null;
+//  } 
 
   // Save the archive message
   $archive_message->save();

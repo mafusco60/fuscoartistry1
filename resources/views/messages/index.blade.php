@@ -124,11 +124,13 @@
                                     {{ $message->reply }}
                                 </p>
                                 {{-- Date and time of reply --}}
+                                
                                 <p class="text-sm mt-2 text-rose-600">
                                     {{ $message->updated_at->setTimezone('America/New_York')->format('m-d-y') }}
                                 </p>
                                 <p class="text-sm text-rose-600">
                                     {{ $message->updated_at->setTimezone('America/New_York')->format(' h:i a') }}
+                                    
                                 </p>
                             </td>
 

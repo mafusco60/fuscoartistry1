@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class Admin extends Authenticatable
+class Admin extends Authenticatable 
 {
-    use HasFactory;
-
+    use HasFactory, Notifiable;
     protected $fillable = [
         'firstname',
         'lastname',
@@ -25,9 +25,6 @@ class Admin extends Authenticatable
     'password', 'remember_token',
 ];
 
-
-
-    
 }
 
 

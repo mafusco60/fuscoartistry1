@@ -12,6 +12,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ArchiveMessageController;
+use App\Http\Controllers\AdminProfileController;
 
 
 Route::get('/', [HomeController::class, 'index'] )->name('home'); 
@@ -68,4 +69,5 @@ Route::post('/admin-logout', [AdminAuthController::class, 'logout'])->name('admi
 
 Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin-dashboard')->middleware('auth:admin');
 
-
+Route::get('/admin-profiles', [AdminProfileController::class, 'edit'])->name('admin-profiles.edit')->middleware('auth:admin');
+Route::put('/admin-profiles', [AdminProfileController::class, 'update'])->name('admin-profiles.update')->middleware('auth:admin');

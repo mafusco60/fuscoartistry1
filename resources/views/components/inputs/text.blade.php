@@ -1,11 +1,12 @@
 @props([
-    'id',
-    'name',
-    'label' => null,
-    'type' => 'text',
-    'placeholder' => '',
-    'value' => '',
-    'required' => false,
+    "id",
+    "name",
+    "label" => null,
+    "type" => "text",
+    "placeholder" => "",
+    "value" => "",
+    "required" => false,
+    "readonly" => false,
 ])
 
 <div class="mb-2">
@@ -18,10 +19,17 @@
     <input
         id="{{ $id }}"
         type="{{ $type }}"
-        class="text-sm border rounded p-2 w-full focus:outline-none font-bold @error($name) border-rose-500 @enderror"
+        @if ($readonly)
+            readonly
+            class="block mt-1 w-full border border-gray-200 rounded p-2 focus:outline-none text-stone-800 focus:border-none form control bg-stone-200"
+        @else
+            class="text-sm border rounded p-2 w-full focus:outline-none font-bold @error($name)
+         border-rose-500 @enderror
+        "
+        @endif
         name="{{ $name }}"
         placeholder="{{ $placeholder }}"
-        {{ $required ? 'required' : '' }}
+        {{ $required ? "required" : "" }}
         value="{{ old($name, $value) }}"
     />
 
