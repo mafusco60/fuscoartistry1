@@ -25,11 +25,7 @@ class Message extends Model
            'archived',
         
     ];
-//Relation to User
-    /* public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    } */
+
 //Relation to Artwork
     public function artwork(): BelongsTo
     {

@@ -40,6 +40,7 @@ Route::middleware('auth' )->group(function(){
 
 Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
 Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
+Route::delete('/messages/{message}/destroy', [MessageController::class, 'destroy'])->name('messages.destroy')->middleware ('auth:admin');
 
 Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'createFromArtwork'])->name('artworks-messages.create');
 Route::post('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
@@ -54,7 +55,7 @@ Route::put('/messages/{message}/update', [MessageController::class, 'update'])->
 Route::post('/messages/{message}/archive', [MessageController::class, 'archive'])->name('messages.archive')->middleware('auth:admin');
 
 // Archive Messages
-Route::get('/archive-messages', [ArchiveMessageController::class, 'index'])->name('archive-messages')->middleware('auth:admin');
+Route::get('/archive-messages', [ArchiveMessageController::class, 'index'])->name('archive-messages.index')->middleware('auth:admin');
 
 Route::post('/archive-messages/{archive_message}/restore', [ArchiveMessageController::class, 'restore'])->name('archive-messages.restore')->middleware('auth:admin');
 
@@ -66,3 +67,5 @@ Route::post('/admin-login', [AdminAuthController::class, 'authenticate'])->name(
 Route::post('/admin-logout', [AdminAuthController::class, 'logout'])->name('admin-logout')->middleware('auth:admin'); */
 
 Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin-dashboard')->middleware('auth:admin');
+
+

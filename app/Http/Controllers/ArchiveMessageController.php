@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\ArchiveMessage;
 use App\Models\Message;
 use App\Models\User;
+use App\Models\Artwork;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -25,10 +26,10 @@ class ArchiveMessageController extends Controller
     //Show all archived messages
     public function index(): View
     {
-      $archive_messages = ArchiveMessage::orderBy('updated_at', 'desc')->get(); 
-      $user = new User();
+      $archive_messages = ArchiveMessage::latest()->with('user','artwork')->get();
+        return view ('archive-messages.index', compact('archive_messages'));
    
-    return view('/archive-messages/index', compact('archive_messages', 'user'));
+    
     }
 
 

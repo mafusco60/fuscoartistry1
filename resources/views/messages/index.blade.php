@@ -1,5 +1,5 @@
 <x-layout>
-    <x-card class="">
+    <x-card>
     <header>
         <h1 class="text-2xl text-center font-bold my-6 text-indigo-900">
             Messages
@@ -7,7 +7,7 @@
     </header>
     {{-- Button to view archive page --}}
     <button class="text-indigo-400 px-6 py-2 rounded-xl">
-        <a href="{{ route('archive-messages') }}">
+        <a href="{{ route('archive-messages.index') }}">
             <i class="fa-solid fa-archive"></i>
             View Archived Messages
         </a>
@@ -171,6 +171,24 @@
                                 </button>
                             </form>
                         </td>
+                        <td class="px-4 py-8 border-t border-b border-gray-300 text-md">
+                            <form
+                              id="delete-form"
+                              action="{{route('messages.destroy', $message->id)}}"
+                              method="POST"
+                            >
+                              @csrf
+                              @method('DELETE')
+                              <button
+                                id="delete-form"
+                                type="submit"
+                                class="text-red-400 px-6 py-2  text-sm"
+                              >
+                                <i class="fa-solid fa-trash "></i>
+                                Delete
+                              </button>
+                            </form>
+                          </td>
                     </tr>
                 
                 @endforeach

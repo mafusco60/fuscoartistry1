@@ -121,7 +121,7 @@
                     <form
                     method="POST"
                     enctype="multipart/form-data"
-                    action="{{ route('message.store', $artwork->id) }}"
+                    action="{{ route('messages.store', $artwork->id) }}"
                     >
                     @csrf
                     <x-inputs.text

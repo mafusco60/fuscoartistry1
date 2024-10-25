@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller
 {
@@ -131,6 +132,18 @@ class MessageController extends Controller
      return back()->with('success', 'Replied to message successfully');
  }
 
+ public function destroy(Request $request, Message $message)
+{
+    $message->delete();
+
+    if ($request->query('stay') === 'message') {
+        return redirect('/messages')->with('error', 'Message not deleted');
+    }
+    if ($message->image && Storage::disk('public')->exists($message->image)) {
+      Storage::disk('public')->delete($message->image);
+  }
+    return redirect('/messages')->with('success', 'Message and file deleted successfully');
+}
   
     //Delete Message Data
 /* public function destroy(Request $request, Message $message)
