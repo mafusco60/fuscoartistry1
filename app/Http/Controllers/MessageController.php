@@ -193,5 +193,35 @@ public function archive (Message $message) {
   return redirect('/messages')->with('archive_messages $archive_messages', 'success', 'Message archived successfully');
 }
 //archive end --------------------------------
+
+
+public function search(Request $request): View
+    {
+        $keywords = strtolower($request->input('keywords'));
+
+        $query = Message::query();
+
+        if ($keywords) {
+            $query->where(function ($q) use ($keywords) {
+                $q->whereRaw('LOWER(body) like ?', ['%' . $keywords . '%'])
+                ->orWhereRaw('LOWER(name) like ?', ['%' . $keywords . '%'])
+                ->orWhereRaw('LOWER(subject) like ?', ['%' . $keywords . '%'])
+                 ->orWhereRaw('LOWER(email) like ?', ['%' . $keywords . '%'])
+                 ->orWhereRaw('LOWER(reply) like ?', ['%' . $keywords . '%'])
+                 ->orWhereRaw('LOWER(image) like ?', ['%' . $keywords . '%'])
+                 ->orWhereHas('artwork', function ($q) use ($keywords) {
+                $q->whereRaw('LOWER(title) like ?', ['%' . $keywords . '%']);
+                })
+                ->orWhereHas('user', function ($q) use ($keywords) {
+                $q->whereRaw('LOWER(name) like ?', ['%' . $keywords . '%']);
+                });
+
+          });
+        }
+
+        $messages = $query->paginate(12);
+
+        return view('messages.index', compact ('messages'));
+    }
 }
     

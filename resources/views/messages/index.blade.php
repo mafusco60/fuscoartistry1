@@ -1,17 +1,32 @@
 <x-layout>
+        {{-- Button to view archive page --}}
+        <button class="text-indigo-400 px-6 py-2 rounded-xl">
+            <a href="{{ route('archive-messages.index') }}">
+                <i class="fa-solid fa-archive"></i>
+                View Archived Messages
+            </a>
+        </button>
+    <div class="text-center text-md mt-5 md:mx-auto">
+        
+        <x-search  
+            :routename="'messages.search'" 
+        />
+        @if (request()->has('keywords'))
+        <a
+            href="{{ route('messages.index') }}"
+            class="block mt-4 text-center text-indigo-900 hover:text-indigo-600"
+        >
+            Clear search
+        </a>
+    @endif
+    </div>
     <x-card>
     <header>
         <h1 class="text-2xl text-center font-bold my-6 text-indigo-900">
             Messages
         </h1>
     </header>
-    {{-- Button to view archive page --}}
-    <button class="text-indigo-400 px-6 py-2 rounded-xl">
-        <a href="{{ route('archive-messages.index') }}">
-            <i class="fa-solid fa-archive"></i>
-            View Archived Messages
-        </a>
-    </button>
+
     <main class="container  mx-auto p-8">
 
     {{-- Display Messages in a Table --}}
@@ -26,7 +41,7 @@
                         <td class="px-4 py-8 border-t border-b border-gray-300">
                             @if ($message->image)
                                 {{-- Display Image if it exists --}}
-                                <p class="text-indigo-500 font-bold">
+                                <p class="text-indigo-900 text-sm text-center font-semibold">
                                     User Upload:
                                 </p>
 
@@ -45,23 +60,43 @@
                                     />
                                 </a>
                                 <a href="{{asset('storage/' . $message->image)}}" download>
-                                    <i class="fa-solid fa-download"></i>
-                                    Download Image
+                                    <i class="fa-solid fa-download mx-auto text-center"></i>
+                                    <span class="text-center text-sm">Download Image</span>
                                 </a>
+                            @else
+                                <p class="text-indigo-500 font-semibold text-center text-sm p-4">
+                                    No Uploaded Image
+                                </p>
                             @endif
 
+
+
                             {{-- Display Original Message Date and Time --}}
+                           
+                                                {{-- Display Artwork Listing Image if it exists --}}
+                             @if ($message->artwork_id != null)
+                             <a href="{{ route('artworks.show', $message->artwork_id) }}">
+                                <p class="text-indigo-900 font-semibold border border-gray-200 p-3 text-sm text-center">Pertinent Artwork: <br>
+                                    {{$message->artwork->title}} 
+                                </p>
+                             </a>
+                                
+                            @else
+                                <p class="text-indigo-900 font-semibold pb-5 text-sm text-center">No Artwork </p>
+                            @endif 
                             @unless ($message->created_at == null)
-                                <div class="text-rose-800">
-                                    <p class="text-xs inline">
-                                        {{ \Carbon\Carbon::parse($message->created_at)->setTimezone('America/New_York')->format('m-d-y') }}
-                                    </p>
-                                    <p class="text-xs inline">
-                                        {{ \Carbon\Carbon::parse($message->created_at)->setTimezone('America/New_York')->format('h:i a') }}
-                                    </p>
-                                </div>
-                            @endunless
-                        </td>
+                            <div class="text-rose-800 text-center">
+                                <p class="text-xs inline">
+                                    {{ \Carbon\Carbon::parse($message->created_at)->setTimezone('America/New_York')->format('m-d-y') }} /
+                                </p>
+                                <p class="text-xs inline text-center">
+                                    {{ \Carbon\Carbon::parse($message->created_at)->setTimezone('America/New_York')->format('h:i a') }}
+                                </p>
+                            </div>
+                        @endunless
+
+
+                        {{-- </td> --}}
                         <td class="px-4 py-8 border-t border-b border-gray-300">                            {{-- Display Message Details --}}
 
                             {{-- Name --}}
@@ -78,11 +113,11 @@
                             @endif
                             {{-- Email --}}
                             <a href="mailto:{{ $message->email }}" >
-                              <h1 class="text-sm font-bold inline text-indigo-900">Email: <h1 class="text-indigo-500 font-bold text-sm inline">{{ $message->email }}</a>
+                              <h1 class="text-sm font-bold inline text-indigo-900 underline">Email: <h1 class="text-indigo-500 font-bold text-sm inline">{{ $message->email }}</a>
                             
                             {{-- Subject --}}
                             <div>
-                              <h1 class="text-sm font-bold inline text-indigo-900">Subject:</h1>
+                              <h1 class="text-sm font-bold inline text-indigo-900 underline">Subject:</h1>
                                 <span
                                     class="font-semibold text-sm inline text-black"
                                 >
@@ -92,61 +127,47 @@
 
                             {{-- Message body --}}
                             {{-- <div class="mb-4"> --}}
-                                <p class="text-sm font-bold inline text-indigo-900">Message:</p>
-                                 <h1 class="font-semibold text-sm inline text-black">
+                                <p class="text-sm font-bold inline text-indigo-900 underline ">Message:</p>
+                                 <h1 class="font-semibold text-sm inline text-black pb-4">
                                     {{ $message->body }}
                                 </h1>
                             </div>
-                            @if ($message->artwork_id != null)
-                                {{-- Display Artwork Listing Image if it exists --}}
-                                <p class="text-indigo-900 font-bold">
-                                    {{$message->artwork->title}}: {{ $message->artwork_id }}
-                                </p>
-                                <img
-                                    src="{{ asset($message->artwork->image) }}"
-                                    alt=" "
-                                    class="object-cover w-[40px]"
-                                />
-                            @else
-                                <p class="text-indigo-900 font-semibold pb-5 text-sm">No Image</p>
-                            @endif
-
-                        </td>
+                               
                         {{-- Display the reply message if it exists --}}
                         @if ($message->reply)
-                            <td
-                                class="px-4  border-t border-b border-gray-300 text-md"
+                            {{-- <td --}}
+                                <div class="p-4 mt-4  border border-gray-300 text-md"
                             >
-                                <p class="font-bold mb-4 text-indigo-500">
+                                <p class="font-bold mb-4 text-indigo-500 underline">
                                     Reply Message:
                                 </p>
-                                <p class="text-sm font-normal text-indigo-700">
+                                <p class="text-sm font-normal text-indigo-700 mb-4">
                                     {{ $message->reply }}
                                 </p>
                                 {{-- Date and time of reply --}}
                                 
-                                <p class="text-sm mt-2 text-rose-600">
-                                    {{ $message->updated_at->setTimezone('America/New_York')->format('m-d-y') }}
+                                <p class="text-xs mt-2 text-rose-600 inline">
+                                    {{ $message->updated_at->setTimezone('America/New_York')->format('m-d-y') }} /
                                 </p>
-                                <p class="text-sm text-rose-600">
+                                <p class="text-xs text-rose-600 inline">
                                     {{ $message->updated_at->setTimezone('America/New_York')->format(' h:i a') }}
                                     
                                 </p>
+                            </div>
                             </td>
 
                             {{-- Display Reply Button if no reply exists. On Click - Redirects to reply form --}}
                         @else
-                            <td
-                                class="px-4 py-8 border-t border-b border-gray-300 text-lg"
+                            <div text-lg"
                             >
                                 <a
                                     href="{{route('messages.edit', $message->id)}}"
-                                    class="text-indigo-500 px-6 py-2 rounded-xl"
+                                    class="text-indigo-500 px-6 py-2 rounded-xl text-md"
                                 >
-                                    <i class="fa-solid fa-reply"></i>
+                                    <i class="fa-solid fa-reply text-center p-6"></i>
                                     Reply
                                 </a>
-                            </td>
+                            </div>
                         @endif
 
                         {{-- Archive Button --}}

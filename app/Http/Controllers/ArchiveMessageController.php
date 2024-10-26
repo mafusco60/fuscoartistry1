@@ -130,6 +130,35 @@ public function restore(ArchiveMessage $archive_message) {
   
     return redirect('/messages')->with('message', 'Message restored successfully');
   }
+
+  public function search(Request $request): View
+    {
+        $keywords = strtolower($request->input('keywords'));
+
+        $query = ArchiveMessage::query();
+
+        if ($keywords) {
+            $query->where(function ($q) use ($keywords) {
+                $q->whereRaw('LOWER(archive_body) like ?', ['%' . $keywords . '%'])
+                ->orWhereRaw('LOWER(archive_name) like ?', ['%' . $keywords . '%'])
+                ->orWhereRaw('LOWER(archive_subject) like ?', ['%' . $keywords . '%'])
+                 ->orWhereRaw('LOWER(archive_email) like ?', ['%' . $keywords . '%'])
+                 ->orWhereRaw('LOWER(archive_reply) like ?', ['%' . $keywords . '%'])
+                 ->orWhereRaw('LOWER(archive_upload) like ?', ['%' . $keywords . '%'])
+                 ->orWhereHas('artwork', function ($q) use ($keywords) {
+                  $q->whereRaw('LOWER(title) like ?', ['%' . $keywords . '%']);
+                  })
+                  ->orWhereHas('user', function ($q) use ($keywords) {
+                  $q->whereRaw('LOWER(name) like ?', ['%' . $keywords . '%']);
+                  });
+  
+            });
+        }
+
+        $archive_messages = $query->paginate(12);
+
+        return view('archive-messages.index', compact ('archive_messages'));
+    }
    
 }
 

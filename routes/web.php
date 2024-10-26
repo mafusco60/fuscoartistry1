@@ -19,6 +19,10 @@ Route::get('/', [HomeController::class, 'index'] )->name('home');
 
 Route::get('/artworks/search', [ArtworkController::class, 'search'])->name('artworks.search'); 
 
+Route::get('/messages/search', [MessageController::class, 'search'])->name('messages.search'); 
+
+Route::get('/archive-messages/search', [ArchiveMessageController::class, 'search'])->name('archive-messages.search'); 
+
 Route::resource('artworks', ArtworkController::class);
 Route::get('/artworks/{artworks}', [ArtworkController::class, 'show'])->name('artworks.show'); 
 

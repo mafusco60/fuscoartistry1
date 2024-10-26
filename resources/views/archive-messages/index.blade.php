@@ -1,4 +1,25 @@
 <x-layout>
+   {{-- Button to view message page --}}
+   <button class="text-indigo-400 px-6 py-2 rounded-xl">
+    <a href="{{ route('messages.index') }}">
+        <i class="fa-solid fa-archive"></i>
+        View Messages
+    </a>
+</button>
+<div class="text-center text-md mt-5 md:mx-auto">
+
+<x-search  
+    :routename="'archive-messages.search'" 
+/>
+@if (request()->has('keywords'))
+<a
+    href="{{ route('archive-messages.index') }}"
+    class="block mt-4 text-center text-indigo-900 hover:text-indigo-600"
+>
+    Clear search
+</a>
+@endif
+</div>
   <x-card class="p-10">
     <header>
       <h1 class="text-xl text-center font-bold my-6 text-indigo-900">
@@ -6,12 +27,7 @@
       </h1>
     </header>
     {{-- Button to view messages page --}}
-    <button class="text-indigo-400 px-6 py-2 rounded-xl">
-      <a href="{{ route('messages.index') }}">
-          <i class="fa-solid fa-archive"></i>
-          View Messages
-      </a>
-  </button>
+    
 
     <table class="w-full table-auto rounded-sm">
       <tbody>

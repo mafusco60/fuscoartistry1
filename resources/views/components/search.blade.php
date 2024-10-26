@@ -1,6 +1,8 @@
+@props(['routename' => 'artworks.search'])
+
 <form
     method="GET"
-    action="{{ route('artworks.search') }}"
+    action="{{ route($routename) }}"
     class="block mx-5 space-y-2 md:mx-auto md:space-x-2"
 >
     <input
