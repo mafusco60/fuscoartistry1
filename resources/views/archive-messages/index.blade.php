@@ -1,4 +1,5 @@
 <x-layout>
+  <x-card>
    {{-- Button to view message page --}}
    <button class="text-indigo-400 px-6 py-2 rounded-xl">
     <a href="{{ route('messages.index') }}">
@@ -20,13 +21,11 @@
 </a>
 @endif
 </div>
-  <x-card class="p-10">
     <header>
       <h1 class="text-xl text-center font-bold my-6 text-indigo-900">
         Archived Messages
       </h1>
     </header>
-    {{-- Button to view messages page --}}
     
 
     <table class="w-full table-auto rounded-sm">
@@ -58,7 +57,6 @@
                   </div>
                 @endunless
 
-                {{-- </div> --}}
               </td>
               {{-- Display Message Details --}}
               <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
@@ -81,7 +79,7 @@
                   <p class="text-indigo-700 inline text-sm">
                       {{ $archive_message->archive_artwork_id ? $archive_message->artwork->title : 'No Artwork' }}
                   </p>
-          </div>
+              </div>
                  
     
                     {{-- Subject --}}
@@ -99,24 +97,26 @@
                       </span>
                     </div>
                     {{-- Reply Message - if exists --}}
+                    <div class="text-indigo-900 font-semibold text-sm ">
+                      Reply Message:
                     @unless ($archive_message->archive_reply == null)
-                      <div class="text-indigo-900 font-semibold text-sm ">
-                          Reply Message:
-                          <span class="font-normal text-indigo-800 inline">
+                      
+                          <span class="font-normal text-sm text-indigo-800 inline">
                             {{ $archive_message->archive_reply }}
                           </span>
                         </p>
                         @else
-                        <span> No Reply Noted. </span>
-                      </div>
-                    @endunless
+                        <span class="font-normal text-sm text-rose-800 inline"> No reply noted. </span>
+                     
+                    @endunless 
+                  </div>
 
                     {{-- Email with Link --}}
-                  <div> <a 
+                   <a 
                       href="mailto:{{ $archive_message->archive_email }}"><p class="text-blue-600 underline text-xs font-normal mt-4">
                      {{ $archive_message->archive_email }}</p>
                     </a>
-                  </div>
+                  
 
                     {{-- Filename --}}
                     <div class="text-xs text-indigo-800 font-bold">

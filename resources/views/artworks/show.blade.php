@@ -89,7 +89,8 @@
                 <div
                     class="grid grid-cols-1 md:col-span-2 text-end border p-5 border-gray-200 bg-yellow-50 rounded-x"
                 ></div>
-                {{-- Modal - Message --}}
+                {{--- Message --}}
+                @if (!Auth::guard('admin')->check())
 
                 <div class="grid grid-cols-1 md:col-span-8 w-full">
                     <a
@@ -104,6 +105,7 @@
                         </button>
                     </a>
                 </div>
+                @endif
                 {{-- <div --}}
                 {{--
                     x-cloak
@@ -186,12 +188,17 @@
 
                 <div class="grid grid-cols-1 md:col-span-8 gap-4 text-end">
                     @guest
+                    @if (! Auth::guard('admin')->check())
                         <a href="{{ route('login') }}">
                             <p
                                 class="bg-indigo-100 text-indigo-900 font-bold w-full py-2 px-4 rounded-full text-center"
                             >
-                                <i class="fas fa-sign-in mr-3"></i>
-                                Log in to add to your favorites!
+                                
+                                    <i class="fas fa-sign-in mr-3"></i>
+
+                                    Log in to add to your favorites! Log in to
+                                    add to your favorites!
+                                @endif
                             </p>
                         </a>
                     @else
