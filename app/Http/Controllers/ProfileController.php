@@ -21,7 +21,6 @@ class ProfileController extends Controller
     // Get the logged in user
     $user = Auth::user();
     $formFields = $request->validate([
-        'name' => 'required|string',
             'email' => 'required|string|email',
             'avatar' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
             'phone' => 'nullable|string',

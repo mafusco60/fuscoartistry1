@@ -199,7 +199,9 @@ public function search(Request $request): View
                 $q->whereRaw('LOWER(title) like ?', ['%' . $keywords . '%']);
                 })
                 ->orWhereHas('user', function ($q) use ($keywords) {
-                $q->whereRaw('LOWER(name) like ?', ['%' . $keywords . '%']);
+                $q->whereRaw('LOWER(firstname) like ?', ['%' . $keywords . '%']);
+                $q->whereRaw('LOWER(lastname) like ?', ['%' . $keywords . '%']);
+
                 });
 
           });

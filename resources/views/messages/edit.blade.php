@@ -18,7 +18,7 @@
                     Sender:
                 </label>
                 <p class="text-rose-700 inline">
-                    {{ $message->sender_id ? $message->user->name : 'Guest' }}
+                    {{ $message->sender_id ? $message->user->firstname : 'Guest' }}
                 </p>
                 <div>
                     <label for="user-name" class="text-md mb-2">Artwork:</label>

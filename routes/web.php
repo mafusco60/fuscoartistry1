@@ -77,4 +77,8 @@ Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name
 Route::get('/admin-profiles', [AdminProfileController::class, 'edit'])->name('admin-profiles.edit')->middleware('auth:admin');
 Route::put('/admin-profiles/update', [AdminProfileController::class, 'update'])->name('admin-profiles.update')->middleware('auth:admin');
 
+// Route::group(['middleware'=>['admin']], function(){
+  
+// });
+
 
