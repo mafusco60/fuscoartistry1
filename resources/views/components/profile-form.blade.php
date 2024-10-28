@@ -18,6 +18,8 @@
 
             <x-avatar :userOrAdmin="$user" />
 
+            {{ $slot }}
+
             <x-inputs.text
                 id="name"
                 name="name"

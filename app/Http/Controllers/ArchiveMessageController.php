@@ -118,8 +118,8 @@ public function restore(ArchiveMessage $archive_message) {
     $message->artwork_id = $archive_message->archive_artwork_id;
     $message->created_at = $archive_message->original_creation_date;
     $message->updated_at = $archive_message->reply_creation_date;
-    $message->created_at = now();
-    $message->updated_at = now();
+    /* $message->created_at = now();
+    $message->updated_at = now(); */
     
   
     // Restore the messge

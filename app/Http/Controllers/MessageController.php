@@ -145,21 +145,7 @@ class MessageController extends Controller
     return redirect('/messages')->with('success', 'Message and file deleted successfully');
 }
   
-    //Delete Message Data
-/* public function destroy(Request $request, Message $message)
-{
-    $message->delete();
-
-    if ($request->query('stay') === 'messages') {
-        return redirect('/admins/messages')->with('message', 'Message deleted successfully');
-    }
-    if($message->image && Storage::disk('public')->exists($message->image)) {
-      Storage::disk('public')->delete($message->image);
-  }
-
-    return redirect('admins/messages/')->with('message', 'Message deleted successfully');
-} */
-//--------------------------------
+    
 // Archive begin --------------------------------
 public function archive (Message $message) {
   // Create a new archive message instance
