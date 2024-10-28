@@ -24,7 +24,7 @@ Route::get('/messages/search', [MessageController::class, 'search'])->name('mess
 Route::get('/archive-messages/search', [ArchiveMessageController::class, 'search'])->name('archive-messages.search'); 
 
 Route::resource('artworks', ArtworkController::class);
-Route::get('/artworks/{artworks}', [ArtworkController::class, 'show'])->name('artworks.show'); 
+Route::get('/artworks/{artwork}', [ArtworkController::class, 'show'])->name('artworks.show'); 
 
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
@@ -33,8 +33,9 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
-Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
-Route::get('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+
+Route::put('/profiles', [ProfileController::class, 'update'])->name('profiles.update')->middleware('auth');
+Route::get('/profiles', [ProfileController::class, 'update'])->name('profiles.update')->middleware('auth');
 
 Route::middleware('auth' )->group(function(){
   Route::get('/favorites/index', [FavoriteController::class, 'index'])->name('favorites.index');
@@ -74,4 +75,6 @@ Route::post('/admin-logout', [AdminAuthController::class, 'logout'])->name('admi
 Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin-dashboard')->middleware('auth:admin');
 
 Route::get('/admin-profiles', [AdminProfileController::class, 'edit'])->name('admin-profiles.edit')->middleware('auth:admin');
-Route::put('/admin-profiles', [AdminProfileController::class, 'update'])->name('admin-profiles.update')->middleware('auth:admin');
+Route::put('/admin-profiles/update', [AdminProfileController::class, 'update'])->name('admin-profiles.update')->middleware('auth:admin');
+
+
