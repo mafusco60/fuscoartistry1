@@ -5,7 +5,7 @@
     @if ($userOrAdmin->avatar)
         <img
             src="{{ asset($userOrAdmin->avatar) }}"
-            alt="{{ $userOrAdmin->name }}"
+            alt="{{ $userOrAdmin->firstname }}"
             style="
                 width: 3rem;
                 height: 3rem;

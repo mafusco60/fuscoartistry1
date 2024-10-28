@@ -13,7 +13,6 @@ class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
     protected $fillable = [
-        'name',
         'firstname',
         'lastname',
         'type',
@@ -21,6 +20,7 @@ class Admin extends Authenticatable
         'email',
         'password',
         'avatar',
+        'phone',
     ];
     protected $hidden = [
     'password', 'remember_token',

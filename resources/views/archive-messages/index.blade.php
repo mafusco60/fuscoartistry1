@@ -71,7 +71,7 @@
               </label>
               <p class="text-indigo-700 inline text-sm">
                  
-                  {{ $archive_message->archive_sender_id ? $archive_message->user->name : 'Guest' }}
+                  {{ $archive_message->archive_sender_id ? $archive_message->user->firstname : 'Guest' }}
               </p>
               {{-- Artwork Title--}}
               <div>

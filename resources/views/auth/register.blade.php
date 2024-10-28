@@ -5,13 +5,26 @@
         <h2 class="text-2xl text-center font-bold mb-4">Register</h2>
         <form method="POST" action="{{ route('register.store') }}">
             @csrf
-            <x-inputs.text id="name" name="name" placeholder="Full name" />
+            {{-- <x-inputs.text id="name" name="name" placeholder="Full name" /> --}}
             <x-inputs.text
                 id="email"
                 name="email"
                 placeholder="Email address"
                 type="email"
             />
+            <x-inputs.text
+                id="firstname"
+                name="firstname"
+                placeholder="First name"
+            />
+            <x-inputs.text
+                id="lastname"
+                name="lastname"
+                placeholder="Last name"
+            />
+
+            <x-inputs.text id="phone" name="phone" placeholder="Phone" />
+
             <x-inputs.text
                 id="password"
                 name="password"

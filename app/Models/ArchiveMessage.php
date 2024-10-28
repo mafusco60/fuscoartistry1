@@ -21,7 +21,9 @@ class ArchiveMessage extends Model
         'original_creation_date',
         'reply_creation_date',
         'archive_sender_id',
-        'archive_artwork_id'
+        'archive_artwork_id',
+        'archive_phone',
+        'archive_read',
     ];
 
     public function artwork(): BelongsTo

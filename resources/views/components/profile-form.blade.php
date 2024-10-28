@@ -20,12 +20,36 @@
 
             {{ $slot }}
 
-            <x-inputs.text
+            {{--
+                <x-inputs.text
                 id="name"
                 name="name"
                 label="Full name"
                 value="{{$user->name }}"
+                />
+            --}}
+
+            <x-inputs.text
+                id="firstname"
+                name="firstname"
+                label="First name"
+                value="{{$user->firstname }}"
             />
+
+            <x-inputs.text
+                id="lastname"
+                name="lastname"
+                label="Last name"
+                value="{{$user->lastname }}"
+            />
+
+            <x-inputs.text
+                id="phone"
+                name="phone"
+                label="Phone"
+                value="{{$user->phone }}"
+            />
+
             <x-inputs.text
                 id="email"
                 name="email"
