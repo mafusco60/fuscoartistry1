@@ -85,4 +85,6 @@ Route::put('/admin-profiles/update', [AdminProfileController::class, 'update'])-
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth:admin');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('auth:admin');
 
+Route::get('/users/{user}/favorites', [UserController::class, 'favorites'])->name('users.favorites')->middleware('auth:admin');
+
 

@@ -59,7 +59,7 @@
                                     class="text-blue-600 underline text-xs font-normal"
                                 >
                                     <i class="fas fa-heart"></i>
-                                    User's Favorites
+                                    User Profile
                                 </a>
                             </td>
 

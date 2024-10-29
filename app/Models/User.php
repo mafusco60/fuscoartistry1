@@ -59,16 +59,23 @@ class User extends Authenticatable
     }
     // Relationship with Favorites
 
-    public function favorites(): BelongsToMany
+    /* public function favorites(): BelongsToMany
     {
         return $this->belongsToMany(Artwork::class, 'favorites', 'user_id', 'artwork_id')
                     ->withTimestamps();
-    }
+    } */
+
+    //Relationship With Bookmark
+  public function favorites() {
+    return $this->hasMany(Favorite::class);
+  }
 
     // Relationship with Messages
     public function message(): HasMany
     {
         return $this->hasMany(Message::class, 'sender_id')->with ('artwork');
     }
-}   
+    
+}
+
 

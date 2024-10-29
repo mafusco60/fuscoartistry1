@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artwork;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Favorite;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -19,6 +20,8 @@ class FavoriteController extends Controller
     {
         $user = Auth::user();
         $artworks = Artwork::all();
+        
+       
         if ($user) {
             $favorites = $user->favorites()->orderBy('favorites.created_at', 'desc')->paginate(3);
         } 
@@ -62,5 +65,7 @@ class FavoriteController extends Controller
 
         return back()->with('success', 'Favorite removed successfully!');
     }
+
+    
 
 }

@@ -66,16 +66,20 @@
             <tbody>
                 {{-- Check if user has any favorites --}}
                 @if ($favorites && $favorites->count() > 0)
+                    {{-- Loop through each favorite --}}
                     @foreach ($favorites as $favorite)
                         {{-- Check that the artwork is still available (not null) --}}
-                        @if ($favorite->artwork != null)
+                        {{-- @if ($favorite->artwork != null) --}}
+
+                        @if ($favorite->artwork)
+                            {{-- Display artwork image, title, and type --}}
                             <tr class="border-gray-300">
                                 <td
                                     class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                                 >
                                     {{-- Display artwork image - Clickable to single artwork view --}}
                                     <a
-                                        href="{{ route("artworks/" . $favorite->artwork->id) }}"
+                                        href="{{ url("artworks/" . $favorite->artwork_id) }}"
                                     >
                                         <img
                                             src="{{ asset($favorite->artwork->image) }}"
@@ -89,13 +93,13 @@
                                 >
                                     {{-- Display artwork title - Clickable to single artwork view --}}
                                     <a
-                                        href="{{ url("artworks/" . $favorite->artwork->id) }}"
+                                        href="{{ url("artworks/" . $favorite->artwork_id) }}"
                                     >
                                         <p class="text-center mx-auto">
                                             {{ $favorite->artwork->title }}
                                         </p>
                                         <p class="text-center mx-auto">
-                                            {{ $favorite->artwork->type }}
+                                            {{ $favorite->artwork->medium }}
                                         </p>
                                         <p class="text-center mx-auto">
                                             Artwork ID:

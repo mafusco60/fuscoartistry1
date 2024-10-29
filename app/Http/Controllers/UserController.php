@@ -11,9 +11,8 @@ use App\Models\Artwork;
 class UserController extends Controller
 {
     public function index() {
-        // Fetch users ordered by admin status first, then by creation date descending
+        // Fetch users ordered by creation date descending
         $users = User::orderBy('created_at', 'desc')
-        ->orderBy('subscribe', 'desc')
         ->paginate(15);
       
       // Pass data to the view
@@ -25,8 +24,10 @@ class UserController extends Controller
       
         return view('users.show', [
             'user' => $user,
-            'favorites' => $user->favorites,
-            'artworks'=> Artwork::all()
+            // 'favorites' => $user->favorites,
+            'artworks'=> Artwork::all(),
+            'favorites' => $user->favorites()->orderBy('favorites.created_at', 'desc')->paginate(3)
+            
       
         ]);
 }

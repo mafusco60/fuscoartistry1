@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('favorites', function (Blueprint $table) {
-            $table->foreignId('admin_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('artwork_id')->constrained()->onDelete('cascade')->nullable();
       
         });
     }
@@ -24,7 +25,8 @@ return new class extends Migration
     {
         
             Schema::table('favorites', function (Blueprint $table) {
-                $table->dropColumn('admin_id');
+                $table->dropColumn('user_id');
+                $table->dropColumn('artwork_id');
             });
         
     }
