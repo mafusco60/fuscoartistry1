@@ -58,6 +58,16 @@
                 value="{{$user->email }}"
             />
             <x-inputs.file id="avatar" name="avatar" label="Upload Avatar" />
+            @if (! Auth::guard('admin')->user())
+                <x-inputs.select
+                    id="subscribe"
+                    name="subscribe"
+                    label="Subscribe to Newsletter"
+                    type="boolean"
+                    :options="[1 => 'Yes', 0 => 'No']"
+                    :value="old('subscribe', $user->subscribe)"
+                />
+            @endif
 
             <button
                 type="submit"

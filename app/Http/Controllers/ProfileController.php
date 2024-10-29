@@ -26,6 +26,7 @@ class ProfileController extends Controller
             'phone' => 'nullable|string',
             'firstname' => 'nullable|string',
             'lastname' => 'nullable|string',
+            'subscribe' => 'nullable|boolean',
     ]);
 
     if ($request->hasFile('avatar')) {

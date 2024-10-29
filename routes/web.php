@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ArchiveMessageController;
 use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', [HomeController::class, 'index'] )->name('home'); 
@@ -80,5 +81,8 @@ Route::put('/admin-profiles/update', [AdminProfileController::class, 'update'])-
 // Route::group(['middleware'=>['admin']], function(){
   
 // });
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth:admin');
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('auth:admin');
 
 
