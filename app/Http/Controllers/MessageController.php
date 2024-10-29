@@ -162,7 +162,7 @@ public function archive (Message $message) {
   if ($message->sender_id)
     $archive_message->archive_sender_id = $message->sender_id;
   if ($message->artwork_id)
-    $archive_message->archive_artwork_id = $message->artwork_id;
+    $archive_message->archive_listing_id = $message->artwork_id;
   $archive_message->original_creation_date = $message->created_at; 
   $archive_message->reply_creation_date = $message->updated_at; 
   // if the update_at is the exact same as the created_at date, set the reply date to null - there was no reply
@@ -195,6 +195,7 @@ public function search(Request $request): View
                  ->orWhereRaw('LOWER(email) like ?', ['%' . $keywords . '%'])
                  ->orWhereRaw('LOWER(reply) like ?', ['%' . $keywords . '%'])
                  ->orWhereRaw('LOWER(image) like ?', ['%' . $keywords . '%'])
+
                  ->orWhereHas('artwork', function ($q) use ($keywords) {
                 $q->whereRaw('LOWER(title) like ?', ['%' . $keywords . '%']);
                 })

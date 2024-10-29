@@ -13,18 +13,25 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ArchiveMessageController;
 use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\ManageListingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArchiveListingController;
 
 
 Route::get('/', [HomeController::class, 'index'] )->name('home'); 
 
 Route::get('/artworks/search', [ArtworkController::class, 'search'])->name('artworks.search'); 
 
+Route::get('/users/search', [UserController::class, 'search'])->name('users.search'); 
+
+Route::get('/manage-listings/search', [ManageListingController::class, 'search'])->name('manage-listings.search'); 
+
 Route::get('/messages/search', [MessageController::class, 'search'])->name('messages.search'); 
 
 Route::get('/archive-messages/search', [ArchiveMessageController::class, 'search'])->name('archive-messages.search'); 
 
 Route::resource('artworks', ArtworkController::class);
+
 Route::get('/artworks/{artwork}', [ArtworkController::class, 'show'])->name('artworks.show'); 
 
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
@@ -86,5 +93,13 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index')->mid
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('auth:admin');
 
 Route::get('/users/{user}/favorites', [UserController::class, 'favorites'])->name('users.favorites')->middleware('auth:admin');
+
+Route::get('/manage-listings', [ManageListingController::class, 'index'])->name('manage-listings.index')->middleware('auth:admin');
+Route::get('/manage-listings/{artwork}', [ManageListingController::class, 'show'])->name('manage-listings.show')->middleware('auth:admin');
+
+Route::get('/archive-listings', [ArchiveListingController::class, 'index'])->name('archive-listings.index')->middleware('auth:admin');
+
+Route::post('/archive-listings', [ManageListingController::class, 'store'])->name('archive-listings.store')->middleware('auth:admin');
+Route::post('/archive-listings', [ManageListingController::class, 'restore'])->name('archive-listings.restore')->middleware('auth:admin');
 
 

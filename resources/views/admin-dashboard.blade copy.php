@@ -79,7 +79,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('home') }}"
+                                    href="{{ route('archive-listings.index') }}"
                                     class="flex text-white space-x-1 text-sm py-2 px-8 rounded-xl hover:opacity-80"
                                 >
                                     <i

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 use App\Models\User;
 use App\Models\Favorite;
@@ -31,4 +32,27 @@ class UserController extends Controller
       
         ]);
 }
+
+public function search(Request $request): View
+    {
+      $keywords = strtolower(trim($request->input('keywords')));
+
+        $query = User::query();
+
+        if ($keywords) {
+            $query->where(function ($q) use ($keywords) {
+                $q->whereRaw('LOWER(firstname) like ?', ['%' . $keywords . '%'])
+                ->orWhereRaw('LOWER(lastname) like ?', ['%' . $keywords . '%'])
+                 ->orWhereRaw('LOWER(email) like ?', ['%' . $keywords . '%']);
+                
+                 
+
+                });
+
+          }
+
+        $users = $query->paginate(12);
+
+        return view('users.index', compact ('users'));
+    }
 }

@@ -45,7 +45,7 @@ class ArchiveMessageController extends Controller
         'archive_upload' => 'nullable',
         'archive_reply' => 'nullable',
         'archive_sender_id' => 'nullable',
-        'archive_artwork_id' => 'nullable',
+        'archive_listing_id' => 'nullable',
         'original_creation_date' => 'required',
         'reply_creation_date' => 'nullable'
       ]);
@@ -114,8 +114,8 @@ public function restore(ArchiveMessage $archive_message) {
     $message->image = $archive_message->archive_upload;
     if ($archive_message->archive_sender_id)
     $message->sender_id = $archive_message->archive_sender_id;
-    if ($archive_message->archive_artwork_id)
-    $message->artwork_id = $archive_message->archive_artwork_id;
+    if ($archive_message->archive_listing_id)
+    $message->artwork_id = $archive_message->archive_listing_id;
     $message->created_at = $archive_message->original_creation_date;
     $message->updated_at = $archive_message->reply_creation_date;
     /* $message->created_at = now();
@@ -149,7 +149,9 @@ public function restore(ArchiveMessage $archive_message) {
                   $q->whereRaw('LOWER(title) like ?', ['%' . $keywords . '%']);
                   })
                   ->orWhereHas('user', function ($q) use ($keywords) {
-                  $q->whereRaw('LOWER(name) like ?', ['%' . $keywords . '%']);
+                  $q->whereRaw('LOWER(firstname) like ?', ['%' . $keywords . '%'])
+                  ->orWhereRaw('LOWER(lastname) like ?', ['%' . $keywords . '%']);
+
                   });
   
             });

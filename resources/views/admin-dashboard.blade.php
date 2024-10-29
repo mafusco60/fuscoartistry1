@@ -69,7 +69,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('home') }}"
+                                    href="{{ route('manage-listings.index') }}"
                                     class="space-x-1 flex text-white text-sm py-2 px-8 rounded-xl hover:opacity-80"
                                 >
                                     <i class="fa-solid fa-list pr-4"></i>
@@ -79,7 +79,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('home') }}"
+                                    href="{{ route('archive-listings.index') }}"
                                     class="flex text-white space-x-1 text-sm py-2 px-8 rounded-xl hover:opacity-80"
                                 >
                                     <i

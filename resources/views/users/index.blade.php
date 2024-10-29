@@ -3,6 +3,18 @@
 {{-- A listing of all users in the database. Each user is displayed with their name, ID, email address, whether or not they are a subscriber. The user's creation date and time are also displayed. Clicking on the "View User" link will take you to the user's profile page which shows their favorite artworks. The Listing ID's are enumerated for quick view --}}
 
 <x-layout>
+    <div class="text-center text-md mt-5 md:mx-auto">
+        <x-search :routename="'users.search'" />
+        @if (request()->has('keywords'))
+            <a
+                href="{{ route('users.index') }}"
+                class="block mt-4 text-center text-indigo-900 hover:text-indigo-600"
+            >
+                Clear search
+            </a>
+        @endif
+    </div>
+
     <x-card class="py-2">
         <header>
             <h1 class="text-3xl text-center font-bold my-2 text-indigo-900">

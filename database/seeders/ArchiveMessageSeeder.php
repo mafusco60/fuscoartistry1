@@ -17,7 +17,7 @@ class ArchiveMessageSeeder extends Seeder
             'archive_body' => 'Hello Artist! I am interested in purchasing your artwork.,How much do you charge for a commisioned original? I would like to know more about your process.,I am interested in purchasing your artwork.,I would like to know more about your process.,I am interested in purchasing your artwork.,I would like to know more about your process.,I am interested in purchasing your artwork.,I would like to know more about your process.,I am interested in purchasing your artwork.,I would like to know more about your process.,I am interested in purchasing your artwork',          
             
             'archive_sender_id' => 1,
-            'archive_artwork_id' => 4,
+            'archive_listing_id' => 4,
             'created_at' => now(),
             'updated_at' => now(),
             'original_creation_date' => now(),

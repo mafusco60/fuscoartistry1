@@ -77,7 +77,7 @@
               <div>
                   <label for="artwork_title" class="text-sm font-semibold text-indigo-900">Artwork:</label>
                   <p class="text-indigo-700 inline text-sm">
-                      {{ $archive_message->archive_artwork_id ? $archive_message->artwork->title : 'No Artwork' }}
+                      {{ $archive_message->archive_listing_id ? $archive_message->artwork->title : 'No Artwork' }}
                   </p>
               </div>
                  
