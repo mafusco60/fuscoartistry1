@@ -50,7 +50,7 @@
                             >
                                 {{-- Display Image --}}
                                 <a
-                                    href="{{ route('manage-listings', $artwork->id) }} }}"
+                                    {{-- href="{{ route('manage-listings', $artwork->id) }} }}" --}}
                                 >
                                     <img
                                         src="{{ asset($artwork->image) }}"
@@ -83,11 +83,11 @@
                                 {{-- Display Artwork Title / Medium Type and if Featured --}}
                                 <div class="text-center">
                                     <a
-                                        href="{{ route('manage-listings', $artwork->id) }}"
-                                    >
-                                        {{ $artwork->title }}
+                                        {{-- href="{{ route('manage-listings.show', 'artwork->id') }}"
+                                    > --}}
+                                        {{-- {{ $artwork->title }} --}}
                                         <p class="text-sm text-yellow-900">
-                                            {{ $artwork->type }}
+                                            {{ $artwork->medium }}
                                         </p>
                                         @if ($artwork->featured)
                                             <p class="">FEATURED</p>
@@ -188,13 +188,13 @@
                                 class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                             ></td>
                             {{-- Archive Button --}}
-                            {{-- Store Archive Data (done from ArtworkController) and delete artwork from the regular artworks --}}
+                            {{-- Store Archive Data (done from ManageListingController) and delete original artwork --}}
                             <td
                                 class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                             >
                                 <form
                                     id="archive-form {{ $artwork->id }}"
-                                    action="{{ 'manage-listings, $artwork->id' }}"
+                                    action="{{route('manage-listings.archive', $artwork->id)}}"
                                     method="POST"
                                 >
                                     @csrf

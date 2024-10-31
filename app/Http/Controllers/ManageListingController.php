@@ -6,58 +6,88 @@ use Illuminate\Http\Request;
 use App\Models\Artwork;
 use App\Models\Favorite;
 use App\Models\ArchiveListing;
+use App\Models\ArchiveMessage;
+use App\Models\Message;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ManageListingController extends Controller
 {
     //Manage Individual Artwork
-public function show(Artwork $artwork){
-    return view('/manage-listings/{artwork}', compact('artwork'));
-  }
+/* public function show(Artwork $artwork){
+  $artwork = Artwork::find($artwork->id);
+    return view('/manage-listing/{{$artwork->1d}}', compact('artwork'));
+  } */
 
     
-  //Manage Artworks
-public function index(){
+ //@desc show the manage listings index view
+  //@route GET /manage-listings
+public function index(): View
+{
 
     $favorites = Favorite::all();
     $artworks = Artwork::all();
   
     $artworks = Artwork::orderBy('updated_at', 'desc')->get();
   
-    return view('/manage-listings.index', compact('artworks', 'favorites'));
+    return view('manage-listings.index', compact('artworks', 'favorites'));
   }
   
 
-
-public function archive(artwork $artwork) {
+//@desc archive the artwork listing - deleting the original listing and creating a new archive listing
+//@route POST /manage-listings/{{$artwork}}/archive
+public function archive(Artwork $artwork): View
+ {
     // Create a new archive listing instance
-    $archivelisting = new ArchiveListing();
+    $archive_listing = new ArchiveListing();
+    $artworks = Artwork::all();
+    $artwork = Artwork::find($artwork->id);
+    $messages = Message::all();
+    $favorites = Favorite::all();
+    
+    $archived_messages = ArchiveMessage::all();
+    foreach ($messages as $message) {
+      if ($message->artwork_id == $artwork->id){
+        $message->artwork_id = null;
+      }
+      /* foreach ($archived_messages as $archived_message) {
+        if ($archived_message->artwork_id == $artwork->id){
+          $archived_message->artwork_id = null;
+        }
+      } */
+      $message->save();
+      // $archived_message->save();
+
+    }
+    
   
     // Set all required fields
-    $archivelisting->archive_title = $artwork->title;
-    $archivelisting->archive_description = $artwork->description;
-    $archivelisting->archive_medium = $artwork->medium;
-    $archivelisting->archive_search_tags = $artwork->search_tags;
-    $archivelisting->archive_image = $artwork->image;
-    $archivelisting->archive_original = $artwork->original; 
-    $archivelisting->archive_featured = $artwork->featured;
-    $archivelisting->archive_original_substrate = $artwork->original_substrate;
-    $archivelisting->archive_original_dimensions = $artwork->original_dimensions;
-    $archivelisting->archive_original_price = $artwork->original_price;
-    $archivelisting->originallisting_id = $artwork->id;
-/*     $archivelisting->created_at = now();
-    $archivelisting->updated_at = now();
+    $archive_listing->archive_title = $artwork->title;
+    $archive_listing->archive_description = $artwork->description;
+    $archive_listing->archive_medium = $artwork->medium;
+    $archive_listing->archive_search_tags = $artwork->search_tags;
+    $archive_listing->archive_image = $artwork->image;
+    $archive_listing->archive_original = $artwork->original; 
+    $archive_listing->archive_featured = $artwork->featured;
+    $archive_listing->archive_original_substrate = $artwork->original_substrate;
+    $archive_listing->archive_original_dimensions = $artwork->original_dimensions;
+    $archive_listing->archive_original_price = $artwork->original_price;
+    $archive_listing->original_artwork_id = $artwork->id;
+/*     $archive_listing->created_at = now();
+    $archive_listing->updated_at = now();
  */    
   
     // Save the archive listing
-    $archivelisting->save();
+    $archive_listing->save();
   
     // Delete the original  listing
     $artwork->delete();
   
-    return redirect('manage-listings.index')->with('message', 'Listing archived successfully');
+    return view('manage-listings.index', compact ('archive_listing', 'artworks', 'favorites'))->with('message', 'Listing archived successfully');
   }
+
+  //@desc 
   public function store(Request $request){
     $formFields = $request->validate([
   
@@ -71,7 +101,7 @@ public function archive(artwork $artwork) {
         'archive_original_dimensions' => 'nullable',
         'archive_original_price' => 'nullable',
         'archive_featured' => 'required', 
-        'originallisting_id' => 'nullable'
+        'original_artwork_id' => 'nullable'
         
       ]);
   
@@ -81,12 +111,13 @@ public function archive(artwork $artwork) {
         $formFields['archive_image'] = $image->storeAs('images', $filename, 'public');
       }
    
-      ArchiveArtwork::create($formFields);
+      ArchiveListing::create($formFields);
     
         return redirect('manage-listings.index')->with('message', 'Listing archived successfully');
     }
-
-    public function restore(Request $request, ArchiveArtwork $archivelisting) {
+//@desc restore archive artwork to original listing
+//@route POST /archive-listings/{{$archivelisting}}/restore
+    public function restore(Request $request, ArchiveListing $archivelisting) {
         // Create a new restored artwork instance
         $artwork = new Artwork();
         
@@ -106,7 +137,7 @@ public function archive(artwork $artwork) {
         $artwork->original_substrate = $archivelisting->archive_soriginal_ubstrate;
         $artwork->original_dimensions = $archivelisting->archive_original_dimensions;
         $artwork->original_price = $archivelisting->archive_original_price;
-        $artwork->id = $archivelisting->originallisting_id;
+        $artwork->id = $archivelisting->original_artwork_id;
         /* $artwork->created_at = now();
         $artwork->updated_at = now(); */
         

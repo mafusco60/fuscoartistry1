@@ -1,21 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\ArchiveMessageController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\ManageListingController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ArchiveListingController;
+use App\Http\Controllers\ArchiveMessageController;
 
 
 Route::get('/', [HomeController::class, 'index'] )->name('home'); 
@@ -94,12 +94,19 @@ Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')
 
 Route::get('/users/{user}/favorites', [UserController::class, 'favorites'])->name('users.favorites')->middleware('auth:admin');
 
-Route::get('/manage-listings', [ManageListingController::class, 'index'])->name('manage-listings.index')->middleware('auth:admin');
+/* Route::get('/manage-listings', [ManageListingController::class, 'index'])->name('manage-listings.index')->middleware('auth:admin');
 Route::get('/manage-listings/{artwork}', [ManageListingController::class, 'show'])->name('manage-listings.show')->middleware('auth:admin');
 
-Route::get('/archive-listings', [ArchiveListingController::class, 'index'])->name('archive-listings.index')->middleware('auth:admin');
 
-Route::post('/archive-listings', [ManageListingController::class, 'store'])->name('archive-listings.store')->middleware('auth:admin');
+
+
 Route::post('/archive-listings', [ManageListingController::class, 'restore'])->name('archive-listings.restore')->middleware('auth:admin');
+ */
 
+Route::get('/manage-listings', [ManageListingController::class, 'index'])->name('manage-listings.index')->middleware('auth:admin');
 
+Route::get('/manage-listings/{artwork}', [ManageListingController::class, 'show'])->name('manage-listings.show, {{$artwork->id}}')->middleware('auth:admin');
+
+Route::post('/manage-listings/{artwork}/archive', [ManageListingController::class, 'archive'])->name('manage-listings.archive')->middleware('auth:admin');
+
+Route::get('/archive-listings', [ArchiveListingController::class, 'index'])->name('archive-listings.index')->middleware('auth:admin');
