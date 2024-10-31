@@ -26,6 +26,9 @@ Route::get('/users/search', [UserController::class, 'search'])->name('users.sear
 
 Route::get('/manage-listings/search', [ManageListingController::class, 'search'])->name('manage-listings.search'); 
 
+Route::get('/archive-listings/search', [ArchiveListingController::class, 'search'])->name('archive-listings.search'); 
+
+
 Route::get('/messages/search', [MessageController::class, 'search'])->name('messages.search'); 
 
 Route::get('/archive-messages/search', [ArchiveMessageController::class, 'search'])->name('archive-messages.search'); 

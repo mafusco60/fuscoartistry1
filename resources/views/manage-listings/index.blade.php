@@ -82,10 +82,8 @@
                                 </p>
                                 {{-- Display Artwork Title / Medium Type and if Featured --}}
                                 <div class="text-center">
-                                    <a
-                                        {{-- href="{{ route('manage-listings.show', 'artwork->id') }}"
-                                    > --}}
-                                        {{-- {{ $artwork->title }} --}}
+                                    <a href="{{ route('home') }}">
+                                        <p>{{ $artwork->title }}</p>
                                         <p class="text-sm text-yellow-900">
                                             {{ $artwork->medium }}
                                         </p>
@@ -194,7 +192,7 @@
                             >
                                 <form
                                     id="archive-form {{ $artwork->id }}"
-                                    action="{{route('manage-listings.archive', $artwork->id)}}"
+                                    action="{{ route('manage-listings.archive', $artwork->id) }}"
                                     method="POST"
                                 >
                                     @csrf

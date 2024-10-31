@@ -152,7 +152,7 @@ class ArtworkController extends Controller
     } */
     public function search(Request $request): View
     {
-        $keywords = strtolower($request->input('keywords'));
+        $keywords = strtolower (trim($request->input('keywords')));
 
         $query = Artwork::query();
 

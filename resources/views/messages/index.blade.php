@@ -113,7 +113,7 @@
                   @if ($message->sender_id == null)
                     <h1 class="text-sm font-semibold text-black  inline"> Guest</h1><br>
                   @else
-                    <h1 class="text-sm font-semibold text-black  inline"> {{ $message->user->name }}</h1>
+                    <h1 class="text-sm font-semibold text-black  inline">  {{ $message->user->firstname}} {{$message->user->lastname}}</h1>
                   @endif
 
             {{-- Message body --}}

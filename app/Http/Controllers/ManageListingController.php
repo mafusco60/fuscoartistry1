@@ -45,7 +45,7 @@ public function archive(Artwork $artwork): View
     $artwork = Artwork::find($artwork->id);
     $messages = Message::all();
     $favorites = Favorite::all();
-    
+
     $archived_messages = ArchiveMessage::all();
     foreach ($messages as $message) {
       if ($message->artwork_id == $artwork->id){
@@ -88,7 +88,7 @@ public function archive(Artwork $artwork): View
   }
 
   //@desc 
-  public function store(Request $request){
+  /* public function store(Request $request){
     $formFields = $request->validate([
   
         'archive_title' => 'required',
@@ -114,7 +114,7 @@ public function archive(Artwork $artwork): View
       ArchiveListing::create($formFields);
     
         return redirect('manage-listings.index')->with('message', 'Listing archived successfully');
-    }
+    } */
 //@desc restore archive artwork to original listing
 //@route POST /archive-listings/{{$archivelisting}}/restore
     public function restore(Request $request, ArchiveListing $archivelisting) {
@@ -153,6 +153,9 @@ public function archive(Artwork $artwork): View
           ->with('message', 'Artwork restored successfully');
       }
         
+
+    // @desc search for artwork
+    // @route GET /manage-listings/search
       public function search(Request $request): View
     {
         $keywords = strtolower(trim($request->input('keywords')));
