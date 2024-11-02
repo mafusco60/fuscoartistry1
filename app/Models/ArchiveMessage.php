@@ -24,6 +24,8 @@ class ArchiveMessage extends Model
         'archive_listing_id',
         'archive_phone',
         'archive_read',
+        'archive_artwork_title',
+        'archive_artwork_image',
     ];
 
     public function artwork(): BelongsTo

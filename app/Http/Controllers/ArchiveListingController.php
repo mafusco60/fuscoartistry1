@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-
-use App\Models\ArchiveListing;
 use App\Models\Artwork;
 use App\Models\Favorite;
 
+use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Models\ArchiveListing;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+
+use function Laravel\Prompts\alert;
 
 class ArchiveListingController extends Controller
 {
@@ -48,7 +51,66 @@ class ArchiveListingController extends Controller
 
         $artworks = $query->paginate(12);
 
-        return view('archive-listings.index', compact('artworks', 'favorites', 'archive_listings'));
+        return view('archive-listings.search', compact('artworks', 'favorites', 'archive_listings'));
     }
+
+    public function restore(Request $request, ArchiveListing $archive_listing) {
+      // Create a new restored listing instance
+      $artwork = new Artwork();
+      $archive_listing = ArchiveListing::findOrFail($archive_listing->id);
+      
+     /*  $validator = Validator::make($request->all(), [
+        'title' => 'required|max:255',
+        'description' => 'required',
+    ]); */
+
+      // Set all required fields
+      $artwork->title = $archive_listing->archive_title;
+      $artwork->description = $archive_listing->archive_description;
+      $artwork->medium = $archive_listing->archive_medium;
+      $artwork->search_tags = $archive_listing->archive_search_tags;
+      $artwork->image = $archive_listing->archive_image;
+      $artwork->original = $archive_listing->archive_original; 
+      $artwork->featured = $archive_listing->archive_featured;
+      $artwork->original_substrate = $archive_listing->archive_original_substrate;
+      $artwork->original_dimensions = $archive_listing->archive_original_dimensions;
+      $artwork->original_price = $archive_listing->archive_original_price;
+      
+      $artwork->id = $archive_listing->original_artwork_id;
+      $artwork->created_at = now();
+      $artwork->updated_at = now();
+      
+      
+      // Save the listing
+      $artwork->save();
+      // $validator->validate();
+    
+      // Delete the archived listing / not the actual image which stays within the public folder
+      $archive_listing->delete();
+  
+      return redirect('manage-listings')   
+       ->with('message', 'Listing restored successfully');
+    }
+      
+   
+    
+//Delete Listing Data
+public function destroy(Request $request, ArchiveListing $archive_listing)
+{
+  $archive_listing->delete();
+
+  if ($request->query('stay') === ('archive-listings.index')) 
+  {
+      return redirect('archive-listings.index', compact ('archive_listing'))->with('message', 'Archive Listing deleted successfully');
+  }
+  if($archive_listing->archive_image && Storage::disk('public')->exists($archive_listing->archive_image)) {
+    Storage::disk('public')->delete($archive_listing->archive_image);
+}
+
+  return redirect('archive-listings/index')->with('message', 'Listing deleted successfully');
+
+}
+
+
 
   }

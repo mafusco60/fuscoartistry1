@@ -18,8 +18,7 @@ class ArchiveMessageController extends Controller
 {
    public function __construct()
   {
-      // Apply the 'auth' middleware to all methods
-      // $this->middleware('auth:admin');
+
   } 
   
    
@@ -33,7 +32,6 @@ class ArchiveMessageController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
      */
     public function store(Request $request){
     $formFields = $request->validate([
@@ -47,7 +45,9 @@ class ArchiveMessageController extends Controller
         'archive_sender_id' => 'nullable',
         'archive_listing_id' => 'nullable',
         'original_creation_date' => 'required',
-        'reply_creation_date' => 'nullable'
+        'reply_creation_date' => 'nullable',
+        'archive_artwork_title' => 'nullable',
+        'archive_artwork_image' => 'nullable',
       ]);
   
       if($request->hasFile('archive_upload')){
@@ -98,8 +98,12 @@ public function destroy(Request $request, ArchiveMessage $archive_message)
     if ($archive_message->archive_upload && Storage::disk('public')->exists($archive_message->archive_upload)) {
       Storage::disk('public')->delete($archive_message->archive_upload);
   }
+  
+
+    
     return redirect('/archive-messages')->with('success', 'Message and file deleted successfully');
 }
+
 
 public function restore(ArchiveMessage $archive_message) {
     // Create a new restored message instance

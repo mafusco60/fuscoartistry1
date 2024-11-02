@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('archive_featured');
             $table->string('archive_original_substrate')->nullable();
             $table->string('archive_original_dimensions')->nullable();
-            $table->decimal('archive_original_price', 8, 2)->nullable();
+            $table->integer('archive_original_price', 8, 2)->nullable();
             $table->unsignedBigInteger('original_artwork_id');
             $table->timestamps();
         });

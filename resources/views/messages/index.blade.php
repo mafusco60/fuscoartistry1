@@ -98,11 +98,9 @@
           {{-- Artwork --}}
                          
                   <p class="text-sm font-bold  text-indigo-900 underline inline"> Artwork:</p>
-                  @if ($message->artwork_id != null)
-                    <a href="{{ route('artworks.show', $message->artwork_id) }}">
-                    <span class="text-indigo-900 font-semibold pb-5 text-sm inline" >    {{$message->artwork->title}} 
-                    </a>
-                             
+                  @if ($message->artwork_title != null)
+                       {{$message->artwork_title}} 
+                            
                   @else
                     <p class="text-indigo-900 font-semibold pb-5 text-sm inline">No Artwork </p>
                   @endif 

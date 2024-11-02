@@ -1,20 +1,21 @@
 {{-- Manage Listing Archives:  /admins/archive_listings/index.blade.php --}}
 <x-layout>
-    <div class="text-center text-md mt-5 md:mx-auto">
-        <x-search :routename="'archive-listings.search'" />
-
-        @if (request()->has('keywords'))
-            <a
-                href="{{ route('archive-listings.index') }}"
-                class="block mt-4 text-center text-indigo-900 hover:text-indigo-600"
-            >
-                Clear search
-            </a>
-        @endif
-    </div>
     <x-card class="p-10">
+        <div class="text-center text-md mt-5 md:mx-auto">
+            <x-search :routename="'archive-listings.search'" />
+
+            @if (request()->has('keywords'))
+                <a
+                    href="{{ route('archive-listings.index') }}"
+                    class="block mt-4 text-center text-indigo-900 hover:text-indigo-600"
+                >
+                    Clear search
+                </a>
+            @endif
+        </div>
+
         <header>
-            <h1 class="text-3xl text-center font-bold my-6 text-cyan-800">
+            <h1 class="text-3xl text-center font-bold my-6 text-indigo-800">
                 Archive Listings
             </h1>
         </header>
@@ -123,8 +124,8 @@
                                 class="px-4 py-8 border-t border-b border-gray-400 text-lg"
                             >
                                 <form
-                                    id="restore {{ $archive_listing->id }}"
-                                    action="/admins/listings/archive-listings/index/{{ $archive_listing->id }}"
+                                    id="restore-form"
+                                    action="{{ route('archive-listings.restore', $archive_listing->id) }}"
                                     method="POST"
                                 >
                                     @csrf
@@ -134,7 +135,7 @@
                                         class="text-red-400 py-2 rounded-xl"
                                     >
                                         <i
-                                            class="text-cyan-600 fa-solid fa-trash-restore-alt"
+                                            class="text-indigo-600 fa-solid fa-trash-restore-alt"
                                         ></i>
                                         <p class="text-lg text-stone-600">
                                             Restore
@@ -148,7 +149,7 @@
                                 {{-- Permanently Delete --}}
                                 <form
                                     id="delete-form"
-                                    action="/admins/listings/archive-listings/index/{{ $archive_listing->id }}"
+                                    action="/archive-listings/{{ $archive_listing->id }}/destroy"
                                     method="POST"
                                 >
                                     @csrf

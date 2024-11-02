@@ -59,9 +59,11 @@ Route::get('/messages/create', [MessageController::class, 'create'])->name('mess
 Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
 Route::delete('/messages/{message}/destroy', [MessageController::class, 'destroy'])->name('messages.destroy')->middleware ('auth:admin');
 
-Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'createFromArtwork'])->name('artworks-messages.create');
-Route::post('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
-Route::get('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
+// Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'createFromArtwork'])->name('artworks-messages.create');
+
+// Route::post('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
+
+// Route::get('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
 
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth:admin');
 
@@ -113,3 +115,7 @@ Route::get('/manage-listings/{artwork}', [ManageListingController::class, 'show'
 Route::post('/manage-listings/{artwork}/archive', [ManageListingController::class, 'archive'])->name('manage-listings.archive')->middleware('auth:admin');
 
 Route::get('/archive-listings', [ArchiveListingController::class, 'index'])->name('archive-listings.index')->middleware('auth:admin');
+
+Route::post('/archive-listings/{archive_listing}/restore', [ArchiveListingController::class, 'restore'])->name('archive-listings.restore')->middleware('auth:admin');
+
+Route::delete('/archive-listings/{archive_listing}/destroy', [ArchiveListingController::class, 'destroy'])->name('archive-listings.destroy')->middleware('auth:admin');

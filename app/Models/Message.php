@@ -13,7 +13,8 @@ class Message extends Model
     protected $fillable = [
 
             'sender_id',
-            'artwork_id',
+            'artwork_title',
+            'artwork_image',
             'name',
             'email',
             'body',

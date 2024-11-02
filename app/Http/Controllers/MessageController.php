@@ -18,13 +18,7 @@ class MessageController extends Controller
         return view('messages.create');
     }
 
-    // Show the form to create a new message from the artwork view
-    public function createFromArtwork(Artwork $artwork): View
-    {
-        return view('messages.create', ['artwork' => $artwork]);
-    }
-
-    // Save the message to the database from the home page
+    // Save the message to the database
     public function store(Request $request): RedirectResponse
     {
         // Validate the form fields
@@ -46,7 +40,7 @@ class MessageController extends Controller
 
         // Add additional fields
         $formFields['sender_id'] = Auth::id();
-        $formFields['artwork_id'] = $request->input('artwork_id');
+        $formFields['artwork_title'] = $request->input('artwork_title');
 
         // Save the message to the database
         Message::create($formFields);
@@ -54,37 +48,7 @@ class MessageController extends Controller
         return redirect()->back()->with('success', 'Message sent successfully!');
     }
 
-    // Save the message to the database from the artwork view
-    public function storeFromArtwork(Request $request, Artwork $artwork): RedirectResponse
-    {
-        $messages = new Message();
-        // Validate the form fields
-        $formFields = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'phone' => 'nullable|string|max:255',
-            'subject' => 'required|string|max:255',
-            'body' => 'required|string',
-            'image' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        // Store the image in the public/uploads folder
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = time() . '_' . $image->getClientOriginalName();
-            $formFields['image'] = $image->storeAs('uploads', $filename, 'public');
-        }
-
-        // Add additional fields
-        $formFields['sender_id'] = Auth::id();
-        $formFields['artwork_id'] = $artwork->id;
-
-        // Save the message to the database
-        Message::create($formFields);
-
-        return redirect()->back()->with('messages', $messages, 'success', 'Message sent successfully!');
-    }
-
+   
     //Show all messages
     public function index(): View
     {
@@ -161,8 +125,8 @@ public function archive (Message $message) {
     $archive_message->archive_reply = $message->reply;
   if ($message->sender_id)
     $archive_message->archive_sender_id = $message->sender_id;
-  if ($message->artwork_id)
-    $archive_message->archive_listing_id = $message->artwork_id;
+    if ($message->artwork_title)
+    $archive_message->archive_artwork_title = $message->artwork_title;
   $archive_message->original_creation_date = $message->created_at; 
   $archive_message->reply_creation_date = $message->updated_at; 
   // if the update_at is the exact same as the created_at date, set the reply date to null - there was no reply

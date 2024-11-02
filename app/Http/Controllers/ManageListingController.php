@@ -42,25 +42,8 @@ public function archive(Artwork $artwork): View
     // Create a new archive listing instance
     $archive_listing = new ArchiveListing();
     $artworks = Artwork::all();
-    $artwork = Artwork::find($artwork->id);
-    $messages = Message::all();
+    $artwork = Artwork::pluck($artwork->id);
     $favorites = Favorite::all();
-
-    $archived_messages = ArchiveMessage::all();
-    foreach ($messages as $message) {
-      if ($message->artwork_id == $artwork->id){
-        $message->artwork_id = null;
-      }
-      /* foreach ($archived_messages as $archived_message) {
-        if ($archived_message->artwork_id == $artwork->id){
-          $archived_message->artwork_id = null;
-        }
-      } */
-      $message->save();
-      // $archived_message->save();
-
-    }
-    
   
     // Set all required fields
     $archive_listing->archive_title = $artwork->title;
@@ -73,10 +56,9 @@ public function archive(Artwork $artwork): View
     $archive_listing->archive_original_substrate = $artwork->original_substrate;
     $archive_listing->archive_original_dimensions = $artwork->original_dimensions;
     $archive_listing->archive_original_price = $artwork->original_price;
-    $archive_listing->original_artwork_id = $artwork->id;
-/*     $archive_listing->created_at = now();
+    $archive_listing->original_artwork_id = $artwork->id;     $archive_listing->created_at = now();
     $archive_listing->updated_at = now();
- */    
+     
   
     // Save the archive listing
     $archive_listing->save();
@@ -86,6 +68,7 @@ public function archive(Artwork $artwork): View
   
     return view('manage-listings.index', compact ('archive_listing', 'artworks', 'favorites'))->with('message', 'Listing archived successfully');
   }
+
 
   //@desc 
   /* public function store(Request $request){
@@ -117,7 +100,7 @@ public function archive(Artwork $artwork): View
     } */
 //@desc restore archive artwork to original listing
 //@route POST /archive-listings/{{$archivelisting}}/restore
-    public function restore(Request $request, ArchiveListing $archivelisting) {
+    /* public function restore(Request $request, ArchiveListing $archivelisting) {
         // Create a new restored artwork instance
         $artwork = new Artwork();
         
@@ -126,7 +109,7 @@ public function archive(Artwork $artwork): View
           'description' => 'required',
       ]);
 
-        // Set all required fields
+   
         $artwork->title = $archivelisting->archive_title;
         $artwork->description = $archivelisting->archive_description;
         $artwork->medium = $archivelisting->archive_medium;
@@ -138,8 +121,8 @@ public function archive(Artwork $artwork): View
         $artwork->original_dimensions = $archivelisting->archive_original_dimensions;
         $artwork->original_price = $archivelisting->archive_original_price;
         $artwork->id = $archivelisting->original_artwork_id;
-        /* $artwork->created_at = now();
-        $artwork->updated_at = now(); */
+        $artwork->created_at = now();
+        $artwork->updated_at = now(); 
         
         
         // Save the artwork
@@ -152,7 +135,7 @@ public function archive(Artwork $artwork): View
          
           ->with('message', 'Artwork restored successfully');
       }
-        
+         */
 
     // @desc search for artwork
     // @route GET /manage-listings/search

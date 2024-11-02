@@ -29,11 +29,7 @@
          border-rose-500 @enderror
 
 
-
-
-
-
-                                                        "
+                                                               "
         @endif
         name="{{ $name }}"
         placeholder="{{ $placeholder }}"
