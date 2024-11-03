@@ -42,7 +42,7 @@ public function archive(Artwork $artwork): View
     // Create a new archive listing instance
     $archive_listing = new ArchiveListing();
     $artworks = Artwork::all();
-    $artwork = Artwork::pluck($artwork->id);
+    $artwork = Artwork::findorFail($artwork->id);
     $favorites = Favorite::all();
   
     // Set all required fields
@@ -56,7 +56,8 @@ public function archive(Artwork $artwork): View
     $archive_listing->archive_original_substrate = $artwork->original_substrate;
     $archive_listing->archive_original_dimensions = $artwork->original_dimensions;
     $archive_listing->archive_original_price = $artwork->original_price;
-    $archive_listing->original_artwork_id = $artwork->id;     $archive_listing->created_at = now();
+    $archive_listing->original_artwork_id = $artwork->id;     
+    $archive_listing->created_at = now();
     $archive_listing->updated_at = now();
      
   

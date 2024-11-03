@@ -4,6 +4,7 @@
             Contact Artist
             @isset($artwork)
                 about "{{ $artwork->title }}"
+
                 {{--
                     @php
                     $message->artwork_title = $artwork->title;

@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Storage;
 class MessageController extends Controller
 {
     // Show the form to create a new message from the home page
-    public function create(): View
+    public function create($artwork_id): View
     {
-        return view('messages.create');
+        $artwork = Artwork::findOrFail($artwork_id);
+        return view('messages.create', compact('artwork'));
     }
 
     // Save the message to the database
@@ -43,9 +44,12 @@ class MessageController extends Controller
         $formFields['artwork_title'] = $request->input('artwork_title');
 
         // Save the message to the database
-        Message::create($formFields);
+        // Message::create($formFields);
+        $message = new Message($formFields);
+        $message->save();
 
-        return redirect()->back()->with('success', 'Message sent successfully!');
+
+        return redirect()->route('messages.index')->with('success', 'Message sent successfully!');
     }
 
    

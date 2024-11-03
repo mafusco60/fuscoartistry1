@@ -1,12 +1,7 @@
 <x-layout>
   <x-card>
    {{-- Button to view message page --}}
-   <button class="text-indigo-400 px-6 py-2 rounded-xl">
-    <a href="{{ route('messages.index') }}">
-        <i class="fa-solid fa-archive"></i>
-        View Messages
-    </a>
-</button>
+   
 <div class="text-center text-md mt-5 md:mx-auto">
 
 <x-search  
@@ -196,6 +191,14 @@
             </td>
           </tr>
         @endunless
+         {{-- Link to Messages --}}
+         <a
+         href="{{ route('messages.index') }}"
+         class="text-blue-600 underline text-xs font-normal"
+     >
+         <i class="fas fa-arrow-left"></i>
+         Back to Messages
+     </a>
       </tbody>
     </table>
   </x-card>

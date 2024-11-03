@@ -5,21 +5,22 @@
 --}}
 
 <x-layout>
-    <div class="text-center text-md mt-5 md:mx-auto">
-        <x-search :routename="'manage-listings.search'" />
-
-        @if (request()->has('keywords'))
-            <a
-                href="{{ route('manage-listings.index') }}"
-                class="block mt-4 text-center text-indigo-900 hover:text-indigo-600"
-            >
-                Clear search
-            </a>
-        @endif
-    </div>
-
-    {{-- Manage Artworks --}}
     <x-card class="p-10">
+        <div class="text-center text-md mt-5 md:mx-auto">
+            <x-search :routename="'manage-listings.search'" />
+
+            @if (request()->has('keywords'))
+                <a
+                    href="{{ route('manage-listings.index') }}"
+                    class="block mt-4 text-center text-indigo-900 hover:text-indigo-600"
+                >
+                    Clear search
+                </a>
+            @endif
+        </div>
+
+        {{-- Manage Artworks --}}
+
         <header>
             <h1 class="text-3xl text-center font-bold my-6 text-indigo-900">
                 Manage Artworks
@@ -223,7 +224,7 @@
                         </td>
                     </tr>
                 @endunless
-                {{-- Link to Manage Listings --}}
+                {{-- Link to Archive Listings --}}
                 <a
                     href="{{ route('archive-listings.index') }}"
                     class="text-blue-600 underline text-xs font-normal"

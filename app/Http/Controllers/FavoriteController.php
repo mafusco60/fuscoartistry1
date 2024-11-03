@@ -46,7 +46,7 @@ class FavoriteController extends Controller
         // Create new favorite
         $user->favorites()->attach($artwork->id);
 
-        return back()->with('success', 'Artwork added to favorites successfully!');
+        return redirect()->back()->with('success', 'Artwork added to favorites successfully!');
     }
     
         // @desc    Remove a favorite Artwork

@@ -1,12 +1,5 @@
 <x-layout>
   <x-card>
-      {{-- Button to view archive page --}}
-    <button class="text-indigo-400 px-6 py-2 rounded-xl">
-      <a href="{{ route('archive-messages.index') }}">
-        <i class="fa-solid fa-archive"></i>
-        View Archived Messages
-      </a>
-    </button>
     <div class="text-center text-md mt-5 md:mx-auto"> 
       <x-search  
           :routename="'messages.search'" 
@@ -200,6 +193,14 @@
                 </td>
             </tr>
           @endif
+           {{-- Link to Archived Messages --}}
+           <a
+           href="{{ route('archive-messages.index') }}"
+           class="text-blue-600 underline text-xs font-normal"
+       >
+           <i class="fas fa-arrow-left"></i>
+           Back to Archived Messages
+       </a>
         </tbody>
       </table>
     </main>

@@ -61,7 +61,8 @@ class ArtworkController extends Controller
     //@route GET /artworks/{$id}
     public function show(Artwork $artwork) : View
     {
-        return view ('artworks.show')->with('artwork', $artwork);
+        $artwork = Artwork::findOrFail($artwork->id);
+        return view ('artworks.show', compact ('artwork'));
     }
 
     

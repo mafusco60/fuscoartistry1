@@ -94,7 +94,7 @@
 
                 <div class="grid grid-cols-1 md:col-span-8 w-full">
                     <a
-                        href="{{ route('artworks.show', $artwork->id) }}"
+                        href="{{ route('messages.create', $artwork->id) }}"
                         class="bg-indigo-100 text-rose-900 font-semibold hover:bg-indigo-700 hover:text-white w-full py-2 px-4 rounded-full flex items-center justify-center"
                     >
                         <button
@@ -196,8 +196,7 @@
                                 
                                     <i class="fas fa-sign-in mr-3"></i>
 
-                                    Log in to add to your favorites! Log in to
-                                    add to your favorites!
+                                    Log in to add to your favorites! 
                                 @endif
                             </p>
                         </a>

@@ -55,11 +55,11 @@ Route::middleware('auth' )->group(function(){
 });
 
 
-Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+Route::get('/messages/{artwork}/create', [MessageController::class, 'create'])->name('messages.create');
 Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
 Route::delete('/messages/{message}/destroy', [MessageController::class, 'destroy'])->name('messages.destroy')->middleware ('auth:admin');
 
-// Route::get('/artworks/{artwork}/messages/create', [MessageController::class, 'createFromArtwork'])->name('artworks-messages.create');
+
 
 // Route::post('/artworks/{artwork}/messages/store', [MessageController::class, 'storeFromArtwork'])->name('artworks-messages.store');
 
@@ -67,11 +67,15 @@ Route::delete('/messages/{message}/destroy', [MessageController::class, 'destroy
 
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth:admin');
 
+
+
 Route::get('/messages/{message}/edit', [MessageController::class, 'edit'])->name('messages.edit')->middleware('auth:admin');
 
 Route::put('/messages/{message}/update', [MessageController::class, 'update'])->name('messages.update')->middleware('auth:admin');
 
 Route::post('/messages/{message}/archive', [MessageController::class, 'archive'])->name('messages.archive')->middleware('auth:admin');
+
+
 
 // Archive Messages
 Route::get('/archive-messages', [ArchiveMessageController::class, 'index'])->name('archive-messages.index')->middleware('auth:admin');
