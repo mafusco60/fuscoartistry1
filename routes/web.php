@@ -16,7 +16,7 @@ use App\Http\Controllers\ManageListingController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ArchiveListingController;
 use App\Http\Controllers\ArchiveMessageController;
-
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomeController::class, 'index'] )->name('home'); 
 
@@ -56,6 +56,7 @@ Route::middleware('auth' )->group(function(){
 
 
 Route::get('/messages/{artwork}/create', [MessageController::class, 'create'])->name('messages.create');
+Route::get('/messages/create', [MessageController::class, 'createWOArtwork'])->name('messages.createWOArtwork');
 Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
 Route::delete('/messages/{message}/destroy', [MessageController::class, 'destroy'])->name('messages.destroy')->middleware ('auth:admin');
 
@@ -123,3 +124,5 @@ Route::get('/archive-listings', [ArchiveListingController::class, 'index'])->nam
 Route::post('/archive-listings/{archive_listing}/restore', [ArchiveListingController::class, 'restore'])->name('archive-listings.restore')->middleware('auth:admin');
 
 Route::delete('/archive-listings/{archive_listing}/destroy', [ArchiveListingController::class, 'destroy'])->name('archive-listings.destroy')->middleware('auth:admin');
+
+Route::get('/admin-dashboards', [AdminController::class, 'index'])->name('admin-dashboards.index');

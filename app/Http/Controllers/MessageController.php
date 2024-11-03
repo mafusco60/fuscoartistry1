@@ -19,6 +19,11 @@ class MessageController extends Controller
         return view('messages.create', compact('artwork'));
     }
 
+    public function createWOArtwork(): View
+    {
+        return view('messages.create');
+    }
+
     // Save the message to the database
     public function store(Request $request): RedirectResponse
     {
@@ -49,7 +54,7 @@ class MessageController extends Controller
         $message->save();
 
 
-        return redirect()->route('messages.index')->with('success', 'Message sent successfully!');
+        return redirect()->route('home')->with('success', 'Message sent successfully!');
     }
 
    

@@ -16,4 +16,6 @@ class AdminDashboardController extends Controller
         $sender = new User();
         return view('admin-dashboard', compact ('artwork', 'sender'));
     }
+
+    
 }

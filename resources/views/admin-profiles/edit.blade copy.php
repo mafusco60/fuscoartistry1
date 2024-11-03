@@ -1,6 +1,8 @@
 {{-- class="flex flex-col md:flex-row gap-4"> --}}
 {{-- Profile Info Form --}}
 <x-layout>
+<x-admin-sidebar />
+
     <main class="container mx-auto p-8">
         <x-card>
             <div class="bg-white p-8 rounded-lg shadow-md w-full ">

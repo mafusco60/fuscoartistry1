@@ -24,7 +24,11 @@
                 id="artwork_title"
                 type="hidden"
                 name="artwork_title"
+                @if (isset($artwork))
                 value="{{ $artwork->title }}"
+                @else
+                value="null"
+                @endif
             />
 
             @isset($user)

@@ -6,6 +6,12 @@
 {{-- The admin can also logout. --}}
 
 <x-layout>
+    <div x-data="{ open: false }" class="flex h-screen">
+        <!-- Sidebar -->
+        <div
+            :class="open ? 'translate-x-0' : '-translate-x-full'"
+            class="fixed inset-y-200 left-0 w-64 bg-gray-800 text-white transform transition-transform duration-300 ease-in-out"
+        >
     <body>
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-3 bg-indigo-900 h-max">
@@ -69,7 +75,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('home') }}"
+                                    href="{{ route('manage-listings.index') }}"
                                     class="space-x-1 flex text-white text-sm py-2 px-8 rounded-xl hover:opacity-80"
                                 >
                                     <i class="fa-solid fa-list pr-4"></i>
@@ -109,7 +115,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('home') }}"
+                                    href="{{ route('users.index') }}"
                                     class="flex text-white text-sm py-2 px-8 rounded-md hover:opacity-80"
                                 >
                                     <i class="fa-solid fa-users pr-4"></i>
@@ -127,7 +133,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ url('home') }}"
+                                    href="{{ route('admin-profiles.edit') }}"
                                     class="flex text-white text-sm py-2 px-8 rounded-md hover:opacity-80"
                                 >
                                     <i
@@ -139,7 +145,7 @@
 
                             <li>
                                 <a
-                                    href="{{ route('home') }}"
+                                    href="{{ route('admin-profiles.edit') }}"
                                     class="flex text-white text-sm py-2 px-8 rounded-md hover:opacity-80"
                                 >
                                     <i
@@ -168,7 +174,19 @@
                 </div>
             </div>
         </div>
-    </body>
+    
 
-    <p></p>
+    <!-- Main Content -->
+    <div class="flex-1 p-4">
+        <button
+            @click="open = !open"
+            class="bg-gray-800 text-white px-4 py-2 rounded-md"
+        >
+            Toggle Sidebar
+        </button>
+        <!-- Your main content goes here -->
+        @yield('content')
+    </div>
+</div>
+</body>
 </x-layout>

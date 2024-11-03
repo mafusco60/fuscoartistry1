@@ -74,5 +74,11 @@
         {{-- end fancybox ----- --}}
 
         {{-- <script src="{{ asset('js/script.js') }}"></script> --}}
+
+        {{--
+            <div class="min-h-screen bg-gray-100">
+            @yield('content')
+        --}}
+        {{-- </div> --}}
     </body>
 </html>
