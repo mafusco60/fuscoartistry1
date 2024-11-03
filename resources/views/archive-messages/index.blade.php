@@ -1,27 +1,21 @@
 <x-layout>
   <x-card>
-   {{-- Button to view message page --}}
-   
-<div class="text-center text-md mt-5 md:mx-auto">
-
-<x-search  
-    :routename="'archive-messages.search'" 
-/>
-@if (request()->has('keywords'))
-<a
-    href="{{ route('archive-messages.index') }}"
-    class="block mt-4 text-center text-indigo-900 hover:text-indigo-600"
->
-    Clear search
-</a>
-@endif
-</div>
+    <div class="text-center text-md mt-5 md:mx-auto">
+      <x-search :routename="'archive-messages.search'" />
+      @if (request()->has('keywords'))
+        <a
+          href="{{ route('archive-messages.index') }}"
+          class="block mt-4 text-center text-indigo-900 hover:text-indigo-600"
+        >
+          Clear search
+        </a>
+      @endif
+    </div>
     <header>
       <h1 class="text-xl text-center font-bold my-6 text-indigo-900">
         Archived Messages
       </h1>
     </header>
-    
 
     <table class="w-full table-auto rounded-sm">
       <tbody>
@@ -51,35 +45,46 @@
                     </p>
                   </div>
                 @endunless
-
               </td>
               {{-- Display Message Details --}}
               <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                 <x-card>
-                   {{-- Contact Name - May be different from the session sender--}}
-                   <div class="text-indigo-500 font-semibold text-sm"> <h1>{{ $archive_message->archive_name }}</h1>
-                   </div>
+                  {{-- Contact Name - May be different from the session sender --}}
+                  <div class="text-indigo-500 font-semibold text-sm">
+                    <h1>
+                      {{ $archive_message->archive_name }}
+                    </h1>
+                  </div>
                   {{-- Session Sender name --}}
-            <div class="text-sm">
-              <label for="user-name" class="inline-block text-sm font-semibold text-indigo-900">
-                  Sender:
-              </label>
-              <p class="text-indigo-700 inline text-sm">
-                 
-                  {{ $archive_message->archive_sender_id ? $archive_message->user->firstname : 'Guest' }}
-              </p>
-              {{-- Artwork Title--}}
-              <div>
-                  <label for="artwork_title" class="text-sm font-semibold text-indigo-900">Artwork:</label>
-                  <p class="text-indigo-700 inline text-sm">
-                      {{ $archive_message->archive_listing_id ? $archive_message->artwork->title : 'No Artwork' }}
-                  </p>
-              </div>
-                 
-    
+                  <div class="text-sm">
+                    <label
+                      for="user-name"
+                      class="inline-block text-sm font-semibold text-indigo-900"
+                    >
+                      Sender:
+                    </label>
+
+                    <p class="text-indigo-700 inline text-sm">
+                      {{ $archive_message->archive_sender_id ? $archive_message->user->firstname : 'Guest' }}
+                    </p>
+                    {{-- Artwork Title --}}
+                    <div>
+                      <label
+                        for="artwork_title"
+                        class="text-sm font-semibold text-indigo-900"
+                      >
+                        Artwork:
+                      </label>
+                      <p class="text-indigo-700 inline text-sm">
+                        {{ $archive_message->archive_listing_id ? $archive_message->artwork->title : 'No Artwork' }}
+                      </p>
+                    </div>
+
                     {{-- Subject --}}
                     <div>
-                      <p class="text-indigo-900 font-semibold text-sm inline">Subject:</p>
+                      <p class="text-indigo-900 font-semibold text-sm inline">
+                        Subject:
+                      </p>
                       <span class="text-indigo-700 inline text-sm">
                         {{ $archive_message->archive_subject }}
                       </span>
@@ -92,26 +97,29 @@
                       </span>
                     </div>
                     {{-- Reply Message - if exists --}}
-                    <div class="text-indigo-900 font-semibold text-sm ">
+                    <div class="text-indigo-900 font-semibold text-sm">
                       Reply Message:
-                    @unless ($archive_message->archive_reply == null)
-                      
-                          <span class="font-normal text-sm text-indigo-800 inline">
-                            {{ $archive_message->archive_reply }}
-                          </span>
-                        </p>
-                        @else
-                        <span class="font-normal text-sm text-rose-800 inline"> No reply noted. </span>
-                     
-                    @endunless 
-                  </div>
+                      @unless ($archive_message->archive_reply == null)
+                        <span
+                          class="font-normal text-sm text-indigo-800 inline"
+                        >
+                          {{ $archive_message->archive_reply }}
+                        </span>
+                      @else
+                        <span class="font-normal text-sm text-rose-800 inline">
+                          No reply noted.
+                        </span>
+                      @endunless
+                    </div>
 
                     {{-- Email with Link --}}
-                   <a 
-                      href="mailto:{{ $archive_message->archive_email }}"><p class="text-blue-600 underline text-xs font-normal mt-4">
-                     {{ $archive_message->archive_email }}</p>
+                    <a href="mailto:{{ $archive_message->archive_email }}">
+                      <p
+                        class="text-blue-600 underline text-xs font-normal mt-4"
+                      >
+                        {{ $archive_message->archive_email }}
+                      </p>
                     </a>
-                  
 
                     {{-- Filename --}}
                     <div class="text-xs text-indigo-800 font-bold">
@@ -149,22 +157,28 @@
                   </div>
                 </x-card>
               </td>
-               {{-- Restore Button --}}
-                 {{-- Restore Archive Data from Controller--}}
-                 <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                  <form id="restore {{ $archive_message->id }}" action='/archive-messages/{{$archive_message->id}}/restore' method="POST">
-                      @csrf
-                      <button type="submit" class="text-red-400  py-2 rounded-xl">
-                        <i class="text-indigo-600 fa-solid fa-trash-restore-alt"></i>
-                        <p class="text-sm text-stone-600">Restore</p>
-                      </button>
-                  </form>
+              {{-- Restore Button --}}
+              {{-- Restore Archive Data from Controller --}}
+              <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                <form
+                  id="restore {{ $archive_message->id }}"
+                  action="/archive-messages/{{ $archive_message->id }}/restore"
+                  method="POST"
+                >
+                  @csrf
+                  <button type="submit" class="text-red-400 py-2 rounded-xl">
+                    <i
+                      class="text-indigo-600 fa-solid fa-trash-restore-alt"
+                    ></i>
+                    <p class="text-sm text-stone-600">Restore</p>
+                  </button>
+                </form>
               </td>
               {{-- Delete --}}
               <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                 <form
                   id="delete-form"
-                  action="{{route('archive-messages.destroy', $archive_message->id)}}"
+                  action="{{ route('archive-messages.destroy', $archive_message->id) }}"
                   method="POST"
                 >
                   @csrf
@@ -191,14 +205,14 @@
             </td>
           </tr>
         @endunless
-         {{-- Link to Messages --}}
-         <a
-         href="{{ route('messages.index') }}"
-         class="text-blue-600 underline text-xs font-normal"
-     >
-         <i class="fas fa-arrow-left"></i>
-         Back to Messages
-     </a>
+        {{-- Link to Messages --}}
+        <a
+          href="{{ route('messages.index') }}"
+          class="text-blue-600 underline text-xs font-normal"
+        >
+          <i class="fas fa-arrow-left"></i>
+          Back to Messages
+        </a>
       </tbody>
     </table>
   </x-card>

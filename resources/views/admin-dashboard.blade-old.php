@@ -69,7 +69,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('manage-listings.index') }}"
+                                    href="{{ route('home') }}"
                                     class="space-x-1 flex text-white text-sm py-2 px-8 rounded-xl hover:opacity-80"
                                 >
                                     <i class="fa-solid fa-list pr-4"></i>
@@ -109,7 +109,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('users.index') }}"
+                                    href="{{ route('home') }}"
                                     class="flex text-white text-sm py-2 px-8 rounded-md hover:opacity-80"
                                 >
                                     <i class="fa-solid fa-users pr-4"></i>
@@ -127,7 +127,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('admin-profiles.edit') }}"
+                                    href="{{ url('home') }}"
                                     class="flex text-white text-sm py-2 px-8 rounded-md hover:opacity-80"
                                 >
                                     <i
@@ -139,7 +139,7 @@
 
                             <li>
                                 <a
-                                    href="{{ route('admin-profiles.edit') }}"
+                                    href="{{ route('home') }}"
                                     class="flex text-white text-sm py-2 px-8 rounded-md hover:opacity-80"
                                 >
                                     <i
