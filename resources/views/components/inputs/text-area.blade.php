@@ -17,10 +17,10 @@
     </label>
   @endif
 
-  <textarea
+  <text-area
     rows="{{ $rows }}"
     cols="{{ $cols }}"
-    type="textarea"
+    type="text-area"
     @if ($readonly)
         readonly
         class="block mt-1 w-full border border-gray-200 rounded p-2 focus:outline-none text-stone-800 focus:border-none form control bg-stone-200"
@@ -31,15 +31,16 @@
 
 
 
-                                    "
+
+                                        "
     @endif
     name="{{ $name }}"
     id="{{ $id }}"
     placeholder="{{ $placeholder }}"
     {{ $required ? "required" : "" }}
   >
-{{ old($name, $value) }}</textarea
-  >
+    {{ old($name, $value) }}
+  </text-area>
 
   @error($name)
     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

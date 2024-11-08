@@ -76,11 +76,11 @@
           </label>
 
           <div class="w-full p-4 border border-rose-500 text-indigo-700">
-            <x-textarea
+            <x-text-area
               id="reply"
               name="reply"
               {{-- value="{{ 'reply' }}" --}}
-            ></x-textarea>
+            ></x-text-area>
           </div>
         </div>
 
