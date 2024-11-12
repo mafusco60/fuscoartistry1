@@ -29,7 +29,9 @@
       {{-- Name --}}
       <div class="text-md">
         <label for="name" class="inline-block text-md mb-2">Name:</label>
-        <p class="text-rose-700 inline">{{ $message->name }}</p>
+        <p class="text-rose-700 inline">
+          {{ $message->name }}
+        </p>
       </div>
       {{-- Email --}}
       <div class="">
@@ -41,7 +43,9 @@
       {{-- Subject --}}
       <div class="mb-3">
         <label for="subject" class="inline-block mb-2">Subject:</label>
-        <p class="text-indigo-800 inline">{{ $message->subject }}</p>
+        <p class="text-indigo-800 inline">
+          {{ $message->subject }}
+        </p>
       </div>
       {{-- Message Body --}}
       <div class="mb-6">
@@ -96,41 +100,134 @@
     {{-- Javascript for Reply Form  to Store and Enteer Mail Client --}}
     <script>
       document
-        .getElementById('reply-form')
-        .addEventListener('submit', function (event) {
-          event.preventDefault();
+          .getElementById(
+              'reply-form',
+          )
+          .addEventListener(
+              'submit',
+              function
+              (
+                  event,
+              )
+              {
+                  event.preventDefault();
 
-          const form = event.target;
-          const formData = new FormData(form);
+                  const
+                  form
+                  =
+                      event.target;
+                  const
+                  formData
+                  =
+                      new
+                      FormData(
+                          form,
+                      );
 
-          fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-              'X-CSRF-TOKEN': '{{ csrf_token() }}',
-              'X-Requested-With': 'XMLHttpRequest',
-            },
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.success) {
-                // Open the email client
-                const mailtoLink = `mailto:${data.email}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(data.body.replace(/<br>/g, '\n'))}`;
-                window.location.href = mailtoLink;
+                  fetch(
+                      form.action,
+                      {
+                          method:
+                          'POST',
+                          body:
+                          formData,
+                          headers:
+                              {
+                                  'X-CSRF-TOKEN':
+                                      '{{ csrf_token() }}',
+                                  'X-Requested-With':
+                                      'XMLHttpRequest',
+                              },
+                      },
+                  )
+                      .then(
+                          (
+                              response,
+                          )
+                          =>
+                              response.json(),
+                      )
+                      .then(
+                          (
+                              data,
+                          )
+                          =>
+                          {
+                              if
+                              (
+                                  data.success
+                              )
+                              {
+                                  //
+                                  Open
+                                  the
+                                  email
+                                  client
+                                  const mailtoLink = `mailto:${data.email}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(data.body.replace(/<br>/g, '\n'))}`;
+                                  window.location.href
+                                  =
+                                      mailtoLink;
 
-                // Redirect to messages after a short delay
-                setTimeout(() => {
-                  window.location.href = '/messages';
-                }, 3000); // Adjust the delay as needed
-              } else {
-                alert('Failed to save the reply.');
-              }
-            })
-            .catch((error) => {
-              console.error('Error:', error);
-              alert('An error occurred while saving the reply.');
-            });
-        });
+                                  //
+                                  Redirect
+                                  to
+                                  messages
+                                  after
+                                  a
+                                  short
+                                  delay
+                                  setTimeout(
+                                      ()
+                                      =>
+                                      {
+                                          window.location.href
+                                          =
+                                              '/messages';
+                                      },
+                                      3000,
+                                  );
+                                  //
+                                  Adjust
+                                  the
+                                  delay
+                                  as
+                                  needed
+                              }
+                              else
+                              {
+                                  alert(
+                                      'Failed
+                                      to
+                                      save
+                                      the
+                                      reply.',
+                                  );
+                              }
+                          },
+                      )
+                      .catch(
+                          (
+                              error,
+                          )
+                          =>
+                          {
+                              console.error(
+                                  'Error:',
+                                  error,
+                              );
+                              alert(
+                                  'An
+                                  error
+                                  occurred
+                                  while
+                                  saving
+                                  the
+                                  reply.',
+                              );
+                          },
+                      );
+              },
+          );
     </script>
   </body>
 </x-layout>

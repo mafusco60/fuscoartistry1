@@ -17,7 +17,7 @@
     </label>
   @endif
 
-  <text-area
+  <textarea
     rows="{{ $rows }}"
     cols="{{ $cols }}"
     type="text-area"
@@ -25,22 +25,20 @@
         readonly
         class="block mt-1 w-full border border-gray-200 rounded p-2 focus:outline-none text-stone-800 focus:border-none form control bg-stone-200"
     @else
-        class="text-sm border rounded p-2 w-full focus:outline-none font-bold @error($name)
+        class="text-sm border rounded p-2 w-full focus:outline-none font-bold
+        @error($name)
      border-rose-500 @enderror
 
 
-
-
-
-                                        "
+        "
     @endif
     name="{{ $name }}"
     id="{{ $id }}"
     placeholder="{{ $placeholder }}"
     {{ $required ? "required" : "" }}
   >
-    {{ old($name, $value) }}
-  </text-area>
+  {{ old($name, $value) }}
+  </textarea>
 
   @error($name)
     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
